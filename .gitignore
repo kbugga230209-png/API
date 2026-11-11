@@ -1,0 +1,5 @@
+atlas_build/figs/
+atlas_build/*.docx
+atlas_build/*.pdf
+atlas_build/contact*.png
+__pycache__/
