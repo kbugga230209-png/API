@@ -86,10 +86,21 @@ gradle.taskGraph.whenReady {
     }
 }
 
+// androidbrowserhelper 2.5.0 resolves kotlin-stdlib-jdk8 1.6.21 alongside a newer
+// kotlin-stdlib, which produces duplicate jdk8 classes at dex time. Pin one Kotlin
+// version for the whole app instead of letting each dependency pick its own.
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
+        force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.24")
+        force("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24")
+    }
+}
+
 dependencies {
     // Trusted Web Activity wrapper: renders the deployed PWA in a Chrome-backed
     // activity with no address bar once asset links are verified.
-    implementation("com.google.androidbrowserhelper:androidbrowserhelper:2.5.0")
+    implementation("com.google.androidbrowserhelper:androidbrowserhelper:2.6.2")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
 }
