@@ -68,6 +68,8 @@ IDENT_EMAIL="${GIT_AUTHOR_EMAIL:-$(git config --global user.email 2>/dev/null ||
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
+FAILED=()
+
 for key in "${KEYS[@]}"; do
   [[ -n "$ONLY" && "$key" != "$ONLY" ]] && continue
   repo="$(repo_for "$key")"
@@ -102,16 +104,33 @@ for key in "${KEYS[@]}"; do
   if [[ "$DRY_RUN" == "1" ]]; then
     echo "[dry-run] would commit + push to $branch — nothing pushed."
   else
-    git -C "$dst" commit -m "100x rebuild: see AUDIT.md in $OWNER/API
+    git -C "$dst" commit -q -F - <<'MSG'
+100x rebuild: see AUDIT.md in kbugga230209-png/API
 
-Ported from the Heavenly Universe hub (sites/$key):
+Ported from the Heavenly Universe hub:
 - fixed live-site bugs, dead code and broken assets
 - performance, mobile, accessibility and metadata upgrades
-- self-contained and GitHub-Pages-ready"
-    git -C "$dst" push origin "$branch"
-    echo "Pushed to $OWNER/$repo ($branch). Pages will rebuild in ~1 minute."
+- self-contained and GitHub-Pages-ready
+MSG
+    if git -C "$dst" push origin "$branch"; then
+      echo "Pushed to $OWNER/$repo ($branch). Pages will rebuild in ~1 minute."
+    else
+      # A read-only token or missing write access lands here — keep going so the
+      # other repos still sync, and report every failure at the end.
+      echo "PUSH FAILED: $OWNER/$repo" >&2
+      FAILED+=("$repo")
+    fi
   fi
 done
+
+if [[ "${#FAILED[@]}" -gt 0 ]]; then
+  echo ""
+  echo "Could not push to: ${FAILED[*]}" >&2
+  echo "Most likely the GitHub credential in use has read-only access to those repos." >&2
+  echo "Either reconnect GitHub with write access, or run this script from a machine" >&2
+  echo "where 'git push' already works (e.g. your laptop with your own credentials)." >&2
+  exit 1
+fi
 
 echo ""
 echo "Done. Tip: enable GitHub Pages on the API repo too, to host the hub itself:"
