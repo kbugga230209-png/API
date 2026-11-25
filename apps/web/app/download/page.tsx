@@ -17,7 +17,7 @@ const RELEASES = [
     channel: 'Source release',
     status: 'no-signed-apk',
     notes:
-      'Repository and web application released. The Android APK for this version has not been built: the build sandbox has no JDK or Android SDK, and no release signing key exists yet. Do not expect a downloadable APK below until that is resolved.',
+      'Repository and web application released. CI now builds the Android wrapper and verifies the APK with apksigner, but no release signing key exists, so there is still no signed APK to download. The pipeline refuses to produce an unsigned release.',
   },
 ];
 
@@ -38,9 +38,10 @@ export default function DownloadPage() {
 
         <div className="alert alert-error" style={{ marginTop: 24 }}>
           <strong>No signed APK published yet.</strong> The application source, signing
-          configuration and release workflow are in the repository, but no release keystore exists and
-          this environment cannot run the Android toolchain. We will not publish an unsigned or
-          unverified APK — a build that has not been signature-verified must never be distributed.
+          configuration and release workflow are in the repository — CI assembles the Android wrapper
+          and verifies the APK signature on every build — but no release keystore exists yet, so there
+          is nothing signed to hand out. We will not publish an unsigned or unverified APK: a build
+          that has not been signature-verified must never be distributed.
         </div>
 
         <div className="grid-2" style={{ marginTop: 24 }}>

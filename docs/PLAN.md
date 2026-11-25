@@ -160,3 +160,33 @@ a signed-in user sees only their own `payments`/`entitlements`, and is denied
 **Still unverified (owner):** a real test-mode checkout, webhook delivery from
 Razorpay's servers, mandate authentication and a dashboard refund — all require
 test-mode keys and a registered webhook secret, i.e. `docs/BLOCKERS.md` §1.
+
+## 8. Android distribution (workstream 3)
+
+There was no Android project in the repository, while `/download` claimed the
+signing configuration and workflow existed. They exist now: `android/` is a
+Trusted Web Activity shell around the deployed PWA, so the product logic is not
+duplicated and a wrapper update cannot drift from the site.
+
+`android release` CI (run `45602635087` — success) builds `:app:assembleDebug`
+with pinned AGP 8.7.3 / Gradle 8.11.1 / JDK 17 / SDK 35, then verifies the APK
+with `apksigner verify --print-certs` and `zipalign -c`, dumps the package and
+launcher activity with `aapt2`, and publishes its SHA-256. It also attempts an
+unsigned release build and fails the job if Gradle produces one instead of
+refusing — an unsigned APK must never be mistaken for a release.
+
+Two authentic build failures were found and fixed while getting there: duplicate
+`kotlin.collections.jdk8.CollectionsJDK8Kt` classes (older
+`kotlin-stdlib-jdk8` transitive dependency) and AAR metadata rejected by this
+AGP/compileSdk pair. Both are pinned now.
+
+The signed-release job is manual, decodes the keystore into `$RUNNER_TEMP`,
+never echoes a secret, verifies exactly one signer and deletes the keystore
+afterwards. It cannot run yet: `ANDROID_KEYSTORE_*` secrets do not exist, so the
+job fails deliberately rather than building something shippable-looking
+(`docs/BLOCKERS.md` §2). Asset-links fingerprints are left empty on purpose, so
+Chrome shows the URL bar instead of pretending the app is verified.
+
+`docs/ANDROID.md` holds the keystore requirements (RSA 4096, 25+ years,
+keytool commands, Play App Signing, asset-links wiring, release checklist) and
+states plainly what reproducibility does and does not mean here.
