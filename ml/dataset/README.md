@@ -91,3 +91,49 @@ train at all.
 `metrics.confusable_report` reports the model's actual confusion restricted to
 these pairs; if a pair is above 25% confusion the UI keeps the review prompt for
 that pair even at high confidence.
+
+---
+
+## Source register and licence policy (workstream 6)
+
+The sourcing plan above is now machine-readable. `ml/dataset/sources.json` holds
+eight researched sources with, per source: original URL, access method, licences
+observed, licence status (`clear` / `mixed` / `ambiguous` / `contradictory` /
+`unavailable`), whether training is allowed, redistribution constraints, expected
+image count, available labels and risks.
+
+```bash
+cd ml
+python3 -m bharatbite_ml.cli sources-audit     # register validates against the policy
+```
+
+Policy, enforced in code (`bharatbite_ml/sources.py`), not just prose:
+
+| Verdict | Meaning | Sources |
+| --- | --- | --- |
+| `trainingAllowed: true` | per-image licence is verifiable and permits commercial use | `wikimedia-commons`, `open-images-v7`, `own-capture` |
+| `eval-only` | may measure a model, never train or ship weights | `kaggle-indian-food-images-80`, `hf-rajistics-indian-food-images`, `food-101` |
+| `rejected` | provenance scraped or licence unknown — not used at all | `kaggle-ashishpadala-indian-food-images`, `indianfoodnet` |
+
+`sources-fetch` refuses a source whose `trainingAllowed` is false
+(`SourcePolicyError`, exit 1). Full research write-up, per-source reasoning and
+the acquisition/quality/split commands: **`docs/DATASET.md`**.
+
+Acquisition is reproducible and resumable:
+
+```bash
+python3 -m bharatbite_ml.cli sources-fetch --per-class 40 --out data/raw \
+    --provenance dataset/acquisition.json
+python3 -m bharatbite_ml.cli quality-audit --root data/raw
+python3 -m bharatbite_ml.cli split-groups --root data/raw
+```
+
+Every download records licence, source URL, author (HTML stripped) and SHA-256;
+byte-identical files are skipped, so re-running is safe. Nothing is written to
+Git — `ml/data/raw/` is ignored and only manifests/provenance JSON are committed.
+
+**Current state:** no corpus has been acquired. This sandbox has no outbound
+HTTPS, so the Commons API fails with `URLError: TLS/SSL connection has been
+closed (EOF)`; no proxy or bypass was attempted. Training therefore has not
+started, and `train.py` still refuses without a validated manifest. See
+`docs/DATASET.md` §8 and `docs/BLOCKERS.md` §5.

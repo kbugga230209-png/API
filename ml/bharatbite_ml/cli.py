@@ -19,6 +19,16 @@ from .export_manifest import ManifestRefused, build_manifest, load_secret, verif
 from .infer import recognize_from_json
 from .labels import load_labels, validate_labels
 from .manifest_tool import build_manifest_from_directory, write_manifest as write_dataset_manifest
+from .quality import assign_grouped_splits, scan_directory
+from .sources import (
+    SourcePolicyError,
+    fetch_wikimedia,
+    load_registry,
+    mapping_coverage,
+    training_sources,
+    validate_registry,
+    write_provenance,
+)
 
 ML_ROOT = Path(__file__).resolve().parent.parent
 SIGNING_ENV = "BHARATBITE_MODEL_SIGNING_KEY"
@@ -92,6 +102,106 @@ def cmd_manifest_from_dir(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_sources_audit(args: argparse.Namespace) -> int:
+    registry = load_registry(Path(args.sources) if args.sources else None)
+    problems = validate_registry(registry)
+    _print(
+        {
+            "ok": not problems,
+            "sources": [
+                {
+                    "id": source.id,
+                    "licenceStatus": source.license_status,
+                    "trainingAllowed": source.usable_for_training,
+                    "evalOnly": source.eval_only,
+                    "rejection": source.rejection,
+                    "licenses": source.licenses,
+                }
+                for source in registry
+            ],
+            "trainingSources": [source.id for source in training_sources(registry)],
+            "coverage": mapping_coverage(registry),
+            "problems": problems,
+        }
+    )
+    return 0 if not problems else 1
+
+
+def cmd_sources_fetch(args: argparse.Namespace) -> int:
+    classes = [c.strip() for c in args.labels.split(",")] if args.labels else None
+    try:
+        report = fetch_wikimedia(
+            Path(args.out),
+            per_class=args.per_class,
+            classes=classes,
+            dry_run=args.dry_run,
+        )
+    except SourcePolicyError as exc:
+        print(f"refusing: {exc}", file=sys.stderr)
+        return 1
+    payload = report.as_dict()
+    payload["dryRun"] = args.dry_run
+    if not args.dry_run:
+        payload["provenance"] = str(write_provenance(report, Path(args.provenance)))
+    _print(
+        {
+            "source": payload["source"],
+            "perClassTarget": payload["perClassTarget"],
+            "downloaded": payload["downloaded"],
+            "skippedLicence": payload["skippedLicence"],
+            "skippedDuplicate": payload["skippedDuplicate"],
+            "skippedError": payload["skippedError"],
+            "perClass": payload["perClass"],
+            "dryRun": args.dry_run,
+            "provenance": payload.get("provenance"),
+        }
+    )
+    return 0 if payload["downloaded"] or args.dry_run else 1
+
+
+def cmd_quality_audit(args: argparse.Namespace) -> int:
+    from .labels import load_labels as _labels
+
+    classes = [cls.label for cls in _labels()]
+    report = scan_directory(Path(args.root), classes, near_duplicates=not args.no_near_duplicates)
+    _print(report.as_dict())
+    return 0 if report.ok else 1
+
+
+def cmd_split_groups(args: argparse.Namespace) -> int:
+    from .quality import dhash_file, find_split_leakage
+    from .dataset import sha256_file
+
+    root = Path(args.root)
+    entries = []
+    for path in sorted(root.rglob("*")):
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}:
+            entries.append(
+                {
+                    "path": str(path.relative_to(root)),
+                    "label": path.parent.name,
+                    "sha256": sha256_file(path),
+                    "dhash": None if args.no_hash else dhash_file(path),
+                }
+            )
+    split = assign_grouped_splits(entries, args.val_fraction, args.test_fraction, args.seed)
+    checked = [dict(entry, split=split.assignments[entry["path"]]) for entry in entries]
+    leakage = find_split_leakage(checked)
+    _print(
+        {
+            "entries": len(entries),
+            "groups": split.groups,
+            "counts": split.counts,
+            "leakage": leakage,
+            "labelConflicts": split.conflicts[:20],
+            "labelConflictCount": len(split.conflicts),
+            "starvedLabels": split.starved_labels,
+            "ok": not leakage and not split.conflicts and not split.starved_labels,
+        }
+    )
+    return 0 if not leakage and not split.conflicts and not split.starved_labels else 1
+
+
 def cmd_split_plan(args: argparse.Namespace) -> int:
     manifest = load_manifest(Path(args.manifest))
     plan: dict[str, list[str]] = {"train": [], "val": [], "test": []}
@@ -107,6 +217,23 @@ def cmd_split_preview(args: argparse.Namespace) -> int:
     plan = build_split(labels, seed=args.seed)
     _print({"seed": args.seed, "classes": len(labels), "counts": {k: len(v) for k, v in plan.items()}})
     return 0
+
+
+def cmd_compat(args: argparse.Namespace) -> int:
+    from .compat import CompatError, compare, load_measurement, render_markdown
+
+    try:
+        browser = load_measurement(args.browser) if args.browser else None
+        native = load_measurement(args.native) if args.native else None
+    except CompatError as exc:
+        print(f"refusing: {exc}", file=sys.stderr)
+        return 1
+    result = compare(browser, native)
+    if args.markdown:
+        print(render_markdown(result))
+    else:
+        _print(result)
+    return 0 if result.get("ok") else 1
 
 
 def cmd_benchmark(args: argparse.Namespace) -> int:
@@ -244,6 +371,31 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--test-fraction", type=float, default=0.15)
     p.set_defaults(func=cmd_manifest_from_dir)
 
+    p = sub.add_parser("sources-audit", help="validate the dataset source registry and licence policy")
+    p.add_argument("--sources", default=None)
+    p.set_defaults(func=cmd_sources_audit)
+
+    p = sub.add_parser("sources-fetch", help="download licence-clean Wikimedia Commons images")
+    p.add_argument("--out", default="data/raw")
+    p.add_argument("--per-class", type=int, default=6)
+    p.add_argument("--labels", default=None, help="comma-separated subset of class labels")
+    p.add_argument("--provenance", default="dataset/acquisition.json")
+    p.add_argument("--dry-run", action="store_true")
+    p.set_defaults(func=cmd_sources_fetch)
+
+    p = sub.add_parser("quality-audit", help="audit an image tree for corrupt, duplicate and mislabelled files")
+    p.add_argument("--root", required=True)
+    p.add_argument("--no-near-duplicates", action="store_true")
+    p.set_defaults(func=cmd_quality_audit)
+
+    p = sub.add_parser("split-groups", help="show duplicate-group-aware splits and any leakage")
+    p.add_argument("--root", required=True)
+    p.add_argument("--val-fraction", type=float, default=0.15)
+    p.add_argument("--test-fraction", type=float, default=0.15)
+    p.add_argument("--seed", type=int, default=20261125)
+    p.add_argument("--no-hash", action="store_true")
+    p.set_defaults(func=cmd_split_groups)
+
     p = sub.add_parser("split-plan", help="inspect the split recorded in a manifest for leakage")
     p.add_argument("--manifest", required=True)
     p.set_defaults(func=cmd_split_plan)
@@ -251,6 +403,12 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("split-preview", help="show the deterministic class-stratified split plan")
     p.add_argument("--seed", type=int, default=20261125)
     p.set_defaults(func=cmd_split_preview)
+
+    p = sub.add_parser("compat", help="compare ONNX Runtime Web vs TFLite from measured runs")
+    p.add_argument("--browser", default=None, help="ORT Web measurement JSON from ml/benchmark/ort-web-harness.html")
+    p.add_argument("--native", default=None, help="TFLite measurement JSON from the Android benchmark test")
+    p.add_argument("--markdown", action="store_true")
+    p.set_defaults(func=cmd_compat)
 
     p = sub.add_parser("benchmark", help="compare candidate models against the promotion gates")
     p.add_argument("--results", default=str(ML_ROOT / "benchmark" / "results.json"))

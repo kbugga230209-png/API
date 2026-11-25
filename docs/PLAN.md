@@ -117,8 +117,8 @@ Shipped in this workstream:
   dispatch job that builds both architectures, runs a random-tensor smoke test
   and reports INT8 artifact sizes.
 
-Verification actually run (stdlib only, this machine): **103 unittest cases, 0
-failures, 1 skipped** (the TensorFlow model-builder test, skipped because TF is
+Verification actually run (stdlib only, Pillow for the image audit): **166
+unittest cases, 0 failures, 1 skipped** (the TensorFlow model-builder test, skipped because TF is
 absent). `python3 -m bharatbite_ml.cli validate-labels` → `ok: true, 50/50`.
 `benchmark` with no results file → exit 1. `ml/tests/test_ed25519.py` matches
 RFC 8032 vectors 1–3.

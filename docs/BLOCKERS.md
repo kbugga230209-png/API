@@ -56,12 +56,12 @@ that builds and signs. Store the keystore + passwords as GitHub Actions secrets:
 artifact and therefore nothing to sign. The app falls back to manual search rather
 than downloading anything unverified.
 
-The pipeline that consumes the corpus is finished and tested (`ml/`, 103 unittest
+The pipeline that consumes the corpus is finished and tested (`ml/`, 166 unittest
 cases). What is missing is data and compute, not code:
 
 | Ask | Detail |
 | --- | --- |
-| Image corpus | 50 classes × ~120 images; at least 40 per class, 5+ validation per class. Sourcing plan and licence rules in `ml/dataset/README.md`. Owned capture is the important part — open corpora alone do not look like a canteen tray. |
+| Image corpus | 50 classes × ~120 images; at least 40 per class, 5+ validation per class. Sourcing plan and licence rules in `docs/DATASET.md` (register: `ml/dataset/sources.json`). Owned capture is the important part — open corpora alone do not look like a canteen tray. |
 | GPU machine (or CI dispatch) | `pip install -r ml/requirements-train.txt`, then `train.py` → `quantize.py` → `evaluate.py`. The `ml-pipeline` workflow can be run manually with `run_training_smoke` to prove the plumbing on a runner. |
 | Signing key | `python3 -m bharatbite_ml.cli new-key`; store the private half as the GitHub Actions secret `BHARATBITE_MODEL_SIGNING_KEY`, commit only the public half. `export_manifest` reads it from the environment and refuses to sign without a measured benchmark. |
 | One `model_versions` row | version, artifact URL, SHA-256, size, signature, metrics — only after `benchmark --results` recommends a model. |
@@ -69,7 +69,37 @@ cases). What is missing is data and compute, not code:
 The gate is not negotiable: top-1 ≥ 0.75, top-5 ≥ 0.90, p95 ≤ 350 ms, artifact
 ≤ 25 MB, and the signed SHA-256 must be the exact file the benchmark measured.
 
-## 4. Nothing else
+## 4. Dataset acquisition (blocks training)
+
+The dataset *pipeline* exists and is tested; no corpus has been acquired.
+`ml/dataset/sources.json` records eight researched sources with per-source
+licence status, and only three may be trained on and shipped: Wikimedia Commons
+(per-file licence, machine-readable), Open Images V7 (per-image licence, thin
+Indian coverage) and our own capture. The Kaggle/Hugging Face Indian-food sets
+are eval-only because their images were scraped from Google Images with no
+per-image licence or author; `ashishpadala/indian-food-images` is rejected
+outright (an Apache-2.0 dataset-level tag cannot relicense scraped photographs).
+Reasoning, per-source detail and commands: `docs/DATASET.md`.
+
+This sandbox has **no outbound HTTPS**: the Commons MediaWiki API fails with
+`URLError: TLS/SSL connection has been closed (EOF)`, so `sources-fetch` records
+`skippedError` per class and downloads nothing. No proxy or bypass was
+attempted — bypassing an access restriction is out of scope. The same limit
+blocks the Open Images shards.
+
+To unblock, any one of:
+
+| Route | Detail |
+| --- | --- |
+| Network access | run `sources-fetch --per-class 40` → `quality-audit` → `split-groups` on a connected machine, then review labels by hand |
+| Owned capture | ~2,000 photographs of the 50 dishes as served (home, canteen, thali restaurant) — the only route to 40+ regional dishes and the real distribution |
+| Written permission | a licence from a corpus author granting redistribution; only then does that source move from `evalOnly` to `trainingAllowed` in `sources.json` |
+
+Until then: no training run, no benchmark numbers, no signed manifest, no
+`model_versions` row. `train.py` refuses without a validated manifest and
+`MIN_IMAGES_PER_CLASS = 40` cannot be met.
+
+## 5. Nothing else
 
 Repo, database schema, RLS, catalog seed, all eight Edge Functions, the auth
 configuration and the web app deployment are done. Domain (if wanted later):

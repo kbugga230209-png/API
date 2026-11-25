@@ -23,6 +23,8 @@ What is verified now, in this repository, on this machine:
 | Benchmark promotion gate | `ml/tests/test_benchmark.py` | untrained/missing/shape-invalid results are rejected, not rendered |
 | Ed25519 signing | `ml/tests/test_ed25519.py` | matches RFC 8032 vectors 1–3 |
 | Signed manifest ↔ shipped TypeScript | `ml/tests/test_export_manifest.py` | Python canonical payload is byte-identical to `canonicalManifestPayload` in `packages/core/src/manifest.ts`, re-checked against `packages/core/dist/manifest.js` under Node |
+| Dataset source licence policy | `ml/tests/test_sources.py` | training-allowed vs eval-only vs rejected is enforced, not documented; fair-use and authorless CC BY are skipped |
+| Dataset quality audit + grouped splits | `ml/tests/test_quality.py` | corrupt/truncated files, 200 px floor, exact and near duplicates, cross-label duplicate conflicts, leakage-free deterministic splits |
 
 What is **not** verified, because this sandbox has no GPU, no TensorFlow and no
 image corpus: the training loop, INT8 quantization and on-device latency of
@@ -56,7 +58,7 @@ ml/
     dataset.py                manifest validation, leakage detection, split construction
     manifest_tool.py          build a manifest from an image tree (hashes + stable splits)
     metrics.py                top-1/5, macro-F1, ECE, per-class floors, confusion
-    benchmark.py              promotion gates + comparison table
+    benchmark.py              promotion gates + comparison table (accuracy/size/latency)
     infer.py                  confidence tiers, abstain, confusable review, catalog mapping
     models.py                 EfficientNet-Lite0 / MobileNetV3-Small builders (lazy TF)
     train.py                  reproducible fine-tune over a validated manifest
@@ -64,10 +66,13 @@ ml/
     evaluate.py               evaluate an artifact on the test split -> results entry
     export_manifest.py        sign a manifest with Ed25519, refuse below the gate
     ed25519.py                RFC 8032 sign/verify, standard library
+    sources.py                dataset source register, licence policy, Commons fetch + provenance
+    quality.py                corrupt/duplicate/imbalance audit, dHash near-dups, grouped splits
+    compat.py                 ONNX Runtime Web vs TFLite comparison from measured runs
     cli.py                    python3 -m bharatbite_ml.cli <command>
-  dataset/                    sourcing plan + manifest schema (no images)
+  dataset/                    source register (sources.json) + sourcing plan + manifest schema (no images)
   benchmark/                  results schema + gate documentation (no results)
-  tests/                      103 unittest cases
+  tests/                      166 unittest cases
 ```
 
 ## Commands
@@ -82,7 +87,12 @@ python3 -m bharatbite_ml.cli manifest-from-dir --root data/raw --out dataset/man
     --license CC-BY-4.0 --source-url https://… --attribution "…"
 python3 -m bharatbite_ml.cli validate-dataset --manifest dataset/manifest.json --root data/raw
 python3 -m bharatbite_ml.cli split-plan --manifest dataset/manifest.json
+python3 -m bharatbite_ml.cli sources-audit                       # licence policy check
+python3 -m bharatbite_ml.cli sources-fetch --per-class 40 --dry-run
+python3 -m bharatbite_ml.cli quality-audit --root data/raw        # corrupt/dup/imbalance
+python3 -m bharatbite_ml.cli split-groups --root data/raw         # duplicate-aware splits
 python3 -m bharatbite_ml.cli benchmark --results benchmark/results.json --markdown
+python3 -m bharatbite_ml.cli compat --browser browser.json --native native.json --markdown
 
 # tests (from the repo root)
 PYTHONPATH=ml python3 -m unittest discover -s ml/tests -t ml
