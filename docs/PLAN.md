@@ -72,3 +72,58 @@ See `docs/BLOCKERS.md`.
 
 Test users created by `db e2e` are deleted afterwards; `auth.users`, `profiles` and
 `food_logs` are currently empty, so the first real account starts clean.
+
+## 6. Indian food recognition (workstream 1) — pipeline built, model not trained
+
+The pipeline lives in `ml/` and is deliberately split into a standard-library half
+that runs anywhere and a TensorFlow half that runs on a GPU machine. Nothing is
+published until a measured model exists.
+
+Shipped in this workstream:
+
+- **`ml/labels.json`** — 50 recognition classes, each with `catalogSlug`,
+  `variant`, `confusables` and aliases. Verified against the generated catalog:
+  50/50 map to a real food, every variant exists on that food, no duplicate
+  mappings, no dangling confusable links. The other 176 catalog foods remain
+  searchable; recognition covers the dishes people actually photograph.
+- **`ml/bharatbite_ml/dataset.py`** — manifest validation: per-image licence
+  allow-list, attribution requirement, SHA-256 computed from bytes and re-checked
+  on disk, byte-identical images in two splits rejected as leakage, class
+  minimums and imbalance warnings. It does not download or invent images.
+- **`ml/bharatbite_ml/manifest_tool.py`** — builds a manifest from an image tree;
+  splits are derived from the image hash so re-running never moves an existing
+  test image.
+- **`ml/bharatbite_ml/metrics.py`** — top-1, top-5, macro-F1, ECE, per-class
+  recall floors, confusion restricted to known look-alike pairs.
+- **`ml/bharatbite_ml/benchmark.py`** — the EfficientNet-Lite0 INT8 vs
+  MobileNetV3-Small INT8 gate: top-1 ≥ 0.75, top-5 ≥ 0.90, p95 ≤ 350 ms,
+  artifact ≤ 25 MB. Untrained or incomplete result files are rejected, not
+  rendered as a table.
+- **`ml/bharatbite_ml/infer.py`** — confidence tiers, margin check against
+  confusable siblings, abstain to search instead of showing a wrong nutrition
+  estimate, and mapping to the catalog slug + variant the diary logs.
+- **`ml/bharatbite_ml/{models,train,quantize,evaluate}.py`** — fine-tuning,
+  INT8 post-training quantization calibrated on the training split, and
+  evaluation that records the artifact SHA-256 and device string. They raise
+  `TrainingUnavailable` here because this sandbox has no TensorFlow.
+- **`ml/bharatbite_ml/{ed25519,export_manifest}.py`** — signing. The Python
+  canonical payload is byte-identical to `canonicalManifestPayload` in
+  `packages/core/src/manifest.ts` (checked against the compiled JS under Node in
+  the test suite), so manifests signed here verify in the app. Signing refuses
+  when the benchmark SHA-256 does not match the artifact, when a gate fails, or
+  when `validationTop1` was never measured.
+- **`.github/workflows/ml-pipeline.yml`** — unit tests, label/catalog contract,
+  an assertion that the gate refuses to pass without results, and an optional
+  dispatch job that builds both architectures, runs a random-tensor smoke test
+  and reports INT8 artifact sizes.
+
+Verification actually run (stdlib only, this machine): **103 unittest cases, 0
+failures, 1 skipped** (the TensorFlow model-builder test, skipped because TF is
+absent). `python3 -m bharatbite_ml.cli validate-labels` → `ok: true, 50/50`.
+`benchmark` with no results file → exit 1. `ml/tests/test_ed25519.py` matches
+RFC 8032 vectors 1–3.
+
+Not verified anywhere yet: real training accuracy, INT8 artifact size, and
+on-device latency. That requires the corpus in `docs/BLOCKERS.md` §3 and a GPU
+machine or the `ml-pipeline` dispatch job. The app keeps returning
+`404 no_published_model` until then.

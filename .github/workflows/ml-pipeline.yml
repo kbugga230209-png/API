@@ -1,0 +1,119 @@
+name: ml pipeline
+
+on:
+  push:
+    paths:
+      - 'ml/**'
+      - '.github/workflows/ml-pipeline.yml'
+  pull_request:
+    paths:
+      - 'ml/**'
+      - '.github/workflows/ml-pipeline.yml'
+  workflow_dispatch:
+    inputs:
+      run_training_smoke:
+        description: 'Build both architectures, quantize and report sizes (no dataset needed)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ml-pipeline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: unit tests (stdlib only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests
+        run: PYTHONPATH=ml python3 -m unittest discover -s ml/tests -t ml -v
+      - name: Label/catalog contract
+        run: cd ml && python3 -m bharatbite_ml.cli validate-labels
+      - name: Pipeline selftest
+        run: cd ml && python3 -m bharatbite_ml.cli selftest
+      - name: Template is not evidence
+        run: |
+          cd ml
+          python3 -m bharatbite_ml.cli benchmark --template > /tmp/template.json
+          set +e
+          python3 -m bharatbite_ml.cli benchmark
+          code=$?
+          set -e
+          if [ "$code" -eq 0 ]; then
+            echo "::error::benchmark passed without a results file — the gate is broken"
+            exit 1
+          fi
+          echo "benchmark correctly refuses to report without measured results"
+      - name: Signed manifest round trip against the shipped TypeScript
+        run: |
+          npm ci
+          npm run build -w @bharatbite/core
+          PYTHONPATH=ml python3 -m unittest ml.tests.test_export_manifest -v
+
+  training-smoke:
+    name: training plumbing (TensorFlow)
+    if: github.event_name == 'workflow_dispatch' && inputs.run_training_smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install training dependencies
+        run: pip install -r ml/requirements-train.txt
+      - name: Build both architectures
+        run: |
+          PYTHONPATH=ml python3 - <<'PY'
+          from bharatbite_ml.models import ARCHITECTURES, build_model
+          for arch in ARCHITECTURES:
+              model = build_model(arch, 50)
+              print(arch, "params=", model.count_params(), "output=", model.output_shape)
+          PY
+      - name: Train one step on random tensors
+        # Plumbing check only. Random tensors are not data; the run writes
+        # SMOKE-TEST-ONLY.txt and its weights must never be published.
+        run: |
+          PYTHONPATH=ml python3 - <<'PY'
+          import json, pathlib, tempfile
+          from bharatbite_ml.train import run
+          tmp = pathlib.Path(tempfile.mkdtemp())
+          manifest = tmp / "manifest.json"
+          manifest.write_text(json.dumps({"schemaVersion": 1, "corpus": "smoke", "classes": [], "images": []}))
+          for arch in ("efficientnet_lite0_int8", "mobilenetv3_small_int8"):
+              record = run(manifest, tmp, tmp / arch, architecture=arch, epochs=1, smoke_test=True)
+              assert record.smokeTest
+              print(arch, "smoke ok", record.checkpoint)
+          PY
+      - name: Convert an untrained model and report artifact size
+        run: |
+          PYTHONPATH=ml python3 - <<'PY'
+          import pathlib
+          from bharatbite_ml.models import build_model
+          from bharatbite_ml import quantize
+          tmp = pathlib.Path("ml/smoke-out")
+          tmp.mkdir(parents=True, exist_ok=True)
+          for arch in ("efficientnet_lite0_int8", "mobilenetv3_small_int8"):
+              model = build_model(arch, 50)
+              ckpt = tmp / f"{arch}.keras"
+              model.save(ckpt)
+              info = quantize.convert(ckpt, tmp / f"{arch}.tflite")
+              print(arch, info["sizeBytes"], "bytes", info["inputDtype"])
+              assert info["withinSizeBudget"], "artifact exceeds the 25 MB budget"
+          PY
+      - name: Upload smoke artifacts for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: ml-smoke
+          path: ml/smoke-out/*.tflite
+          if-no-files-found: warn
+          retention-days: 7

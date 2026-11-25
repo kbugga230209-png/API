@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "description": "Recognition classes. Every class must resolve to a catalog food and a real preparation variant; `confusables` drive the confirmation prompt instead of a silent guess.",
+  "classes": [
+    {
+      "label": "thepla",
+      "displayName": "Methi thepla",
+      "catalogSlug": "thepla",
+      "variant": "homemade",
+      "confusables": [
+        "roti-chapati",
+        "aloo-paratha"
+      ],
+      "aliases": [
+        "methi thepla"
+      ]
+    },
+    {
+      "label": "roti-chapati",
+      "displayName": "Roti / chapati",
+      "catalogSlug": "roti-chapati",
+      "variant": "homemade",
+      "confusables": [
+        "phulka",
+        "thepla",
+        "naan"
+      ],
+      "aliases": [
+        "chapati",
+        "roti"
+      ]
+    },
+    {
+      "label": "phulka",
+      "displayName": "Phulka",
+      "catalogSlug": "phulka",
+      "variant": "homemade",
+      "confusables": [
+        "roti-chapati",
+        "puri"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "aloo-paratha",
+      "displayName": "Aloo paratha",
+      "catalogSlug": "aloo-paratha",
+      "variant": "homemade",
+      "confusables": [
+        "thepla",
+        "naan"
+      ],
+      "aliases": [
+        "paratha",
+        "parantha"
+      ]
+    },
+    {
+      "label": "puri",
+      "displayName": "Puri",
+      "catalogSlug": "puri",
+      "variant": "homemade",
+      "confusables": [
+        "phulka",
+        "naan"
+      ],
+      "aliases": [
+        "poori"
+      ]
+    },
+    {
+      "label": "naan",
+      "displayName": "Naan",
+      "catalogSlug": "naan",
+      "variant": "homemade",
+      "confusables": [
+        "roti-chapati",
+        "puri"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "khakhra",
+      "displayName": "Khakhra",
+      "catalogSlug": "khakhra",
+      "variant": "homemade",
+      "confusables": [
+        "roti-chapati"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "idli",
+      "displayName": "Idli",
+      "catalogSlug": "idli",
+      "variant": "homemade",
+      "confusables": [
+        "dhokla",
+        "medu-vada"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "plain-dosa",
+      "displayName": "Plain dosa",
+      "catalogSlug": "plain-dosa",
+      "variant": "homemade",
+      "confusables": [
+        "masala-dosa",
+        "uttapam"
+      ],
+      "aliases": [
+        "dosa",
+        "sada dosa"
+      ]
+    },
+    {
+      "label": "masala-dosa",
+      "displayName": "Masala dosa",
+      "catalogSlug": "masala-dosa",
+      "variant": "homemade",
+      "confusables": [
+        "plain-dosa",
+        "uttapam"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "uttapam",
+      "displayName": "Uttapam",
+      "catalogSlug": "uttapam",
+      "variant": "homemade",
+      "confusables": [
+        "masala-dosa",
+        "plain-dosa"
+      ],
+      "aliases": [
+        "uthappam"
+      ]
+    },
+    {
+      "label": "medu-vada",
+      "displayName": "Medu vada",
+      "catalogSlug": "medu-vada",
+      "variant": "homemade",
+      "confusables": [
+        "idli",
+        "samosa"
+      ],
+      "aliases": [
+        "vada",
+        "vadai"
+      ]
+    },
+    {
+      "label": "dhokla",
+      "displayName": "Dhokla",
+      "catalogSlug": "dhokla",
+      "variant": "homemade",
+      "confusables": [
+        "idli",
+        "khandvi"
+      ],
+      "aliases": [
+        "khaman"
+      ]
+    },
+    {
+      "label": "khandvi",
+      "displayName": "Khandvi",
+      "catalogSlug": "khandvi",
+      "variant": "homemade",
+      "confusables": [
+        "dhokla"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "poha-dish",
+      "displayName": "Poha",
+      "catalogSlug": "poha-dish",
+      "variant": "homemade",
+      "confusables": [
+        "upma"
+      ],
+      "aliases": [
+        "pauwa",
+        "aval"
+      ]
+    },
+    {
+      "label": "upma",
+      "displayName": "Upma",
+      "catalogSlug": "upma",
+      "variant": "homemade",
+      "confusables": [
+        "poha-dish"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "masala-omelette",
+      "displayName": "Masala omelette",
+      "catalogSlug": "masala-omelette",
+      "variant": "homemade",
+      "confusables": [
+        "egg-bhurji"
+      ],
+      "aliases": [
+        "omelette"
+      ]
+    },
+    {
+      "label": "egg-bhurji",
+      "displayName": "Egg bhurji",
+      "catalogSlug": "egg-bhurji",
+      "variant": "homemade",
+      "confusables": [
+        "masala-omelette"
+      ],
+      "aliases": [
+        "bhurji"
+      ]
+    },
+    {
+      "label": "dal-tadka",
+      "displayName": "Dal tadka",
+      "catalogSlug": "dal-tadka",
+      "variant": "homemade",
+      "confusables": [
+        "dal-fry-restaurant-style",
+        "sambar"
+      ],
+      "aliases": [
+        "dal",
+        "dal fry"
+      ]
+    },
+    {
+      "label": "dal-fry-restaurant-style",
+      "displayName": "Dal fry (restaurant)",
+      "catalogSlug": "dal-fry-restaurant-style",
+      "variant": "restaurant",
+      "confusables": [
+        "dal-tadka"
+      ],
+      "aliases": [
+        "dal fry"
+      ]
+    },
+    {
+      "label": "sambar",
+      "displayName": "Sambar",
+      "catalogSlug": "sambar",
+      "variant": "homemade",
+      "confusables": [
+        "rasam",
+        "dal-tadka"
+      ],
+      "aliases": [
+        "sambhar"
+      ]
+    },
+    {
+      "label": "rasam",
+      "displayName": "Rasam",
+      "catalogSlug": "rasam",
+      "variant": "homemade",
+      "confusables": [
+        "sambar"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "chole",
+      "displayName": "Chole",
+      "catalogSlug": "chole",
+      "variant": "homemade",
+      "confusables": [
+        "rajma-curry",
+        "chole-bhature"
+      ],
+      "aliases": [
+        "chana masala",
+        "chhole"
+      ]
+    },
+    {
+      "label": "rajma-curry",
+      "displayName": "Rajma",
+      "catalogSlug": "rajma-curry",
+      "variant": "homemade",
+      "confusables": [
+        "chole"
+      ],
+      "aliases": [
+        "rajma chawal"
+      ]
+    },
+    {
+      "label": "palak-paneer",
+      "displayName": "Palak paneer",
+      "catalogSlug": "palak-paneer",
+      "variant": "homemade",
+      "confusables": [
+        "paneer-butter-masala",
+        "mix-veg"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "paneer-butter-masala",
+      "displayName": "Paneer butter masala",
+      "catalogSlug": "paneer-butter-masala",
+      "variant": "restaurant",
+      "confusables": [
+        "palak-paneer",
+        "butter-chicken"
+      ],
+      "aliases": [
+        "paneer makhani"
+      ]
+    },
+    {
+      "label": "aloo-gobi-dry",
+      "displayName": "Aloo gobi (dry)",
+      "catalogSlug": "aloo-gobi-dry",
+      "variant": "homemade",
+      "confusables": [
+        "aloo-gobi-gravy",
+        "mix-veg"
+      ],
+      "aliases": [
+        "aloo gobhi"
+      ]
+    },
+    {
+      "label": "aloo-gobi-gravy",
+      "displayName": "Aloo gobi (gravy)",
+      "catalogSlug": "aloo-gobi-gravy",
+      "variant": "homemade",
+      "confusables": [
+        "aloo-gobi-dry",
+        "mix-veg"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "bhindi-masala",
+      "displayName": "Bhindi masala",
+      "catalogSlug": "bhindi-masala",
+      "variant": "homemade",
+      "confusables": [
+        "mix-veg"
+      ],
+      "aliases": [
+        "okra",
+        "ladyfinger sabzi"
+      ]
+    },
+    {
+      "label": "mix-veg",
+      "displayName": "Mixed vegetable sabzi",
+      "catalogSlug": "mix-veg",
+      "variant": "homemade",
+      "confusables": [
+        "aloo-gobi-dry",
+        "bhindi-masala"
+      ],
+      "aliases": [
+        "veg sabzi"
+      ]
+    },
+    {
+      "label": "khichdi",
+      "displayName": "Khichdi",
+      "catalogSlug": "khichdi",
+      "variant": "homemade",
+      "confusables": [
+        "veg-pulao",
+        "dal-tadka"
+      ],
+      "aliases": [
+        "khichri"
+      ]
+    },
+    {
+      "label": "plain-rice-cooked",
+      "displayName": "Plain rice",
+      "catalogSlug": "plain-rice-cooked",
+      "variant": "homemade",
+      "confusables": [
+        "veg-pulao",
+        "curd-rice"
+      ],
+      "aliases": [
+        "chawal",
+        "bhaat"
+      ]
+    },
+    {
+      "label": "curd-rice",
+      "displayName": "Curd rice",
+      "catalogSlug": "curd-rice",
+      "variant": "homemade",
+      "confusables": [
+        "plain-rice-cooked"
+      ],
+      "aliases": [
+        "dahi chawal",
+        "thayir sadam"
+      ]
+    },
+    {
+      "label": "veg-pulao",
+      "displayName": "Vegetable pulao",
+      "catalogSlug": "veg-pulao",
+      "variant": "homemade",
+      "confusables": [
+        "veg-biryani",
+        "plain-rice-cooked"
+      ],
+      "aliases": [
+        "pulav"
+      ]
+    },
+    {
+      "label": "veg-biryani",
+      "displayName": "Vegetable biryani",
+      "catalogSlug": "veg-biryani",
+      "variant": "homemade",
+      "confusables": [
+        "chicken-biryani",
+        "veg-pulao"
+      ],
+      "aliases": [
+        "biriyani"
+      ]
+    },
+    {
+      "label": "chicken-biryani",
+      "displayName": "Chicken biryani",
+      "catalogSlug": "chicken-biryani",
+      "variant": "homemade",
+      "confusables": [
+        "veg-biryani",
+        "chicken-curry"
+      ],
+      "aliases": [
+        "biriyani"
+      ]
+    },
+    {
+      "label": "chicken-curry",
+      "displayName": "Chicken curry",
+      "catalogSlug": "chicken-curry",
+      "variant": "homemade",
+      "confusables": [
+        "butter-chicken",
+        "chicken-biryani"
+      ],
+      "aliases": [
+        "murgh curry"
+      ]
+    },
+    {
+      "label": "butter-chicken",
+      "displayName": "Butter chicken",
+      "catalogSlug": "butter-chicken",
+      "variant": "restaurant",
+      "confusables": [
+        "chicken-curry",
+        "paneer-butter-masala"
+      ],
+      "aliases": [
+        "murgh makhani"
+      ]
+    },
+    {
+      "label": "fish-curry",
+      "displayName": "Fish curry",
+      "catalogSlug": "fish-curry",
+      "variant": "homemade",
+      "confusables": [
+        "chicken-curry"
+      ],
+      "aliases": [
+        "machli curry",
+        "meen kuzhambu"
+      ]
+    },
+    {
+      "label": "samosa",
+      "displayName": "Samosa",
+      "catalogSlug": "samosa",
+      "variant": "homemade",
+      "confusables": [
+        "medu-vada",
+        "khandvi"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "vada-pav",
+      "displayName": "Vada pav",
+      "catalogSlug": "vada-pav",
+      "variant": "restaurant",
+      "confusables": [
+        "samosa",
+        "pav-bhaji"
+      ],
+      "aliases": [
+        "vadapav"
+      ]
+    },
+    {
+      "label": "pav-bhaji",
+      "displayName": "Pav bhaji",
+      "catalogSlug": "pav-bhaji",
+      "variant": "homemade",
+      "confusables": [
+        "vada-pav"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "pani-puri",
+      "displayName": "Pani puri",
+      "catalogSlug": "pani-puri",
+      "variant": "homemade",
+      "confusables": [
+        "chole-bhature"
+      ],
+      "aliases": [
+        "golgappa",
+        "puchka"
+      ]
+    },
+    {
+      "label": "chole-bhature",
+      "displayName": "Chole bhature",
+      "catalogSlug": "chole-bhature",
+      "variant": "homemade",
+      "confusables": [
+        "chole",
+        "pani-puri"
+      ],
+      "aliases": [
+        "chana bhatura"
+      ]
+    },
+    {
+      "label": "gulab-jamun",
+      "displayName": "Gulab jamun",
+      "catalogSlug": "gulab-jamun",
+      "variant": "homemade",
+      "confusables": [
+        "jalebi"
+      ],
+      "aliases": []
+    },
+    {
+      "label": "jalebi",
+      "displayName": "Jalebi",
+      "catalogSlug": "jalebi",
+      "variant": "homemade",
+      "confusables": [
+        "gulab-jamun"
+      ],
+      "aliases": [
+        "jilebi"
+      ]
+    },
+    {
+      "label": "gajar-halwa",
+      "displayName": "Gajar halwa",
+      "catalogSlug": "gajar-halwa",
+      "variant": "homemade",
+      "confusables": [
+        "kheer"
+      ],
+      "aliases": [
+        "carrot halwa"
+      ]
+    },
+    {
+      "label": "kheer",
+      "displayName": "Kheer",
+      "catalogSlug": "kheer",
+      "variant": "homemade",
+      "confusables": [
+        "gajar-halwa"
+      ],
+      "aliases": [
+        "payasam",
+        "rice kheer"
+      ]
+    },
+    {
+      "label": "masala-chai",
+      "displayName": "Masala chai",
+      "catalogSlug": "masala-chai",
+      "variant": "homemade",
+      "confusables": [
+        "sweet-lassi"
+      ],
+      "aliases": [
+        "chai",
+        "tea"
+      ]
+    },
+    {
+      "label": "sweet-lassi",
+      "displayName": "Sweet lassi",
+      "catalogSlug": "sweet-lassi",
+      "variant": "homemade",
+      "confusables": [
+        "masala-chai"
+      ],
+      "aliases": [
+        "lassi"
+      ]
+    }
+  ]
+}

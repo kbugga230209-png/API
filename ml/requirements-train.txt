@@ -1,0 +1,9 @@
+# Training-only dependencies. Not needed to run the pipeline logic, tests or
+# manifest tooling — those are standard library only.
+#
+# Install on a machine with a GPU (or a CPU runner) before running:
+#   python3 -m bharatbite_ml.train ...
+#   python3 -m bharatbite_ml.evaluate ...
+#   python3 -m bharatbite_ml.quantize ...
+tensorflow-cpu==2.17.0
+numpy==1.26.4

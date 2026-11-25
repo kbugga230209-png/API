@@ -51,9 +51,18 @@ that builds and signs. Store the keystore + passwords as GitHub Actions secrets:
 artifact and therefore nothing to sign. The app falls back to manual search rather
 than downloading anything unverified.
 
-Needed: a licensed Indian-food image corpus, a training run (steps in `docs/PLAN.md`
-§1.9), then an Ed25519 signing key held outside the repo and one `model_versions`
-row (version, artifact URL, SHA-256, size, signature, metrics).
+The pipeline that consumes the corpus is finished and tested (`ml/`, 103 unittest
+cases). What is missing is data and compute, not code:
+
+| Ask | Detail |
+| --- | --- |
+| Image corpus | 50 classes × ~120 images; at least 40 per class, 5+ validation per class. Sourcing plan and licence rules in `ml/dataset/README.md`. Owned capture is the important part — open corpora alone do not look like a canteen tray. |
+| GPU machine (or CI dispatch) | `pip install -r ml/requirements-train.txt`, then `train.py` → `quantize.py` → `evaluate.py`. The `ml-pipeline` workflow can be run manually with `run_training_smoke` to prove the plumbing on a runner. |
+| Signing key | `python3 -m bharatbite_ml.cli new-key`; store the private half as the GitHub Actions secret `BHARATBITE_MODEL_SIGNING_KEY`, commit only the public half. `export_manifest` reads it from the environment and refuses to sign without a measured benchmark. |
+| One `model_versions` row | version, artifact URL, SHA-256, size, signature, metrics — only after `benchmark --results` recommends a model. |
+
+The gate is not negotiable: top-1 ≥ 0.75, top-5 ≥ 0.90, p95 ≤ 350 ms, artifact
+≤ 25 MB, and the signed SHA-256 must be the exact file the benchmark measured.
 
 ## 4. Nothing else
 

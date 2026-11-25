@@ -22,6 +22,8 @@ ml/data/raw/
 ml/artifacts/*.onnx
 ml/artifacts/*.tflite
 ml/keys/
+ml/smoke-out/
+ml/runs/
 *.keystore
 *.jks
 android/app/build/
