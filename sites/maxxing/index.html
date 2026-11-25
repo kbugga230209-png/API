@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEAVENLY — AI Aesthetic Analyzer</title>
+<meta name="description" content="On-device facial proportion scan with MediaPipe. Deterministic scores, honest no-face handling, zero uploads. For fun — not a beauty judgment.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="HEAVENLY — AI Aesthetic Analyzer">
+<meta property="og:description" content="Discover your aesthetic potential. 100% in your browser — photos never leave your device.">
+<meta property="og:image" content="og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ccircle cx='32' cy='30' r='16' fill='none' stroke='%23d4af37' stroke-width='4'/%3E%3Ccircle cx='32' cy='30' r='7' fill='%23d4af37'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#d4af37;--gold-light:#f4e4bc;--gold-dark:#8b6914;
+  --bg-dark:#0a0a0f;--glass:rgba(255,255,255,.05);--glass-border:rgba(212,175,55,.2);
+  --text-primary:#fff;--text-secondary:rgba(255,255,255,.6);
+  --ok:#8fce7a;--warn:#ffc861;--bad:#ff8f8f;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;overflow-x:hidden;line-height:1.6}
+#dust{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.halo-glow{position:fixed;top:20%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse at center,rgba(212,175,55,.08) 0%,rgba(212,175,55,.03) 30%,transparent 70%);border-radius:50%;pointer-events:none;z-index:1;animation:haloPulse 8s ease-in-out infinite}
+@keyframes haloPulse{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
+.glass-sphere{position:fixed;border-radius:50%;background:radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.15),rgba(212,175,55,.05) 50%,transparent 70%);border:1px solid rgba(212,175,55,.1);pointer-events:none;z-index:2}
+.sphere-1{width:300px;height:300px;top:10%;right:5%;animation:floatSphere 20s ease-in-out infinite}
+.sphere-2{width:200px;height:200px;bottom:20%;left:8%;animation:floatSphere 25s ease-in-out infinite reverse}
+@keyframes floatSphere{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-20px)}50%{transform:translate(-20px,30px)}75%{transform:translate(20px,20px)}}
+nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:1200px;padding:16px 32px;background:rgba(10,10,15,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:100px;z-index:1000;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:600;letter-spacing:4px;color:var(--gold);text-shadow:0 0 30px rgba(212,175,55,.3)}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.85rem;font-weight:500;padding:10px 20px;border-radius:50px;transition:all .3s;letter-spacing:1px}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--gold);background:rgba(212,175,55,.1);outline:none}
+main{position:relative;z-index:10;padding-top:100px}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 20px}
+.glass-card{background:var(--glass);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--glass-border);border-radius:24px;padding:48px;position:relative;overflow:hidden}
+.glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.3),transparent)}
+#hero{text-align:center}
+.hero-card{max-width:700px;animation:floatCard 6s ease-in-out infinite}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.badge{display:inline-block;padding:8px 20px;background:rgba(212,175,55,.1);border:1px solid var(--glass-border);border-radius:50px;font-size:.75rem;font-weight:500;letter-spacing:3px;color:var(--gold);margin-bottom:32px}
+h1{font-family:'Cinzel',serif;font-size:clamp(3rem,10vw,5rem);font-weight:600;letter-spacing:12px;margin-bottom:16px;background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 50%,var(--gold-dark) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.subtitle{font-family:'Cinzel',serif;font-size:1.2rem;letter-spacing:6px;color:var(--text-secondary);margin-bottom:24px}
+.description{font-size:1.1rem;color:var(--text-secondary);margin-bottom:40px;max-width:440px;margin-inline:auto}
+.btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{padding:16px 40px;border-radius:50px;font-size:.9rem;font-weight:500;letter-spacing:2px;cursor:pointer;transition:all .4s;text-decoration:none;border:none;font-family:inherit;display:inline-block}
+.btn-primary{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);color:var(--bg-dark);box-shadow:0 4px 30px rgba(212,175,55,.3)}
+.btn-primary:hover,.btn-primary:focus-visible{transform:translateY(-2px);box-shadow:0 8px 40px rgba(212,175,55,.5);outline:none}
+.btn-secondary{background:transparent;color:var(--gold);border:1px solid var(--glass-border)}
+.btn-secondary:hover,.btn-secondary:focus-visible{background:rgba(212,175,55,.1);border-color:var(--gold);outline:none}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+#scan{min-height:auto;padding:120px 20px}
+.scan-card{max-width:620px;width:100%;text-align:center}
+.section-title{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:500;letter-spacing:4px;color:var(--gold);margin-bottom:16px}
+.section-desc{color:var(--text-secondary);margin-bottom:28px}
+.privacy{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;letter-spacing:1.5px;color:var(--ok);border:1px solid rgba(143,206,122,.3);background:rgba(143,206,122,.06);border-radius:50px;padding:7px 16px;margin-bottom:28px}
+.upload-zone{border:2px dashed var(--glass-border);border-radius:20px;padding:56px 40px;background:rgba(212,175,55,.02);cursor:pointer;transition:all .3s}
+.upload-zone:hover,.upload-zone:focus-visible,.upload-zone.dragover{border-color:var(--gold);background:rgba(212,175,55,.06);outline:none}
+.upload-icon{font-size:3rem;margin-bottom:20px;opacity:.6}
+.upload-text{color:var(--text-secondary);font-size:.95rem}
+.upload-text span{color:var(--gold)}
+.upload-hint{font-size:.8rem;margin-top:8px;color:var(--text-secondary)}
+#file-input{display:none}
+.demo-row{margin-top:22px;font-size:.85rem;color:var(--text-secondary)}
+.linklike{background:none;border:none;color:var(--gold);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:3px}
+.linklike:hover,.linklike:focus-visible{color:var(--gold-light);outline:none}
+.preview-container{display:none;position:relative;border-radius:20px;overflow:hidden;background:rgba(0,0,0,.3)}
+.preview-container.active{display:block}
+#preview-canvas{width:100%;max-width:500px;border-radius:20px;display:block;margin:0 auto}
+.scanning-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(10,10,15,.8);opacity:0;pointer-events:none;transition:opacity .3s}
+.scanning-overlay.active{opacity:1;pointer-events:auto}
+.scan-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);box-shadow:0 0 20px var(--gold);animation:scanMove 2s ease-in-out infinite}
+@keyframes scanMove{0%{top:0}100%{top:100%}}
+.scan-text{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:4px;color:var(--gold);margin-top:20px}
+.status{margin-top:18px;font-size:.85rem;letter-spacing:1px;min-height:1.4em;color:var(--text-secondary)}
+.status.err{color:var(--bad)}
+.status.warn{color:var(--warn)}
+.scan-actions{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#results{min-height:auto;padding:80px 20px;display:none}
+#results.active{display:flex}
+.results-card{max-width:700px;width:100%}
+.demo-banner{display:none;text-align:center;font-size:.75rem;letter-spacing:2px;color:var(--warn);border:1px solid rgba(255,200,97,.35);background:rgba(255,200,97,.07);border-radius:12px;padding:10px;margin-bottom:24px}
+.demo-banner.show{display:block}
+.overall-score{text-align:center;margin-bottom:48px}
+.score-circle{width:200px;height:200px;margin:0 auto 24px;position:relative}
+.score-circle svg{width:100%;height:100%;transform:rotate(-90deg)}
+.bg-circle{fill:none;stroke:rgba(212,175,55,.1);stroke-width:8}
+.progress-circle{fill:none;stroke:url(#goldGradient);stroke-width:8;stroke-linecap:round;stroke-dasharray:565;stroke-dashoffset:565;transition:stroke-dashoffset 2s ease}
+.score-value{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cinzel',serif;font-size:3rem;font-weight:600;color:var(--gold)}
+.score-label{font-size:.9rem;color:var(--text-secondary);letter-spacing:2px}
+.metrics-grid{display:grid;gap:20px}
+.metric-item{padding:24px;background:rgba(212,175,55,.03);border-radius:16px;border:1px solid rgba(212,175,55,.1)}
+.metric-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.metric-name{font-weight:500;letter-spacing:1px}
+.metric-score{font-family:'Cinzel',serif;color:var(--gold);font-weight:600}
+.metric-bar{height:6px;background:rgba(212,175,55,.1);border-radius:3px;overflow:hidden}
+.metric-fill{height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold));border-radius:3px;width:0%;transition:width 1.5s ease}
+.metric-note{font-size:.72rem;color:var(--text-secondary);margin-top:10px}
+.fineprint{font-size:.75rem;color:var(--text-secondary);margin-top:26px;line-height:1.7;text-align:center}
+#tips{min-height:auto;padding:80px 20px 120px;display:none}
+#tips.active{display:flex}
+.tips-card{max-width:900px;width:100%}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px}
+.tip-card{padding:32px;background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;transition:all .3s}
+.tip-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.tip-icon{font-size:2rem;margin-bottom:16px}
+.tip-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:500;letter-spacing:1px;margin-bottom:12px;color:var(--gold)}
+.tip-text{font-size:.9rem;color:var(--text-secondary);line-height:1.6}
+footer{position:relative;z-index:10;text-align:center;padding:0 20px 46px;color:var(--text-secondary);font-size:.8rem}
+footer a{color:var(--text-secondary);text-decoration:none;border-bottom:1px dotted rgba(212,175,55,.3);margin:0 6px}
+footer a:hover{color:var(--gold)}
+@media (max-width:768px){
+  nav{padding:12px 20px}.logo{font-size:1.1rem;letter-spacing:2px}
+  .nav-links a{padding:8px 12px;font-size:.75rem}
+  .glass-card{padding:32px 24px}
+  h1{letter-spacing:6px}.subtitle{font-size:1rem;letter-spacing:3px}
+  .btn{padding:14px 28px;font-size:.8rem}
+  .sphere-1,.sphere-2{display:none}
+  .halo-glow{width:100%;height:400px}
+}
+@media (max-width:480px){.nav-links{display:none}.btn-group{flex-direction:column;width:100%}.btn{width:100%;text-align:center}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .halo-glow,.glass-sphere,.hero-card,.scan-line{animation:none}
+  .progress-circle,.metric-fill{transition:none}
+}
+</style>
+</head>
+<body>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="halo-glow" aria-hidden="true"></div>
+<div class="glass-sphere sphere-1" aria-hidden="true"></div>
+<div class="glass-sphere sphere-2" aria-hidden="true"></div>
+
+<nav aria-label="Main">
+  <div class="logo">HEAVENLY</div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#scan">Scan</a>
+    <a href="#results">Results</a>
+    <a href="#tips">Tips</a>
+  </div>
+</nav>
+
+<main>
+  <section id="hero">
+    <div class="glass-card hero-card">
+      <div class="badge">ON-DEVICE INTELLIGENCE · DIVINE AESTHETICS</div>
+      <h1>HEAVENLY</h1>
+      <p class="subtitle">AI Aesthetic Analyzer</p>
+      <p class="description">Facial proportion scan powered by MediaPipe — deterministic, private, and honest about what it can and can't measure.</p>
+      <div class="btn-group">
+        <a href="#scan" class="btn btn-primary">Scan My Face</a>
+        <a href="#scan" class="btn btn-secondary">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="scan">
+    <div class="glass-card scan-card">
+      <h2 class="section-title">NEURAL SCAN</h2>
+      <p class="section-desc">Upload a front-facing portrait. The same photo always gives the same score.</p>
+      <div class="privacy">🔒 100% on-device — your photo never leaves this browser</div>
+
+      <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Upload a portrait image">
+        <div class="upload-icon" aria-hidden="true">✨</div>
+        <p class="upload-text"><span>Click to upload</span>, drag &amp; drop, or paste</p>
+        <p class="upload-hint">PNG / JPG · up to 10 MB · one face, good light, looking at the camera</p>
+        <input type="file" id="file-input" accept="image/*">
+      </div>
+
+      <div class="preview-container" id="preview-container">
+        <canvas id="preview-canvas" aria-label="Uploaded portrait with face mesh overlay"></canvas>
+        <div class="scanning-overlay" id="scanning-overlay">
+          <div class="scan-line"></div>
+          <p class="scan-text" id="scan-text">ANALYZING AESTHETICS</p>
+        </div>
+      </div>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <div class="scan-actions" id="scan-actions" hidden>
+        <button class="btn btn-secondary" id="rescan" type="button">Scan another photo</button>
+      </div>
+      <p class="demo-row">No photo handy? <button class="linklike" id="demo" type="button">Run a clearly-labelled demo scan</button></p>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="glass-card results-card">
+      <div class="demo-banner" id="demo-banner">SIMULATED DEMO — these numbers are illustrative, not measured from a face</div>
+      <h2 class="section-title" style="text-align:center;margin-bottom:40px">AESTHETIC RESULTS</h2>
+      <div class="overall-score">
+        <div class="score-circle">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#8b6914"/>
+                <stop offset="50%" style="stop-color:#d4af37"/>
+                <stop offset="100%" style="stop-color:#f4e4bc"/>
+              </linearGradient>
+            </defs>
+            <circle class="bg-circle" cx="100" cy="100" r="90"/>
+            <circle class="progress-circle" cx="100" cy="100" r="90" id="score-progress"/>
+          </svg>
+          <div class="score-value" id="overall-value">0.0</div>
+        </div>
+        <p class="score-label">OVERALL AESTHETIC SCORE</p>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-header"><span class="metric-name">Facial Symmetry</span><span class="metric-score" id="symmetry-score">0.0</span></div>
+          <div class="metric-bar"><div class="metric-fill" id="symmetry-fill"></div></div>
+          <p class="metric-note">Midline deviation of nose, eyes and mouth, relative to face width.</p>
+        </div>
+        <div class="metric-item">
+          <div class="metric-header"><span class="metric-name">Jawline Definition</span><span class="metric-score" id="jawline-score">0.0</span></div>
+          <div class="metric-bar"><div class="metric-fill" id="jawline-fill"></div></div>
+          <p class="metric-note">Jaw width-to-height ratio and chin taper from landmarks.</p>
+        </div>
+        <div class="metric-item">
+          <div class="metric-header"><span class="metric-name">Eye Alignment</span><span class="metric-score" id="eyes-score">0.0</span></div>
+          <div class="metric-bar"><div class="metric-fill" id="eyes-fill"></div></div>
+          <p class="metric-note">Eye-line tilt and interpupillary spacing vs. the classical canon.</p>
+        </div>
+        <div class="metric-item">
+          <div class="metric-header"><span class="metric-name">Skin Quality*</span><span class="metric-score" id="skin-score">0.0</span></div>
+          <div class="metric-bar"><div class="metric-fill" id="skin-fill"></div></div>
+          <p class="metric-note">*Photo texture &amp; lighting evenness on the cheeks — not a skin assessment.</p>
+        </div>
+      </div>
+      <div class="scan-actions" style="margin-top:30px">
+        <button class="btn btn-primary" id="download" type="button">Download score card</button>
+        <button class="btn btn-secondary" id="rescan2" type="button">Scan another</button>
+      </div>
+      <p class="fineprint">Scores describe proportions in one photo under one lighting setup. They change with angle, lens and light — they are not a measure of worth, health or beauty. Built for fun.</p>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="glass-card tips-card">
+      <h2 class="section-title" style="text-align:center">IMPROVEMENT TIPS</h2>
+      <p class="section-desc" style="text-align:center">Chosen for your two lowest metrics — not random</p>
+      <div class="tips-grid" id="tips-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a data-xlink="hub" href="#">Universe</a>·<a data-xlink="heavenly" href="#">Heavenly</a>·<a data-xlink="thatminecraft" href="#">The Realm</a>·<a data-xlink="aioutfit" href="#">Outfits</a>·<a data-xlink="legagme" href="#">Legacy</a>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Gold dust background (2D canvas — no Three.js, ~0 deps) ---------- */
+var dust=document.getElementById("dust"),dctx=dust.getContext("2d");
+var DPR=Math.min(2,window.devicePixelRatio||1),parts=[],mx=0,my=0,running=true;
+var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function sizeDust(){dust.width=innerWidth*DPR;dust.height=innerHeight*DPR;dctx.setTransform(DPR,0,0,DPR,0,0);}
+function makeParts(){
+  parts=[];var n=innerWidth<768?70:130;
+  for(var i=0;i<n;i++)parts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.6+.4,s:Math.random()*.25+.05,tw:Math.random()*Math.PI*2,depth:Math.random()*.7+.3});
+}
+function drawDust(t){
+  dctx.clearRect(0,0,innerWidth,innerHeight);
+  for(var i=0;i<parts.length;i++){
+    var p=parts[i];
+    if(!reduce){p.y-=p.s;if(p.y<-4)p.y=innerHeight+4;p.tw+=.02;}
+    var a=.25+.55*Math.abs(Math.sin(p.tw));
+    dctx.beginPath();
+    dctx.arc(p.x+mx*14*p.depth,p.y+my*10*p.depth,p.r,0,Math.PI*2);
+    dctx.fillStyle="rgba(212,175,55,"+a.toFixed(3)+")";
+    dctx.fill();
+  }
+}
+function loop(t){if(running)drawDust(t);if(!reduce)requestAnimationFrame(loop);}
+sizeDust();makeParts();
+if(reduce){drawDust(0);}else{requestAnimationFrame(loop);}
+addEventListener("resize",function(){sizeDust();makeParts();if(reduce)drawDust(0);});
+document.addEventListener("visibilitychange",function(){running=!document.hidden;});
+document.addEventListener("mousemove",function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;},{passive:true});
+
+/* ---------- Elements & state ---------- */
+function $(id){return document.getElementById(id);}
+var uploadZone=$("upload-zone"),fileInput=$("file-input"),previewContainer=$("preview-container"),
+    previewCanvas=$("preview-canvas"),scanningOverlay=$("scanning-overlay"),scanText=$("scan-text"),
+    statusEl=$("status"),ctx=previewCanvas.getContext("2d",{willReadFrequently:true});
+var originalImg=null;      // FIX: keep the source image; never redraw from a cleared canvas
+var faceMesh=null,meshPromise=null,lastScores=null,lastDemo=false;
+
+function setStatus(msg,cls){statusEl.textContent=msg||"";statusEl.className="status"+(cls?" "+cls:"");}
+
+/* ---------- MediaPipe: lazy-load on first use, with timeout & graceful failure ---------- */
+function loadScript(src,ms){
+  return new Promise(function(res,rej){
+    var s=document.createElement("script");s.src=src;s.async=true;
+    var to=setTimeout(function(){rej(new Error("timeout"));},ms||20000);
+    s.onload=function(){clearTimeout(to);res();};
+    s.onerror=function(){clearTimeout(to);rej(new Error("network"));};
+    document.head.appendChild(s);
+  });
+}
+function getFaceMesh(){
+  if(faceMesh)return Promise.resolve(faceMesh);
+  if(meshPromise)return meshPromise;
+  meshPromise=loadScript("https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4/face_mesh.js",20000)
+    .then(function(){
+      faceMesh=new FaceMesh({locateFile:function(f){return "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4/"+f;}});
+      faceMesh.setOptions({maxNumFaces:1,refineLandmarks:false,minDetectionConfidence:.5,minTrackingConfidence:.5});
+      faceMesh.onResults(onResults);
+      return faceMesh.initialize?faceMesh.initialize().then(function(){return faceMesh;}):faceMesh;
+    })
+    .catch(function(e){meshPromise=null;faceMesh=null;throw e;});
+  return meshPromise;
+}
+
+/* ---------- Upload handling ---------- */
+uploadZone.addEventListener("click",function(){fileInput.click();});
+uploadZone.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();fileInput.click();}});
+uploadZone.addEventListener("dragover",function(e){e.preventDefault();uploadZone.classList.add("dragover");});
+uploadZone.addEventListener("dragleave",function(){uploadZone.classList.remove("dragover");});
+uploadZone.addEventListener("drop",function(e){
+  e.preventDefault();uploadZone.classList.remove("dragover");
+  var f=e.dataTransfer.files&&e.dataTransfer.files[0];
+  if(f)handleFile(f);
+});
+fileInput.addEventListener("change",function(e){if(e.target.files[0])handleFile(e.target.files[0]);e.target.value="";});
+window.addEventListener("paste",function(e){
+  if(!e.clipboardData)return;
+  for(var i=0;i<e.clipboardData.items.length;i++){
+    var it=e.clipboardData.items[i];
+    if(it.type.indexOf("image/")===0){handleFile(it.getAsFile());break;}
+  }
+});
+
+function handleFile(file){
+  if(!file.type||!file.type.startsWith("image/")){setStatus("That file isn't an image — try a PNG or JPG.","err");return;}
+  if(file.size>10*1024*1024){setStatus("Image is over 10 MB — pick a smaller one.","err");return;}
+  setStatus("Loading photo…");
+  var url=URL.createObjectURL(file);
+  var img=new Image();
+  img.onload=function(){
+    URL.revokeObjectURL(url);
+    originalImg=img;
+    var maxW=640,scale=Math.min(1,maxW/img.width);
+    previewCanvas.width=Math.round(img.width*scale);
+    previewCanvas.height=Math.round(img.height*scale);
+    ctx.drawImage(img,0,0,previewCanvas.width,previewCanvas.height);
+    uploadZone.style.display="none";
+    previewContainer.classList.add("active");
+    scanningOverlay.classList.add("active");
+    scanText.textContent="LOADING NEURAL MODEL";
+    $("scan-actions").hidden=true;
+    $("results").classList.remove("active");$("tips").classList.remove("active");
+    setStatus("First scan downloads the face model (~3 MB) once…");
+    getFaceMesh().then(function(fm){
+      scanText.textContent="ANALYZING AESTHETICS";
+      setStatus("Scanning landmarks…");
+      return fm.send({image:previewCanvas});
+    }).catch(function(){
+      scanningOverlay.classList.remove("active");
+      setStatus("Couldn't load the face model (offline or CDN blocked). You can still run the labelled demo below.","err");
+      $("scan-actions").hidden=false;
+    });
+  };
+  img.onerror=function(){URL.revokeObjectURL(url);setStatus("Couldn't read that image file.","err");};
+  img.src=url;
+}
+
+/* ---------- Results from MediaPipe ---------- */
+function onResults(results){
+  // FIX: redraw from the stored original image — the old code redrawed a blank canvas.
+  ctx.clearRect(0,0,previewCanvas.width,previewCanvas.height);
+  if(originalImg)ctx.drawImage(originalImg,0,0,previewCanvas.width,previewCanvas.height);
+  var lm=results.multiFaceLandmarks&&results.multiFaceLandmarks[0];
+  if(!lm){
+    scanningOverlay.classList.remove("active");
+    setStatus("No face detected. Use a front-facing photo with good light and the whole face in frame — or run the demo.","warn");
+    $("scan-actions").hidden=false;
+    return; // FIX: never fabricate scores for a real photo with no face
+  }
+  drawMesh(lm);
+  var scores=calculateScores(lm);
+  setTimeout(function(){
+    scanningOverlay.classList.remove("active");
+    setStatus("Scan complete — 468 landmarks measured.");
+    $("scan-actions").hidden=false;
+    displayResults(scores,false);
+  },900);
+}
+
+function drawMesh(lm){
+  var W=previewCanvas.width,H=previewCanvas.height;
+  ctx.strokeStyle="rgba(212,175,55,.4)";ctx.lineWidth=.5;
+  var C=[[10,338],[338,297],[297,332],[332,284],[284,251],[251,389],[389,356],[356,454],[454,323],[323,361],[361,288],[288,397],[397,365],[365,379],[379,378],[378,400],[400,377],[377,152],[152,148],[148,176],[176,149],[149,150],[150,136],[136,172],[172,58],[58,132],[132,93],[93,234],[234,127],[127,162],[162,21],[21,54],[54,103],[103,67],[67,109],[109,10]];
+  C.forEach(function(c){
+    ctx.beginPath();
+    ctx.moveTo(lm[c[0]].x*W,lm[c[0]].y*H);
+    ctx.lineTo(lm[c[1]].x*W,lm[c[1]].y*H);
+    ctx.stroke();
+  });
+  ctx.fillStyle="rgba(212,175,55,.8)";
+  for(var i=0;i<lm.length;i+=2){
+    ctx.beginPath();ctx.arc(lm[i].x*W,lm[i].y*H,1.2,0,Math.PI*2);ctx.fill();
+  }
+}
+
+/* ---------- Deterministic scoring — same photo, same numbers ---------- */
+function clamp(v){return Math.round(Math.min(10,Math.max(1,v))*10)/10;}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
+function calculateScores(lm){
+  var W=dist(lm[234],lm[454]);                 // face width
+  var H=dist(lm[10],lm[152]);                  // face height
+  var midX=(lm[234].x+lm[454].x)/2;            // true face midline (framing-independent)
+
+  // Symmetry: deviation of nose / eye balance / mouth from the midline
+  var noseDev=Math.abs(lm[1].x-midX)/W;
+  var eyeBal=Math.abs(Math.abs(lm[33].x-midX)-Math.abs(lm[263].x-midX))/W;
+  var mouthDev=Math.abs((lm[61].x+lm[291].x)/2-midX)/W;
+  var symmetry=clamp(10-(noseDev*28+eyeBal*22+mouthDev*18));
+
+  // Jawline: width/height ratio + chin taper
+  var jawRatio=W/Math.max(.001,H);
+  var taper=dist(lm[58],lm[288])/W;
+  var jawline=clamp(4+(jawRatio-.7)*18+(.78-taper)*10);
+
+  // Eyes: tilt + interpupillary ratio vs classical canon (~0.46 of face width)
+  var tilt=Math.abs(lm[33].y-lm[263].y)/W;
+  var ipd=dist(lm[33],lm[263])/W;
+  var eyes=clamp(10-tilt*90-Math.abs(ipd-.46)*25);
+
+  // Skin: luminance texture + evenness on both cheeks (photo-based, honest)
+  var skin=clamp(sampleSkin(lm,W));
+
+  return {symmetry:symmetry,jawline:jawline,eyes:eyes,skin:skin};
+}
+function sampleSkin(lm,W){
+  var w=previewCanvas.width,h=previewCanvas.height;
+  var r=Math.max(3,Math.round(W*w*.06));
+  function patch(idx){
+    var cx=Math.round(lm[idx].x*w),cy=Math.round(lm[idx].y*h);
+    var x0=Math.max(0,cx-r),y0=Math.max(0,cy-r);
+    var x1=Math.min(w,cx+r),y1=Math.min(h,cy+r);
+    if(x1<=x0||y1<=y0)return{mean:128,std:20};
+    var d=ctx.getImageData(x0,y0,x1-x0,y1-y0).data,n=0,sum=0,sum2=0;
+    for(var i=0;i<d.length;i+=16){ // sample every 4th pixel
+      var lum=.299*d[i]+.587*d[i+1]+.114*d[i+2];
+      sum+=lum;sum2+=lum*lum;n++;
+    }
+    var mean=sum/n;return{mean:mean,std:Math.sqrt(Math.max(0,sum2/n-mean*mean))};
+  }
+  var L=patch(50),R=patch(280);
+  var texture=(L.std+R.std)/2,evenness=Math.abs(L.mean-R.mean);
+  return 10-texture*.22-evenness*.12;
+}
+
+/* ---------- Demo mode (explicit, labelled, deterministic) ---------- */
+$("demo").addEventListener("click",function(){
+  var scores={symmetry:8.4,jawline:7.6,eyes:8.9,skin:7.8};
+  setStatus("Demo scan — illustrative numbers, no face measured.","warn");
+  displayResults(scores,true);
+});
+
+/* ---------- Display ---------- */
+function displayResults(scores,isDemo){
+  lastScores=scores;lastDemo=isDemo;
+  $("demo-banner").classList.toggle("show",!!isDemo);
+  var overall=Math.round((scores.symmetry*.3+scores.jawline*.25+scores.eyes*.25+scores.skin*.2)*10)/10;
+  lastScores.overall=overall;
+  $("results").classList.add("active");
+  setTimeout(function(){$("results").scrollIntoView({behavior:reduce?"auto":"smooth"});},250);
+  setTimeout(function(){
+    $("score-progress").style.strokeDashoffset=565-(overall/10)*565;
+    animateValue($("overall-value"),0,overall,1800);
+  },450);
+  setTimeout(function(){
+    ["symmetry","jawline","eyes","skin"].forEach(function(k){
+      animateValue($(k+"-score"),0,scores[k],1400);
+      $(k+"-fill").style.width=(scores[k]*10)+"%";
+    });
+  },900);
+  setTimeout(function(){
+    generateTips(scores);
+    $("tips").classList.add("active");
+  },1800);
+}
+function animateValue(el,start,end,dur){
+  if(reduce){el.textContent=end.toFixed(1);return;}
+  var t0=performance.now();
+  (function step(t){
+    var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=(start+(end-start)*e).toFixed(1);
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}
+
+/* ---------- Tips: actually keyed to the two lowest metrics ---------- */
+var TIP_POOL={
+  symmetry:[
+    {icon:"📸",title:"Angle Awareness",text:"Shoot straight-on at eye level — tilt and lens distortion fake asymmetry that isn't there."},
+    {icon:"💤",title:"Sleep Symmetry",text:"Side-sleeping and jaw clenching can puff one side. Back-sleep and relax the jaw before bed."}
+  ],
+  jawline:[
+    {icon:"🧂",title:"De-Puff Protocol",text:"Cut late-night sodium, hydrate, and add 10 minutes of morning cardio — water retention hides the jaw."},
+    {icon:"🧔",title:"Contour Framing",text:"A beard line or haircut with clean edges draws the jaw visually. Ask your barber for a low, sharp fade."}
+  ],
+  eyes:[
+    {icon:"💡",title:"Lighting Mastery",text:"Soft light from 45° above eye level removes under-eye shadows and levels the eye line in photos."},
+    {icon:"🌿",title:"Wellness Balance",text:"Sleep, hydration and less screen strain before bed reduce eye redness and droop."}
+  ],
+  skin:[
+    {icon:"✨",title:"Skincare Ritual",text:"Cleanser, moisturiser, SPF 30+ every morning. Consistency beats expensive products."},
+    {icon:"🎨",title:"Colour Harmony",text:"Wear tones that complement your undertone — it makes skin read clearer in any light."}
+  ]
+};
+function generateTips(scores){
+  var order=["symmetry","jawline","eyes","skin"].sort(function(a,b){return scores[a]-scores[b];});
+  var picks=TIP_POOL[order[0]].concat(TIP_POOL[order[1]]);
+  var grid=$("tips-grid");grid.innerHTML="";
+  picks.forEach(function(tip,i){
+    var card=document.createElement("div");card.className="tip-card";
+    card.style.opacity="0";card.style.transform="translateY(20px)";
+    var ic=document.createElement("div");ic.className="tip-icon";ic.textContent=tip.icon;
+    var h=document.createElement("h3");h.className="tip-title";h.textContent=tip.title;
+    var p=document.createElement("p");p.className="tip-text";p.textContent=tip.text;
+    card.appendChild(ic);card.appendChild(h);card.appendChild(p);
+    grid.appendChild(card);
+    setTimeout(function(){card.style.transition="all .5s ease";card.style.opacity="1";card.style.transform="translateY(0)";},reduce?0:i*160);
+  });
+}
+
+/* ---------- Rescan ---------- */
+function rescan(){
+  originalImg=null;lastScores=null;
+  previewContainer.classList.remove("active");
+  uploadZone.style.display="";
+  $("results").classList.remove("active");$("tips").classList.remove("active");
+  $("scan-actions").hidden=true;
+  $("score-progress").style.strokeDashoffset=565;
+  setStatus("");
+  $("scan").scrollIntoView({behavior:reduce?"auto":"smooth"});
+}
+$("rescan").addEventListener("click",rescan);
+$("rescan2").addEventListener("click",rescan);
+
+/* ---------- Score card download ---------- */
+$("download").addEventListener("click",function(){
+  if(!lastScores)return;
+  var c=document.createElement("canvas");c.width=1000;c.height=1250;
+  var g=c.getContext("2d");
+  g.fillStyle="#0a0a0f";g.fillRect(0,0,1000,1250);
+  var rad=g.createRadialGradient(500,430,50,500,430,520);
+  rad.addColorStop(0,"rgba(212,175,55,.16)");rad.addColorStop(1,"rgba(212,175,55,0)");
+  g.fillStyle=rad;g.fillRect(0,0,1000,1250);
+  g.strokeStyle="#d4af37";g.lineWidth=2;
+  g.beginPath();g.arc(500,430,240,0,Math.PI*2);g.stroke();
+  g.textAlign="center";
+  g.fillStyle="#f4e4bc";g.font="600 74px Georgia,serif";
+  g.fillText("H E A V E N L Y",500,180);
+  g.fillStyle="#d4af37";g.font="26px Georgia,serif";
+  g.fillText("AESTHETIC SCAN"+(lastDemo?" · SIMULATED DEMO":""),500,235);
+  g.fillStyle="#d4af37";g.font="600 150px Georgia,serif";
+  g.fillText(lastScores.overall.toFixed(1),500,480);
+  g.fillStyle="rgba(255,255,255,.6)";g.font="22px Arial,sans-serif";
+  g.fillText("OVERALL / 10",500,530);
+  var rows=[["Facial Symmetry",lastScores.symmetry],["Jawline Definition",lastScores.jawline],["Eye Alignment",lastScores.eyes],["Skin Quality*",lastScores.skin]];
+  rows.forEach(function(r,i){
+    var y=720+i*110;
+    g.textAlign="left";g.fillStyle="#fff";g.font="28px Arial,sans-serif";
+    g.fillText(r[0],170,y);
+    g.textAlign="right";g.fillStyle="#d4af37";g.font="600 30px Georgia,serif";
+    g.fillText(r[1].toFixed(1),830,y);
+    g.fillStyle="rgba(212,175,55,.15)";g.fillRect(170,y+18,660,8);
+    g.fillStyle="#d4af37";g.fillRect(170,y+18,660*r[1]/10,8);
+  });
+  g.textAlign="center";g.fillStyle="rgba(255,255,255,.45)";g.font="19px Arial,sans-serif";
+  g.fillText("Proportions in one photo, one light. For fun — not a measure of worth.",500,1160);
+  g.fillText("kbugga230209-png.github.io/maxxing",500,1195);
+  var a=document.createElement("a");a.href=c.toDataURL("image/png");a.download="heavenly-score-card.png";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+});
+
+/* ---------- Smooth nav + cross-links ---------- */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener("click",function(e){
+    var t=document.querySelector(a.getAttribute("href"));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:reduce?"auto":"smooth"});}
+  });
+});
+var REPOS={heavenly:"Heaven","heavenly-site":"Heavenly-site",thatminecraft:"Heavenly-",maxxing:"maxxing",aioutfit:"AiOutfit",legagme:"LegaGMe"};
+var inHub=location.pathname.indexOf("/sites/")>-1;
+document.querySelectorAll("[data-xlink]").forEach(function(a){
+  var k=a.getAttribute("data-xlink");
+  a.href=k==="hub"?(inHub?"../../":"https://kbugga230209-png.github.io/API/"):(inHub?"../"+k+"/":"https://kbugga230209-png.github.io/"+REPOS[k]+"/");
+});
+})();
+</script>
+</body>
+</html>

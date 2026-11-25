@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Beyond the Realm</title>
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ccircle cx='32' cy='30' r='16' fill='none' stroke='%23d4af37' stroke-width='4'/%3E%3Ccircle cx='32' cy='30' r='7' fill='%23d4af37'/%3E%3C/svg%3E">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+background:radial-gradient(800px 500px at 50% 30%,rgba(212,175,55,.08),transparent 65%),#0a0a0f;
+color:#fff;font-family:Georgia,'Times New Roman',serif;padding:24px}
+h1{font-size:clamp(3rem,12vw,5.5rem);letter-spacing:.3em;text-indent:.3em;color:#d4af37;margin-bottom:18px}
+p{color:rgba(255,255,255,.6);font-family:system-ui,sans-serif;font-size:1rem;margin-bottom:34px;line-height:1.7}
+a{display:inline-block;color:#0a0a0f;background:linear-gradient(135deg,#d4af37,#8b6914);text-decoration:none;
+font-family:system-ui,sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+padding:15px 34px;border-radius:999px}
+a:hover{filter:brightness(1.1)}
+</style>
+</head>
+<body>
+<main>
+<h1>404</h1>
+<p>You&rsquo;ve wandered beyond the render distance.<br>This chunk was never generated.</p>
+<a id="home" href="./">Return to the Universe</a>
+</main>
+<script>
+(function(){
+  var p=location.pathname,i=p.indexOf("/API/");
+  document.getElementById("home").href=i>-1?p.slice(0,i+5):"/";
+})();
+</script>
+</body>
+</html>

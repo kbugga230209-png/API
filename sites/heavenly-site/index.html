@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HEAVENLY — Dossier</title>
+<meta name="description" content="Pressure. Control. Fluid adaptation. The Heavenly dossier — alias, identity, and the way in." />
+<meta name="theme-color" content="#0b0d12" />
+<meta property="og:title" content="HEAVENLY — Dossier" />
+<meta property="og:description" content="You won't lose to mechanics. You'll lose to assumption." />
+<meta property="og:image" content="og.jpg" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0d12'/%3E%3Ccircle cx='32' cy='30' r='16' fill='none' stroke='%23c23b3b' stroke-width='4'/%3E%3Ccircle cx='32' cy='30' r='7' fill='%23c23b3b'/%3E%3C/svg%3E" />
+<style>
+:root{
+  --bg:#0b0d12;
+  --bg-soft:#0f1218;
+  --ink:#e8e9ea;
+  --muted:#a7adb5;
+  --accent:#c23b3b;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:14px;
+  --e:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
+  background:
+    radial-gradient(1200px 800px at 50% -10%, rgba(194,59,59,.12), transparent 60%),
+    linear-gradient(180deg,#0b0d12,#0a0c11 60%,#080a0e);
+  color:var(--ink);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;align-items:center;
+  padding:min(6vh,48px) min(4vw,28px) 28px;
+  min-height:100vh;
+}
+.wrap{
+  width:min(92vw,780px);
+  background:linear-gradient(180deg,var(--bg-soft),#0b0f15);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:clamp(18px,3.2vw,28px);
+}
+.hero{text-align:center;margin-bottom:clamp(24px,5vh,40px)}
+.title{
+  font-weight:800;letter-spacing:.22em;text-transform:uppercase;text-indent:.22em;
+  font-size:clamp(28px,10vw,56px);line-height:1.1;
+}
+.tag{margin-top:.6rem;color:var(--muted);letter-spacing:.08em;font-size:clamp(13px,2.6vw,16px)}
+section{margin:clamp(24px,5vh,44px) 0}
+.h2{
+  font-size:clamp(18px,4.4vw,26px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:14px;color:var(--accent);text-align:center;
+}
+.block{margin-inline:auto;width:min(65ch,100%)}
+.block p{margin:.6rem 0;color:var(--muted);text-wrap:balance;transition:opacity .6s var(--e),transform .6s var(--e);opacity:1;transform:none}
+.js .block p{opacity:0;transform:translateY(10px)}
+.js .block p.show{opacity:1;transform:translateY(0)}
+.id-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(65ch,100%);margin:14px auto 0}
+.id{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;text-align:center}
+.id .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.id .val{display:block;margin-top:4px;font-weight:600;overflow-wrap:anywhere}
+.id .mini{
+  margin-top:6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  background:none;border:1px solid rgba(255,255,255,.12);color:var(--muted);
+  border-radius:999px;padding:3px 10px;cursor:pointer;transition:color .2s,border-color .2s;
+}
+.id .mini:hover,.id .mini:focus-visible{color:var(--accent);border-color:var(--accent);outline:none}
+.id .mini.done{color:#8fce7a;border-color:#3c5a34}
+.cta-row{text-align:center;margin-top:22px}
+.btn{
+  display:inline-block;margin:0 auto;padding:13px 26px;border-radius:999px;
+  background:var(--accent);color:#fff;border:none;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;
+  transition:transform .15s var(--e),filter .2s var(--e),box-shadow .3s var(--e);
+  box-shadow:0 6px 22px rgba(194,59,59,.25);
+}
+.btn:active{transform:translateY(1px)}
+.btn:hover,.btn:focus-visible{filter:brightness(1.08);box-shadow:0 10px 30px rgba(194,59,59,.4);outline:none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.14);color:var(--muted);box-shadow:none;margin-left:10px}
+.btn.ghost:hover,.btn.ghost:focus-visible{color:var(--ink);border-color:var(--accent)}
+footer{margin-top:26px;text-align:center;color:var(--muted);font-size:12px;letter-spacing:.12em}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.2);margin:0 6px}
+footer a:hover,footer a:focus-visible{color:var(--accent);outline:none}
+@media (max-width:560px){
+  .id-grid{grid-template-columns:1fr}
+  .btn.ghost{margin-left:0;margin-top:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .block p{opacity:1;transform:none;transition:none}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <h1 class="title">HEAVENLY</h1>
+    <p class="tag">You're already inside it.</p>
+  </header>
+
+  <section aria-labelledby="h-pressure">
+    <h2 class="h2" id="h-pressure">Pressure</h2>
+    <div class="block">
+      <p>You won&rsquo;t lose to mechanics.</p>
+      <p>You&rsquo;ll lose to assumption.</p>
+      <p>He studies entry points.</p>
+      <p>Every action narrows your options.</p>
+      <p>Spacing. Timing. Micro-adjustments.</p>
+      <p>The outcome settles before the exchange begins.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-control">
+    <h2 class="h2" id="h-control">Control</h2>
+    <div class="block">
+      <p>You believe you're adapting.</p>
+      <p>You aren&rsquo;t.</p>
+      <p>The tempo fractures.</p>
+      <p>Your rhythm collapses before your aim does.</p>
+      <p>This isn&rsquo;t speed.</p>
+      <p>It&rsquo;s structural dominance.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-fluid">
+    <h2 class="h2" id="h-fluid">Fluid Adaptation</h2>
+    <div class="block">
+      <p>No visible adjustment.</p>
+      <p>Only recalibration.</p>
+      <p>Frame by frame.</p>
+      <p>You won&rsquo;t see the shift.</p>
+      <p>You&rsquo;ll feel it.</p>
+      <p>And when you recognize it &mdash; the margin is gone.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-identity">
+    <h2 class="h2" id="h-identity">Identity</h2>
+    <div class="id-grid">
+      <div class="id"><span class="label">Alias</span><span class="val">Heavenly</span></div>
+      <div class="id"><span class="label">Real Name</span><span class="val">Kush Bugga</span></div>
+      <div class="id">
+        <span class="label">Discord</span><span class="val">itz_crime_9</span>
+        <button class="mini" type="button" data-copy="itz_crime_9" aria-label="Copy Discord handle">copy</button>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="btn" data-xlink="thatminecraft" href="#">Enter the Realm</a>
+      <a class="btn ghost" data-xlink="heavenly" href="#">Read the Log</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a data-xlink="hub" href="#">Universe</a>&middot;<a data-xlink="maxxing" href="#">Analyzer</a>&middot;<a data-xlink="legagme" href="#">Legacy</a>&middot;<a data-xlink="aioutfit" href="#">Outfits</a>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var REPOS={heavenly:"Heaven","heavenly-site":"Heavenly-site",thatminecraft:"Heavenly-",maxxing:"maxxing",aioutfit:"AiOutfit",legagme:"LegaGMe"};
+  var inHub=location.pathname.indexOf("/sites/")>-1;
+  document.querySelectorAll("[data-xlink]").forEach(function(a){
+    var k=a.getAttribute("data-xlink");
+    a.href = k==="hub"
+      ? (inHub ? "../../" : "https://kbugga230209-png.github.io/API/")
+      : (inHub ? "../"+k+"/" : "https://kbugga230209-png.github.io/"+REPOS[k]+"/");
+  });
+
+  document.querySelectorAll("[data-copy]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var text=btn.getAttribute("data-copy");
+      function ok(){btn.textContent="copied";btn.classList.add("done");setTimeout(function(){btn.textContent="copy";btn.classList.remove("done");},1600);}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fallback);}else{fallback();}
+      function fallback(){
+        var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
+        document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok();}catch(e){}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Reveal: IntersectionObserver instead of a scroll handler — no layout thrash.
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!reduce&&"IntersectionObserver" in window){
+    document.documentElement.classList.add("js");
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting)return;
+        var ps=en.target.querySelectorAll("p");
+        ps.forEach(function(p,i){setTimeout(function(){p.classList.add("show");},i*110);});
+        io.unobserve(en.target);
+      });
+    },{threshold:.15});
+    document.querySelectorAll(".block").forEach(function(b){io.observe(b);});
+  }
+})();
+</script>
+</body>
+</html>
