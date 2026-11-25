@@ -1,0 +1,2931 @@
+[
+  {
+    "foodId": "roti-chapati",
+    "name": "Roti / Chapati",
+    "cuisine": "pan_indian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 220,
+      "protein_g": 7.81,
+      "carbs_g": 44.77,
+      "fat_g": 1.1,
+      "sat_fat_g": 0.26,
+      "fibre_g": 7.23,
+      "sugar_g": 0.97,
+      "sodium_mg": 3.2
+    },
+    "servingGrams": 52,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "phulka",
+    "name": "Phulka",
+    "cuisine": "pan_indian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 235.2,
+      "protein_g": 8.34,
+      "carbs_g": 47.86,
+      "fat_g": 1.17,
+      "sat_fat_g": 0.28,
+      "fibre_g": 7.72,
+      "sugar_g": 1.03,
+      "sodium_mg": 3.4
+    },
+    "servingGrams": 48,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "bajra-rotla",
+    "name": "Bajra Rotla",
+    "cuisine": "gujarati",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 235.2,
+      "protein_g": 7.03,
+      "carbs_g": 40.91,
+      "fat_g": 4.85,
+      "sat_fat_g": 1.67,
+      "fibre_g": 6.85,
+      "sugar_g": 1.21,
+      "sodium_mg": 475.9
+    },
+    "servingGrams": 55,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "jowar-roti",
+    "name": "Jowar Bhakri",
+    "cuisine": "maharashtrian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 205.3,
+      "protein_g": 6.12,
+      "carbs_g": 42.71,
+      "fat_g": 1.12,
+      "sat_fat_g": 0.18,
+      "fibre_g": 5.71,
+      "sugar_g": 0.88,
+      "sodium_mg": 460.7
+    },
+    "servingGrams": 57,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "makki-roti",
+    "name": "Makki di Roti",
+    "cuisine": "punjabi",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 232.7,
+      "protein_g": 5.48,
+      "carbs_g": 43.51,
+      "fat_g": 4.7,
+      "sat_fat_g": 1.83,
+      "fibre_g": 4.29,
+      "sugar_g": 0.6,
+      "sodium_mg": 464.5
+    },
+    "servingGrams": 56,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "missi-roti",
+    "name": "Missi Roti",
+    "cuisine": "rajasthani",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 223.1,
+      "protein_g": 8.56,
+      "carbs_g": 39.15,
+      "fat_g": 3.7,
+      "sat_fat_g": 0.54,
+      "fibre_g": 6.45,
+      "sugar_g": 0.98,
+      "sodium_mg": 468.9
+    },
+    "servingGrams": 56,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "aloo-paratha",
+    "name": "Aloo Paratha",
+    "cuisine": "punjabi",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 212.8,
+      "protein_g": 5.29,
+      "carbs_g": 33.74,
+      "fat_g": 6.1,
+      "sat_fat_g": 3.51,
+      "fibre_g": 4.47,
+      "sugar_g": 0.99,
+      "sodium_mg": 424.6
+    },
+    "servingGrams": 92,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "lachha-paratha",
+    "name": "Lachha Paratha",
+    "cuisine": "punjabi",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 308.9,
+      "protein_g": 7.33,
+      "carbs_g": 42.06,
+      "fat_g": 12.39,
+      "sat_fat_g": 7.29,
+      "fibre_g": 6.79,
+      "sugar_g": 0.91,
+      "sodium_mg": 590.5
+    },
+    "servingGrams": 66,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "thepla",
+    "name": "Methi Thepla",
+    "cuisine": "gujarati",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 232.8,
+      "protein_g": 8.29,
+      "carbs_g": 35.74,
+      "fat_g": 6.41,
+      "sat_fat_g": 0.98,
+      "fibre_g": 6.19,
+      "sugar_g": 1.29,
+      "sodium_mg": 457.1
+    },
+    "servingGrams": 44,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "khakhra",
+    "name": "Khakhra",
+    "cuisine": "gujarati",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 259.1,
+      "protein_g": 8.52,
+      "carbs_g": 48.87,
+      "fat_g": 3.3,
+      "sat_fat_g": 0.53,
+      "fibre_g": 7.89,
+      "sugar_g": 1.06,
+      "sodium_mg": 549.4
+    },
+    "servingGrams": 35,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "naan",
+    "name": "Naan",
+    "cuisine": "north_indian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 269.1,
+      "protein_g": 6.62,
+      "carbs_g": 47.08,
+      "fat_g": 5.77,
+      "sat_fat_g": 0.86,
+      "fibre_g": 1.45,
+      "sugar_g": 2.42,
+      "sodium_mg": 477.1
+    },
+    "servingGrams": 82,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "puri",
+    "name": "Puri",
+    "cuisine": "pan_indian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 336.9,
+      "protein_g": 7.56,
+      "carbs_g": 43.38,
+      "fat_g": 14.81,
+      "sat_fat_g": 1.69,
+      "fibre_g": 7,
+      "sugar_g": 0.94,
+      "sodium_mg": 487.6
+    },
+    "servingGrams": 40,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "bhatura",
+    "name": "Bhatura",
+    "cuisine": "punjabi",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 312.2,
+      "protein_g": 6.26,
+      "carbs_g": 43.34,
+      "fat_g": 12.42,
+      "sat_fat_g": 1.51,
+      "fibre_g": 1.4,
+      "sugar_g": 0.49,
+      "sodium_mg": 456.4
+    },
+    "servingGrams": 86,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "pav",
+    "name": "Pav (bread roll)",
+    "cuisine": "maharashtrian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 264.6,
+      "protein_g": 6.52,
+      "carbs_g": 49.42,
+      "fat_g": 4.37,
+      "sat_fat_g": 0.53,
+      "fibre_g": 1.52,
+      "sugar_g": 2.78,
+      "sodium_mg": 492.5
+    },
+    "servingGrams": 53,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "dal-tadka",
+    "name": "Dal Tadka",
+    "cuisine": "north_indian",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 72.8,
+      "protein_g": 3.56,
+      "carbs_g": 9.74,
+      "fat_g": 2.07,
+      "sat_fat_g": 1.1,
+      "fibre_g": 1.82,
+      "sugar_g": 0.96,
+      "sodium_mg": 247.1
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "dal-fry-restaurant-style",
+    "name": "Dal Fry (Restaurant Style)",
+    "cuisine": "north_indian",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 92.8,
+      "protein_g": 3.9,
+      "carbs_g": 10.51,
+      "fat_g": 3.83,
+      "sat_fat_g": 2.2,
+      "fibre_g": 1.84,
+      "sugar_g": 1.09,
+      "sodium_mg": 303.4
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "dal-makhani",
+    "name": "Dal Makhani",
+    "cuisine": "punjabi",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 72.8,
+      "protein_g": 3.29,
+      "carbs_g": 7.67,
+      "fat_g": 3.23,
+      "sat_fat_g": 1.84,
+      "fibre_g": 1.2,
+      "sugar_g": 0.96,
+      "sodium_mg": 306.7
+    },
+    "servingGrams": 190,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "moong-dal-simple",
+    "name": "Moong Dal (Simple)",
+    "cuisine": "pan_indian",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 97,
+      "protein_g": 5.63,
+      "carbs_g": 13.48,
+      "fat_g": 2.37,
+      "sat_fat_g": 1.28,
+      "fibre_g": 2.19,
+      "sugar_g": 0.94,
+      "sodium_mg": 452.7
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "dal-palak",
+    "name": "Dal Palak",
+    "cuisine": "north_indian",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 58,
+      "protein_g": 3.23,
+      "carbs_g": 7.59,
+      "fat_g": 1.61,
+      "sat_fat_g": 0.88,
+      "fibre_g": 1.2,
+      "sugar_g": 0.9,
+      "sodium_mg": 274.6
+    },
+    "servingGrams": 210,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "sambar",
+    "name": "Sambar",
+    "cuisine": "south_indian",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 58,
+      "protein_g": 2.8,
+      "carbs_g": 8.46,
+      "fat_g": 1.35,
+      "sat_fat_g": 0.16,
+      "fibre_g": 1.75,
+      "sugar_g": 1.95,
+      "sodium_mg": 237.9
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "rasam",
+    "name": "Rasam",
+    "cuisine": "south_indian",
+    "category": "soup",
+    "nutrition": {
+      "kcal": 22,
+      "protein_g": 0.94,
+      "carbs_g": 3.22,
+      "fat_g": 0.58,
+      "sat_fat_g": 0.28,
+      "fibre_g": 0.55,
+      "sugar_g": 0.87,
+      "sodium_mg": 109.5
+    },
+    "servingGrams": 195,
+    "costPerServingInr": 18,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "kadhi",
+    "name": "Kadhi (Gujarati)",
+    "cuisine": "gujarati",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 50.8,
+      "protein_g": 1.89,
+      "carbs_g": 5.3,
+      "fat_g": 2.21,
+      "sat_fat_g": 1.16,
+      "fibre_g": 0.48,
+      "sugar_g": 2.85,
+      "sodium_mg": 203.9
+    },
+    "servingGrams": 220,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "chole",
+    "name": "Chole (Chana Masala)",
+    "cuisine": "punjabi",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 86.4,
+      "protein_g": 4.09,
+      "carbs_g": 11.7,
+      "fat_g": 3.32,
+      "sat_fat_g": 0.38,
+      "fibre_g": 2.57,
+      "sugar_g": 1.29,
+      "sodium_mg": 264.9
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "rajma-curry",
+    "name": "Rajma Curry",
+    "cuisine": "punjabi",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 83.4,
+      "protein_g": 4.31,
+      "carbs_g": 11.45,
+      "fat_g": 2.51,
+      "sat_fat_g": 0.3,
+      "fibre_g": 2.16,
+      "sugar_g": 1.12,
+      "sodium_mg": 259
+    },
+    "servingGrams": 220,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "aloo-gobi-dry",
+    "name": "Aloo Gobi (Dry)",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 76.9,
+      "protein_g": 2.1,
+      "carbs_g": 10.54,
+      "fat_g": 2.9,
+      "sat_fat_g": 0.32,
+      "fibre_g": 0.96,
+      "sugar_g": 1.64,
+      "sodium_mg": 272
+    },
+    "servingGrams": 155,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "aloo-gobi-gravy",
+    "name": "Aloo Gobi Masala (Gravy)",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 76.9,
+      "protein_g": 1.93,
+      "carbs_g": 9.65,
+      "fat_g": 3.38,
+      "sat_fat_g": 0.39,
+      "fibre_g": 0.89,
+      "sugar_g": 1.79,
+      "sodium_mg": 254.6
+    },
+    "servingGrams": 180,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "baingan-bharta",
+    "name": "Baingan Bharta",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 59.3,
+      "protein_g": 1.46,
+      "carbs_g": 5.51,
+      "fat_g": 3.47,
+      "sat_fat_g": 0.38,
+      "fibre_g": 0.72,
+      "sugar_g": 2.59,
+      "sodium_mg": 312.4
+    },
+    "servingGrams": 133,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "bhindi-masala",
+    "name": "Bhindi Masala",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 63.6,
+      "protein_g": 1.79,
+      "carbs_g": 6.64,
+      "fat_g": 3.36,
+      "sat_fat_g": 0.37,
+      "fibre_g": 0.98,
+      "sugar_g": 1.89,
+      "sodium_mg": 367.1
+    },
+    "servingGrams": 165,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "aloo-matar",
+    "name": "Aloo Matar",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 90.7,
+      "protein_g": 2.46,
+      "carbs_g": 12.49,
+      "fat_g": 3.22,
+      "sat_fat_g": 0.35,
+      "fibre_g": 0.88,
+      "sugar_g": 2.2,
+      "sodium_mg": 358.7
+    },
+    "servingGrams": 150,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "paneer-bhurji",
+    "name": "Paneer Bhurji",
+    "cuisine": "north_indian",
+    "category": "paneer_dairy",
+    "nutrition": {
+      "kcal": 198.8,
+      "protein_g": 11.38,
+      "carbs_g": 4.24,
+      "fat_g": 15.76,
+      "sat_fat_g": 7.98,
+      "fibre_g": 0.27,
+      "sugar_g": 2.59,
+      "sodium_mg": 485.2
+    },
+    "servingGrams": 132,
+    "costPerServingInr": 60,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "palak-paneer",
+    "name": "Palak Paneer",
+    "cuisine": "north_indian",
+    "category": "paneer_dairy",
+    "nutrition": {
+      "kcal": 102.9,
+      "protein_g": 5.37,
+      "carbs_g": 3.65,
+      "fat_g": 7.42,
+      "sat_fat_g": 3.1,
+      "fibre_g": 0.47,
+      "sugar_g": 1.53,
+      "sodium_mg": 346.2
+    },
+    "servingGrams": 133,
+    "costPerServingInr": 60,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "paneer-butter-masala",
+    "name": "Paneer Butter Masala",
+    "cuisine": "north_indian",
+    "category": "paneer_dairy",
+    "nutrition": {
+      "kcal": 146.4,
+      "protein_g": 5.99,
+      "carbs_g": 3.42,
+      "fat_g": 12.41,
+      "sat_fat_g": 6.5,
+      "fibre_g": 0.3,
+      "sugar_g": 2.2,
+      "sodium_mg": 325.7
+    },
+    "servingGrams": 140,
+    "costPerServingInr": 60,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian"
+    ]
+  },
+  {
+    "foodId": "mix-veg",
+    "name": "Mix Veg Sabzi",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 66.4,
+      "protein_g": 1.97,
+      "carbs_g": 7.91,
+      "fat_g": 2.92,
+      "sat_fat_g": 0.32,
+      "fibre_g": 0.98,
+      "sugar_g": 2.19,
+      "sodium_mg": 277
+    },
+    "servingGrams": 173,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "karela-sabzi",
+    "name": "Karela Sabzi",
+    "cuisine": "gujarati",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 52.6,
+      "protein_g": 1.59,
+      "carbs_g": 4.07,
+      "fat_g": 3.63,
+      "sat_fat_g": 0.4,
+      "fibre_g": 1.47,
+      "sugar_g": 1.2,
+      "sodium_mg": 411.6
+    },
+    "servingGrams": 150,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "lauki-sabzi",
+    "name": "Lauki Sabzi",
+    "cuisine": "north_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 37.3,
+      "protein_g": 0.74,
+      "carbs_g": 2.89,
+      "fat_g": 2.47,
+      "sat_fat_g": 0.27,
+      "fibre_g": 0.55,
+      "sugar_g": 1.5,
+      "sodium_mg": 345.7
+    },
+    "servingGrams": 180,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "cabbage-poriyal",
+    "name": "Cabbage Poriyal",
+    "cuisine": "south_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 74.9,
+      "protein_g": 1.8,
+      "carbs_g": 5.17,
+      "fat_g": 5.02,
+      "sat_fat_g": 2.29,
+      "fibre_g": 1.31,
+      "sugar_g": 2.11,
+      "sodium_mg": 445.6
+    },
+    "servingGrams": 140,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "beans-poriyal",
+    "name": "Beans Poriyal",
+    "cuisine": "south_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 74.9,
+      "protein_g": 2,
+      "carbs_g": 4.93,
+      "fat_g": 5.02,
+      "sat_fat_g": 2.31,
+      "fibre_g": 1.69,
+      "sugar_g": 1.4,
+      "sodium_mg": 444.5
+    },
+    "servingGrams": 135,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "avial",
+    "name": "Avial",
+    "cuisine": "south_indian",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 111.7,
+      "protein_g": 1.73,
+      "carbs_g": 10.92,
+      "fat_g": 6.37,
+      "sat_fat_g": 5.38,
+      "fibre_g": 1.09,
+      "sugar_g": 2.13,
+      "sodium_mg": 322.1
+    },
+    "servingGrams": 133,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "dhokla",
+    "name": "Dhokla",
+    "cuisine": "gujarati",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 170,
+      "protein_g": 7.78,
+      "carbs_g": 24.24,
+      "fat_g": 4.85,
+      "sat_fat_g": 0.57,
+      "fibre_g": 4.03,
+      "sugar_g": 2.73,
+      "sodium_mg": 458.9
+    },
+    "servingGrams": 90,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "khandvi",
+    "name": "Khandvi",
+    "cuisine": "gujarati",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 124.4,
+      "protein_g": 5.62,
+      "carbs_g": 13.12,
+      "fat_g": 5.17,
+      "sat_fat_g": 1.36,
+      "fibre_g": 2.11,
+      "sugar_g": 1.93,
+      "sodium_mg": 287
+    },
+    "servingGrams": 127,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "plain-rice-cooked",
+    "name": "Plain Rice (Cooked)",
+    "cuisine": "pan_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 127.8,
+      "protein_g": 2.93,
+      "carbs_g": 28.96,
+      "fat_g": 0.19,
+      "sat_fat_g": 0.04,
+      "fibre_g": 0.37,
+      "sugar_g": 0.04,
+      "sodium_mg": 1.9
+    },
+    "servingGrams": 150,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "jeera-rice",
+    "name": "Jeera Rice",
+    "cuisine": "north_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 146.4,
+      "protein_g": 2.84,
+      "carbs_g": 27.22,
+      "fat_g": 3.09,
+      "sat_fat_g": 1.76,
+      "fibre_g": 0.42,
+      "sugar_g": 0.05,
+      "sodium_mg": 403.9
+    },
+    "servingGrams": 172,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "veg-pulao",
+    "name": "Vegetable Pulao",
+    "cuisine": "pan_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 84,
+      "protein_g": 1.9,
+      "carbs_g": 15.1,
+      "fat_g": 1.85,
+      "sat_fat_g": 0.22,
+      "fibre_g": 0.5,
+      "sugar_g": 0.8,
+      "sodium_mg": 198.2
+    },
+    "servingGrams": 160,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "veg-biryani",
+    "name": "Vegetable Biryani",
+    "cuisine": "north_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 129.7,
+      "protein_g": 2.83,
+      "carbs_g": 21.48,
+      "fat_g": 3.59,
+      "sat_fat_g": 0.52,
+      "fibre_g": 0.75,
+      "sugar_g": 1.38,
+      "sodium_mg": 332.6
+    },
+    "servingGrams": 255,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "chicken-biryani",
+    "name": "Chicken Biryani",
+    "cuisine": "north_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 146.5,
+      "protein_g": 9.13,
+      "carbs_g": 16.49,
+      "fat_g": 4.73,
+      "sat_fat_g": 0.8,
+      "fibre_g": 0.39,
+      "sugar_g": 0.68,
+      "sodium_mg": 320.7
+    },
+    "servingGrams": 280,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "khichdi",
+    "name": "Khichdi",
+    "cuisine": "gujarati",
+    "category": "mixed_meal",
+    "nutrition": {
+      "kcal": 138.6,
+      "protein_g": 4.8,
+      "carbs_g": 23.42,
+      "fat_g": 2.98,
+      "sat_fat_g": 1.72,
+      "fibre_g": 1.46,
+      "sugar_g": 0.56,
+      "sodium_mg": 391.4
+    },
+    "servingGrams": 240,
+    "costPerServingInr": 45,
+    "prepMinutes": 35,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "dal-chawal",
+    "name": "Dal Chawal",
+    "cuisine": "pan_indian",
+    "category": "mixed_meal",
+    "nutrition": {
+      "kcal": 115,
+      "protein_g": 3.78,
+      "carbs_g": 21.03,
+      "fat_g": 1.75,
+      "sat_fat_g": 0.94,
+      "fibre_g": 1.3,
+      "sugar_g": 0.58,
+      "sodium_mg": 280.7
+    },
+    "servingGrams": 310,
+    "costPerServingInr": 45,
+    "prepMinutes": 35,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "curd-rice",
+    "name": "Curd Rice",
+    "cuisine": "south_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 98.8,
+      "protein_g": 2.74,
+      "carbs_g": 16.14,
+      "fat_g": 2.35,
+      "sat_fat_g": 0.81,
+      "fibre_g": 0.3,
+      "sugar_g": 1.11,
+      "sodium_mg": 294
+    },
+    "servingGrams": 215,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "lemon-rice",
+    "name": "Lemon Rice",
+    "cuisine": "south_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 119.6,
+      "protein_g": 2.7,
+      "carbs_g": 18.58,
+      "fat_g": 3.78,
+      "sat_fat_g": 0.48,
+      "fibre_g": 0.62,
+      "sugar_g": 0.17,
+      "sodium_mg": 333.9
+    },
+    "servingGrams": 185,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "tamarind-rice",
+    "name": "Tamarind Rice (Puliyogare)",
+    "cuisine": "south_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 128.7,
+      "protein_g": 2.71,
+      "carbs_g": 21.35,
+      "fat_g": 3.58,
+      "sat_fat_g": 0.47,
+      "fibre_g": 0.7,
+      "sugar_g": 2.59,
+      "sodium_mg": 335.1
+    },
+    "servingGrams": 185,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "veg-fried-rice",
+    "name": "Vegetable Fried Rice",
+    "cuisine": "pan_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 115.6,
+      "protein_g": 2.26,
+      "carbs_g": 19.99,
+      "fat_g": 3.02,
+      "sat_fat_g": 0.33,
+      "fibre_g": 0.56,
+      "sugar_g": 0.62,
+      "sodium_mg": 282.8
+    },
+    "servingGrams": 215,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "tomato-rice",
+    "name": "Tomato Rice",
+    "cuisine": "south_indian",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 97.2,
+      "protein_g": 2,
+      "carbs_g": 17.59,
+      "fat_g": 2.17,
+      "sat_fat_g": 0.24,
+      "fibre_g": 0.44,
+      "sugar_g": 1.16,
+      "sodium_mg": 293.8
+    },
+    "servingGrams": 210,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "dal-baati-churma",
+    "name": "Dal Baati Churma",
+    "cuisine": "rajasthani",
+    "category": "mixed_meal",
+    "nutrition": {
+      "kcal": 208.4,
+      "protein_g": 5.27,
+      "carbs_g": 27.58,
+      "fat_g": 8.58,
+      "sat_fat_g": 5.09,
+      "fibre_g": 3.72,
+      "sugar_g": 5.41,
+      "sodium_mg": 315.2
+    },
+    "servingGrams": 250,
+    "costPerServingInr": 45,
+    "prepMinutes": 35,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "litti-chokha",
+    "name": "Litti Chokha",
+    "cuisine": "bihari",
+    "category": "mixed_meal",
+    "nutrition": {
+      "kcal": 156.1,
+      "protein_g": 5.03,
+      "carbs_g": 22.33,
+      "fat_g": 5.25,
+      "sat_fat_g": 1.96,
+      "fibre_g": 3.59,
+      "sugar_g": 1.65,
+      "sodium_mg": 304.7
+    },
+    "servingGrams": 195,
+    "costPerServingInr": 45,
+    "prepMinutes": 35,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "ven-pongal",
+    "name": "Ven Pongal",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 94,
+      "protein_g": 2.86,
+      "carbs_g": 14.27,
+      "fat_g": 2.93,
+      "sat_fat_g": 1.46,
+      "fibre_g": 0.9,
+      "sugar_g": 0.33,
+      "sodium_mg": 250.3
+    },
+    "servingGrams": 235,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "undhiyu",
+    "name": "Undhiyu",
+    "cuisine": "gujarati",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 90.1,
+      "protein_g": 1.55,
+      "carbs_g": 10.51,
+      "fat_g": 4.6,
+      "sat_fat_g": 1.65,
+      "fibre_g": 1.17,
+      "sugar_g": 1.4,
+      "sodium_mg": 281.5
+    },
+    "servingGrams": 140,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "dhansak",
+    "name": "Dhansak",
+    "cuisine": "not_regional",
+    "category": "dal_legume",
+    "nutrition": {
+      "kcal": 104.5,
+      "protein_g": 8.19,
+      "carbs_g": 9.68,
+      "fat_g": 3.73,
+      "sat_fat_g": 1.84,
+      "fibre_g": 1.94,
+      "sugar_g": 0.96,
+      "sodium_mg": 345.1
+    },
+    "servingGrams": 160,
+    "costPerServingInr": 28,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "kosha-mangsho",
+    "name": "Kosha Mangsho",
+    "cuisine": "bengali",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 131,
+      "protein_g": 11.34,
+      "carbs_g": 2.3,
+      "fat_g": 8.52,
+      "sat_fat_g": 1.98,
+      "fibre_g": 0.49,
+      "sugar_g": 0.86,
+      "sodium_mg": 435.5
+    },
+    "servingGrams": 133,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "machher-jhol",
+    "name": "Machher Jhol",
+    "cuisine": "bengali",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 63.5,
+      "protein_g": 6.92,
+      "carbs_g": 1.75,
+      "fat_g": 3.11,
+      "sat_fat_g": 0.51,
+      "fibre_g": 0.2,
+      "sugar_g": 0.58,
+      "sodium_mg": 339.8
+    },
+    "servingGrams": 185,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "thukpa",
+    "name": "Thukpa",
+    "cuisine": "northeastern",
+    "category": "soup",
+    "nutrition": {
+      "kcal": 77.8,
+      "protein_g": 6.03,
+      "carbs_g": 9.36,
+      "fat_g": 1.62,
+      "sat_fat_g": 0.28,
+      "fibre_g": 0.42,
+      "sugar_g": 0.52,
+      "sodium_mg": 234.2
+    },
+    "servingGrams": 265,
+    "costPerServingInr": 18,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "pakhala",
+    "name": "Pakhala",
+    "cuisine": "odia",
+    "category": "rice_dish",
+    "nutrition": {
+      "kcal": 59.4,
+      "protein_g": 1.64,
+      "carbs_g": 11.69,
+      "fat_g": 0.61,
+      "sat_fat_g": 0.29,
+      "fibre_g": 0.2,
+      "sugar_g": 0.45,
+      "sodium_mg": 191.8
+    },
+    "servingGrams": 420,
+    "costPerServingInr": 35,
+    "prepMinutes": 30,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "sarson-da-saag",
+    "name": "Sarson da Saag",
+    "cuisine": "punjabi",
+    "category": "vegetable_sabzi",
+    "nutrition": {
+      "kcal": 59,
+      "protein_g": 2.33,
+      "carbs_g": 5.09,
+      "fat_g": 3.21,
+      "sat_fat_g": 1.79,
+      "fibre_g": 1.03,
+      "sugar_g": 0.78,
+      "sodium_mg": 361.4
+    },
+    "servingGrams": 180,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "idli",
+    "name": "Idli",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 139.2,
+      "protein_g": 5.26,
+      "carbs_g": 28.84,
+      "fat_g": 0.33,
+      "sat_fat_g": 0.07,
+      "fibre_g": 1.36,
+      "sugar_g": 0.27,
+      "sodium_mg": 373.6
+    },
+    "servingGrams": 84,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "plain-dosa",
+    "name": "Plain Dosa",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 206.6,
+      "protein_g": 6.31,
+      "carbs_g": 37.32,
+      "fat_g": 3.63,
+      "sat_fat_g": 0.42,
+      "fibre_g": 1.55,
+      "sugar_g": 0.3,
+      "sodium_mg": 505.3
+    },
+    "servingGrams": 74,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "masala-dosa",
+    "name": "Masala Dosa",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 141.5,
+      "protein_g": 3.59,
+      "carbs_g": 23.5,
+      "fat_g": 3.57,
+      "sat_fat_g": 0.4,
+      "fibre_g": 0.97,
+      "sugar_g": 0.71,
+      "sodium_mg": 393
+    },
+    "servingGrams": 260,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "uttapam",
+    "name": "Uttapam",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 158,
+      "protein_g": 4.63,
+      "carbs_g": 27.62,
+      "fat_g": 3.3,
+      "sat_fat_g": 0.38,
+      "fibre_g": 1.18,
+      "sugar_g": 0.74,
+      "sodium_mg": 392.2
+    },
+    "servingGrams": 89,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "medu-vada",
+    "name": "Medu Vada",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 219.8,
+      "protein_g": 9.09,
+      "carbs_g": 19.69,
+      "fat_g": 11.3,
+      "sat_fat_g": 1.24,
+      "fibre_g": 3.31,
+      "sugar_g": 0.73,
+      "sodium_mg": 562.8
+    },
+    "servingGrams": 48,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "poha-dish",
+    "name": "Poha",
+    "cuisine": "maharashtrian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 160.9,
+      "protein_g": 3.36,
+      "carbs_g": 24.65,
+      "fat_g": 5.26,
+      "sat_fat_g": 0.68,
+      "fibre_g": 0.77,
+      "sugar_g": 0.87,
+      "sodium_mg": 348.4
+    },
+    "servingGrams": 225,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "upma",
+    "name": "Upma",
+    "cuisine": "south_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 127.8,
+      "protein_g": 3.28,
+      "carbs_g": 20.06,
+      "fat_g": 3.76,
+      "sat_fat_g": 0.39,
+      "fibre_g": 0.66,
+      "sugar_g": 0.95,
+      "sodium_mg": 312.4
+    },
+    "servingGrams": 265,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "besan-chilla",
+    "name": "Besan Chilla",
+    "cuisine": "north_indian",
+    "category": "breakfast",
+    "nutrition": {
+      "kcal": 174.7,
+      "protein_g": 7.52,
+      "carbs_g": 22.84,
+      "fat_g": 6.16,
+      "sat_fat_g": 0.72,
+      "fibre_g": 3.82,
+      "sugar_g": 1.76,
+      "sodium_mg": 482.6
+    },
+    "servingGrams": 168,
+    "costPerServingInr": 25,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "masala-omelette",
+    "name": "Masala Omelette",
+    "cuisine": "pan_indian",
+    "category": "egg",
+    "nutrition": {
+      "kcal": 133.2,
+      "protein_g": 9.16,
+      "carbs_g": 2.08,
+      "fat_g": 9.71,
+      "sat_fat_g": 2.23,
+      "fibre_g": 0.16,
+      "sugar_g": 1.31,
+      "sodium_mg": 613
+    },
+    "servingGrams": 150,
+    "costPerServingInr": 25,
+    "prepMinutes": 12,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "egg-bhurji",
+    "name": "Egg Bhurji",
+    "cuisine": "north_indian",
+    "category": "egg",
+    "nutrition": {
+      "kcal": 140.7,
+      "protein_g": 9.22,
+      "carbs_g": 2.4,
+      "fat_g": 10.39,
+      "sat_fat_g": 2.3,
+      "fibre_g": 0.19,
+      "sugar_g": 1.49,
+      "sodium_mg": 613.3
+    },
+    "servingGrams": 150,
+    "costPerServingInr": 25,
+    "prepMinutes": 12,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "samosa",
+    "name": "Samosa",
+    "cuisine": "street_food",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 245.1,
+      "protein_g": 4.68,
+      "carbs_g": 32.29,
+      "fat_g": 10.53,
+      "sat_fat_g": 1.19,
+      "fibre_g": 1.44,
+      "sugar_g": 1.02,
+      "sodium_mg": 651.7
+    },
+    "servingGrams": 90,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "vada-pav",
+    "name": "Vada Pav",
+    "cuisine": "maharashtrian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 225.4,
+      "protein_g": 4.79,
+      "carbs_g": 31.82,
+      "fat_g": 8.57,
+      "sat_fat_g": 0.95,
+      "fibre_g": 1.44,
+      "sugar_g": 0.52,
+      "sodium_mg": 413.1
+    },
+    "servingGrams": 195,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "pav-bhaji",
+    "name": "Pav Bhaji",
+    "cuisine": "maharashtrian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 137.4,
+      "protein_g": 2.91,
+      "carbs_g": 19.99,
+      "fat_g": 4.98,
+      "sat_fat_g": 1.92,
+      "fibre_g": 0.8,
+      "sugar_g": 1.09,
+      "sodium_mg": 251.6
+    },
+    "servingGrams": 260,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "pani-puri",
+    "name": "Pani Puri",
+    "cuisine": "street_food",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 199.3,
+      "protein_g": 3.45,
+      "carbs_g": 27.95,
+      "fat_g": 8.01,
+      "sat_fat_g": 0.88,
+      "fibre_g": 1.08,
+      "sugar_g": 3.33,
+      "sodium_mg": 601.7
+    },
+    "servingGrams": 195,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "bhel-puri",
+    "name": "Bhel Puri",
+    "cuisine": "street_food",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 160.6,
+      "protein_g": 3.06,
+      "carbs_g": 27.43,
+      "fat_g": 4.36,
+      "sat_fat_g": 0.5,
+      "fibre_g": 0.82,
+      "sugar_g": 3.35,
+      "sodium_mg": 392.1
+    },
+    "servingGrams": 205,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "chole-bhature",
+    "name": "Chole Bhature",
+    "cuisine": "punjabi",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 162.9,
+      "protein_g": 5.61,
+      "carbs_g": 23.17,
+      "fat_g": 5.94,
+      "sat_fat_g": 0.71,
+      "fibre_g": 2.81,
+      "sugar_g": 1.2,
+      "sodium_mg": 254.5
+    },
+    "servingGrams": 250,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "aloo-tikki",
+    "name": "Aloo Tikki",
+    "cuisine": "street_food",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 163.2,
+      "protein_g": 3.15,
+      "carbs_g": 21.66,
+      "fat_g": 6.69,
+      "sat_fat_g": 0.75,
+      "fibre_g": 1.37,
+      "sugar_g": 1.08,
+      "sodium_mg": 398.2
+    },
+    "servingGrams": 102,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "pakora",
+    "name": "Pakora (Bhajiya)",
+    "cuisine": "street_food",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 220.4,
+      "protein_g": 6.64,
+      "carbs_g": 21.08,
+      "fat_g": 12.44,
+      "sat_fat_g": 1.37,
+      "fibre_g": 3.48,
+      "sugar_g": 2.1,
+      "sodium_mg": 409.4
+    },
+    "servingGrams": 100,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "veg-momos",
+    "name": "Veg Momos",
+    "cuisine": "northeastern",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 146.8,
+      "protein_g": 4.02,
+      "carbs_g": 26.98,
+      "fat_g": 2.39,
+      "sat_fat_g": 0.29,
+      "fibre_g": 1.33,
+      "sugar_g": 1.69,
+      "sodium_mg": 322.7
+    },
+    "servingGrams": 250,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "dabeli",
+    "name": "Dabeli",
+    "cuisine": "gujarati",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 222,
+      "protein_g": 4.91,
+      "carbs_g": 33.63,
+      "fat_g": 7.11,
+      "sat_fat_g": 0.88,
+      "fibre_g": 1.42,
+      "sugar_g": 2.69,
+      "sodium_mg": 350.5
+    },
+    "servingGrams": 225,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "chicken-curry",
+    "name": "Chicken Curry",
+    "cuisine": "pan_indian",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 111.7,
+      "protein_g": 14.23,
+      "carbs_g": 2.59,
+      "fat_g": 4.51,
+      "sat_fat_g": 0.86,
+      "fibre_g": 0.31,
+      "sugar_g": 1.07,
+      "sodium_mg": 309.3
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "chicken-tandoori",
+    "name": "Chicken Tandoori",
+    "cuisine": "punjabi",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 177.8,
+      "protein_g": 26.65,
+      "carbs_g": 1.34,
+      "fat_g": 6.43,
+      "sat_fat_g": 1.51,
+      "fibre_g": 0.53,
+      "sugar_g": 0.65,
+      "sodium_mg": 586.8
+    },
+    "servingGrams": 152,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "butter-chicken",
+    "name": "Butter Chicken",
+    "cuisine": "punjabi",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 146.8,
+      "protein_g": 13.95,
+      "carbs_g": 2.25,
+      "fat_g": 8.75,
+      "sat_fat_g": 3.63,
+      "fibre_g": 0.3,
+      "sugar_g": 1.36,
+      "sodium_mg": 405.9
+    },
+    "servingGrams": 160,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "fish-curry",
+    "name": "Fish Curry",
+    "cuisine": "south_indian",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 116.8,
+      "protein_g": 8.29,
+      "carbs_g": 4,
+      "fat_g": 7.27,
+      "sat_fat_g": 3.88,
+      "fibre_g": 0.52,
+      "sugar_g": 2.14,
+      "sodium_mg": 301.5
+    },
+    "servingGrams": 150,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "egg-curry",
+    "name": "Egg Curry",
+    "cuisine": "pan_indian",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 89.2,
+      "protein_g": 5.26,
+      "carbs_g": 2.3,
+      "fat_g": 6.52,
+      "sat_fat_g": 1.37,
+      "fibre_g": 0.29,
+      "sugar_g": 1.24,
+      "sodium_mg": 337.6
+    },
+    "servingGrams": 140,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "mutton-rogan-josh",
+    "name": "Mutton Rogan Josh",
+    "cuisine": "kashmiri",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 112,
+      "protein_g": 9.96,
+      "carbs_g": 2.3,
+      "fat_g": 6.99,
+      "sat_fat_g": 1.64,
+      "fibre_g": 0.37,
+      "sugar_g": 0.83,
+      "sodium_mg": 380
+    },
+    "servingGrams": 160,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "prawn-masala",
+    "name": "Prawn Masala",
+    "cuisine": "maharashtrian",
+    "category": "non_veg_curry",
+    "nutrition": {
+      "kcal": 112.1,
+      "protein_g": 9.18,
+      "carbs_g": 2.75,
+      "fat_g": 6.76,
+      "sat_fat_g": 2.71,
+      "fibre_g": 0.41,
+      "sugar_g": 1.35,
+      "sodium_mg": 423.4
+    },
+    "servingGrams": 170,
+    "costPerServingInr": 85,
+    "prepMinutes": 45,
+    "mealSlots": [
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "masala-chai",
+    "name": "Masala Chai",
+    "cuisine": "pan_indian",
+    "category": "beverage",
+    "nutrition": {
+      "kcal": 60.3,
+      "protein_g": 1.81,
+      "carbs_g": 5.88,
+      "fat_g": 3.18,
+      "sat_fat_g": 1.9,
+      "fibre_g": 0.16,
+      "sugar_g": 5.49,
+      "sodium_mg": 26.8
+    },
+    "servingGrams": 95,
+    "costPerServingInr": 15,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "filter-coffee",
+    "name": "Filter Coffee",
+    "cuisine": "south_indian",
+    "category": "beverage",
+    "nutrition": {
+      "kcal": 65.8,
+      "protein_g": 2.03,
+      "carbs_g": 5.77,
+      "fat_g": 3.69,
+      "sat_fat_g": 2.22,
+      "fibre_g": 0,
+      "sugar_g": 5.77,
+      "sodium_mg": 30.8
+    },
+    "servingGrams": 98,
+    "costPerServingInr": 15,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "sweet-lassi",
+    "name": "Sweet Lassi",
+    "cuisine": "punjabi",
+    "category": "beverage",
+    "nutrition": {
+      "kcal": 75.5,
+      "protein_g": 2.34,
+      "carbs_g": 9.79,
+      "fat_g": 2.34,
+      "sat_fat_g": 1.43,
+      "fibre_g": 0,
+      "sugar_g": 9.79,
+      "sodium_mg": 34
+    },
+    "servingGrams": 265,
+    "costPerServingInr": 15,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "chaas",
+    "name": "Chaas (Buttermilk)",
+    "cuisine": "pan_indian",
+    "category": "beverage",
+    "nutrition": {
+      "kcal": 26,
+      "protein_g": 1.34,
+      "carbs_g": 1.4,
+      "fat_g": 1.33,
+      "sat_fat_g": 0.77,
+      "fibre_g": 0.07,
+      "sugar_g": 1.21,
+      "sodium_mg": 173.8
+    },
+    "servingGrams": 250,
+    "costPerServingInr": 15,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free"
+    ]
+  },
+  {
+    "foodId": "egg-boiled",
+    "name": "Egg, boiled",
+    "cuisine": "pan_indian",
+    "category": "egg",
+    "nutrition": {
+      "kcal": 143,
+      "protein_g": 13.3,
+      "carbs_g": 0.7,
+      "fat_g": 9.5,
+      "sat_fat_g": 2.8,
+      "fibre_g": 0,
+      "sugar_g": 0.7,
+      "sodium_mg": 142
+    },
+    "servingGrams": 50,
+    "costPerServingInr": 25,
+    "prepMinutes": 12,
+    "mealSlots": [
+      "breakfast"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "bread-white-slice",
+    "name": "Bread, white",
+    "cuisine": "pan_indian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 265,
+      "protein_g": 8,
+      "carbs_g": 50,
+      "fat_g": 3.2,
+      "sat_fat_g": 0.7,
+      "fibre_g": 2.7,
+      "sugar_g": 5,
+      "sodium_mg": 490
+    },
+    "servingGrams": 28,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "bread-brown-slice",
+    "name": "Bread, brown",
+    "cuisine": "pan_indian",
+    "category": "roti_bread",
+    "nutrition": {
+      "kcal": 250,
+      "protein_g": 9,
+      "carbs_g": 46,
+      "fat_g": 3.5,
+      "sat_fat_g": 0.8,
+      "fibre_g": 5,
+      "sugar_g": 4,
+      "sodium_mg": 450
+    },
+    "servingGrams": 28,
+    "costPerServingInr": 12,
+    "prepMinutes": 20,
+    "mealSlots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "potato-chips",
+    "name": "Potato Chips",
+    "cuisine": "pan_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 536,
+      "protein_g": 7,
+      "carbs_g": 53,
+      "fat_g": 34,
+      "sat_fat_g": 15,
+      "fibre_g": 4,
+      "sugar_g": 2,
+      "sodium_mg": 525
+    },
+    "servingGrams": 30,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "glucose-biscuit",
+    "name": "Glucose Biscuit",
+    "cuisine": "pan_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 444,
+      "protein_g": 7,
+      "carbs_g": 76,
+      "fat_g": 13,
+      "sat_fat_g": 6,
+      "fibre_g": 2.5,
+      "sugar_g": 24,
+      "sodium_mg": 400
+    },
+    "servingGrams": 25,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "digestive-biscuit",
+    "name": "Digestive Biscuit",
+    "cuisine": "pan_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 470,
+      "protein_g": 7.5,
+      "carbs_g": 66,
+      "fat_g": 20,
+      "sat_fat_g": 9,
+      "fibre_g": 5.5,
+      "sugar_g": 17,
+      "sodium_mg": 450
+    },
+    "servingGrams": 25,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "namkeen-mixture",
+    "name": "Namkeen Mixture",
+    "cuisine": "pan_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 520,
+      "protein_g": 12,
+      "carbs_g": 50,
+      "fat_g": 31,
+      "sat_fat_g": 9,
+      "fibre_g": 6,
+      "sugar_g": 3,
+      "sodium_mg": 900
+    },
+    "servingGrams": 30,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "instant-noodles-cooked",
+    "name": "Instant Noodles (Cooked)",
+    "cuisine": "pan_indian",
+    "category": "mixed_meal",
+    "nutrition": {
+      "kcal": 152,
+      "protein_g": 3,
+      "carbs_g": 21,
+      "fat_g": 6.5,
+      "sat_fat_g": 3,
+      "fibre_g": 1,
+      "sugar_g": 1.5,
+      "sodium_mg": 400
+    },
+    "servingGrams": 180,
+    "costPerServingInr": 45,
+    "prepMinutes": 35,
+    "mealSlots": [
+      "lunch"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "papad-roasted",
+    "name": "Papad, Roasted",
+    "cuisine": "pan_indian",
+    "category": "condiment_chutney",
+    "nutrition": {
+      "kcal": 371,
+      "protein_g": 22,
+      "carbs_g": 45,
+      "fat_g": 11,
+      "sat_fat_g": 2,
+      "fibre_g": 7,
+      "sugar_g": 2,
+      "sodium_mg": 1500
+    },
+    "servingGrams": 12,
+    "costPerServingInr": 8,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "papad-fried",
+    "name": "Papad, Fried",
+    "cuisine": "pan_indian",
+    "category": "condiment_chutney",
+    "nutrition": {
+      "kcal": 450,
+      "protein_g": 18,
+      "carbs_g": 40,
+      "fat_g": 25,
+      "sat_fat_g": 5,
+      "fibre_g": 5,
+      "sugar_g": 2,
+      "sodium_mg": 1400
+    },
+    "servingGrams": 15,
+    "costPerServingInr": 8,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "roasted-chana",
+    "name": "Roasted Bengal Gram",
+    "cuisine": "pan_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 364,
+      "protein_g": 19.7,
+      "carbs_g": 57.3,
+      "fat_g": 6.8,
+      "sat_fat_g": 0.9,
+      "fibre_g": 10,
+      "sugar_g": 2,
+      "sodium_mg": 30
+    },
+    "servingGrams": 30,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "high_protein"
+    ]
+  },
+  {
+    "foodId": "puffed-rice",
+    "name": "Puffed Rice (Murmura)",
+    "cuisine": "pan_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 325,
+      "protein_g": 7.5,
+      "carbs_g": 73,
+      "fat_g": 0.5,
+      "sat_fat_g": 0.1,
+      "fibre_g": 1.5,
+      "sugar_g": 0.4,
+      "sodium_mg": 5
+    },
+    "servingGrams": 20,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "packaged-fruit-juice",
+    "name": "Packaged Fruit Juice",
+    "cuisine": "pan_indian",
+    "category": "beverage",
+    "nutrition": {
+      "kcal": 50,
+      "protein_g": 0.2,
+      "carbs_g": 12.5,
+      "fat_g": 0.1,
+      "sat_fat_g": 0,
+      "fibre_g": 0.2,
+      "sugar_g": 11.5,
+      "sodium_mg": 10
+    },
+    "servingGrams": 200,
+    "costPerServingInr": 15,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "cola-soft-drink",
+    "name": "Cola Soft Drink",
+    "cuisine": "pan_indian",
+    "category": "beverage",
+    "nutrition": {
+      "kcal": 41,
+      "protein_g": 0,
+      "carbs_g": 10.5,
+      "fat_g": 0,
+      "sat_fat_g": 0,
+      "fibre_g": 0,
+      "sugar_g": 10.5,
+      "sodium_mg": 4
+    },
+    "servingGrams": 250,
+    "costPerServingInr": 15,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "banana-chips",
+    "name": "Banana Chips",
+    "cuisine": "south_indian",
+    "category": "snack_street_food",
+    "nutrition": {
+      "kcal": 519,
+      "protein_g": 3,
+      "carbs_g": 58,
+      "fat_g": 30,
+      "sat_fat_g": 26,
+      "fibre_g": 4,
+      "sugar_g": 8,
+      "sodium_mg": 200
+    },
+    "servingGrams": 25,
+    "costPerServingInr": 30,
+    "prepMinutes": 25,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "foodId": "tomato-ketchup",
+    "name": "Tomato Ketchup",
+    "cuisine": "pan_indian",
+    "category": "condiment_chutney",
+    "nutrition": {
+      "kcal": 110,
+      "protein_g": 1.2,
+      "carbs_g": 26,
+      "fat_g": 0.2,
+      "sat_fat_g": 0,
+      "fibre_g": 0.6,
+      "sugar_g": 22,
+      "sodium_mg": 900
+    },
+    "servingGrams": 15,
+    "costPerServingInr": 8,
+    "prepMinutes": 10,
+    "mealSlots": [
+      "evening_snack"
+    ],
+    "dietTags": [
+      "vegetarian",
+      "vegan"
+    ]
+  }
+]

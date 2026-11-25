@@ -17,7 +17,7 @@
     "lint": "npm run lint -w @bharatbite/web",
     "test": "npm run test -w @bharatbite/core && npm run test -w @bharatbite/foods",
     "build:web": "npm run build -w @bharatbite/web",
-    "seed:generate": "node packages/foods/scripts/generate-seed.mjs",
+    "seed:generate": "node packages/foods/scripts/generate-catalog.mjs",
     "dev:web": "npm run dev -w @bharatbite/web"
   },
   "devDependencies": {
