@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BharatBite</string>
+    <string name="app_url" translatable="false">https://bharatbite.vercel.app/app</string>
+    <!--
+      Digital Asset Links. The SHA-256 fingerprint must be the certificate that
+      actually signs the distributed APK. Until it is filled in, Chrome shows the
+      URL bar above the app instead of hiding it — the app still works, it just is
+      not verified as owned by the site. See docs/ANDROID.md.
+    -->
+    <string name="asset_statements" translatable="false">[{
+      \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+      \"target\": {
+        \"namespace\": \"android_app\",
+        \"package_name\": \"app.bharatbite\",
+        \"sha256_cert_fingerprints\": []
+      }
+    }]</string>
+</resources>
