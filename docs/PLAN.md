@@ -56,3 +56,19 @@ See `docs/BLOCKERS.md`.
 - **Payments:** amounts are fixed server-side in the Edge Functions; the browser receives only `order_id`, `amount_paise`, `key_id`. 503 `razorpay_not_configured` is surfaced as "nothing was charged".
 - **PWA:** `app/manifest.webmanifest`, service worker (network-first navigations, cache-first static, `/offline` fallback), generated PNG icons via `scripts/gen-icons.mjs`, installable with `start_url=/app`.
 - **Honest surfaces:** `/download` states no signed APK exists; `/privacy` describes real behaviour; `/app/account` says account deletion is a data wipe plus a manual request.
+
+## 5. Verification actually run (not claimed)
+
+| Check | How | Result |
+| --- | --- | --- |
+| Unit tests | `npm test` | 38 core + 11 foods, 0 failures |
+| Typecheck | `npm run typecheck` (3 workspaces, strict) | clean |
+| Production build | `npm run build:app` locally and on Vercel | clean, 20 routes |
+| Marketing + catalog pages | `curl` against local `next start` and the live origin | 200, real rows (thepla in English and Gujarati) |
+| `/app` guard | live origin | 307 → `/login` |
+| PWA assets | live origin | `manifest.webmanifest`, `sw.js`, icons all 200 |
+| Signup → log → read → RLS | GitHub Actions `db e2e` against the live project with the anon key | signup 200, profile + free entitlement auto-created, diary insert/read OK, Gujarati alias RPC OK, cross-user insert 403, entitlement tamper 403, free-user planner write 403 |
+| Post-deploy smoke | GitHub Actions `web smoke test` on every push | green |
+
+Test users created by `db e2e` are deleted afterwards; `auth.users`, `profiles` and
+`food_logs` are currently empty, so the first real account starts clean.

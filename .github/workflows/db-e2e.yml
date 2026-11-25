@@ -1,0 +1,21 @@
+# Full-path check against the live Supabase project: signup with the anon key,
+# profile/entitlement bootstrap, diary insert and read-back, search RPC in two
+# scripts, and the three negative cases (cross-user write, entitlement tamper,
+# planner write without Plus).
+#
+# Manual only, on purpose: it creates a real user. Afterwards run
+#   delete from auth.users where email like '%@e2e.bharatbite.invalid';
+# The script prints the exact address it created.
+name: db e2e
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run database e2e
+        run: python3 .github/e2e.py
