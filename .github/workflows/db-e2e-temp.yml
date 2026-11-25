@@ -2,6 +2,9 @@ name: db e2e (temporary)
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'arena/**'
 
 jobs:
   e2e:
