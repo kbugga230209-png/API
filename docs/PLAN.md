@@ -127,3 +127,36 @@ Not verified anywhere yet: real training accuracy, INT8 artifact size, and
 on-device latency. That requires the corpus in `docs/BLOCKERS.md` §3 and a GPU
 machine or the `ml-pipeline` dispatch job. The app keeps returning
 `404 no_published_model` until then.
+
+## 7. Razorpay test-mode rehearsal (workstream 2)
+
+No live transaction was attempted and no Razorpay credential exists in the repo.
+What was verified is the code that will handle money, plus the database rules
+that make it safe. Full detail and the remaining checklist: `docs/PAYMENTS.md`.
+
+**Edge Function logic — 36/36 scenarios.** `supabase/tests/rehearsal/` loads the
+shipped function sources (webhook, manual order, verify, subscription create,
+cancel) into Node with a `Deno` shim, an in-memory Supabase client and a scripted
+Razorpay API. Because it runs the real source, the assertions cover the deployed
+behaviour: HMAC verification (missing/wrong/tampered → 401), idempotency (replay
+→ `duplicate: true`, access not extended), amount mismatch → failed event and no
+grant, failed payment, 30-day arithmetic with 3-day grace, purchase stacking,
+subscription charged/cancelled/halted/expired, refund revocation, rate limiting,
+and the live-mode guard that refuses to auto-create a plan.
+
+**Database semantics — measured on the real project, then cleaned up.** Synthetic
+users were created and deleted; `auth.users`, `profiles`, `payments`,
+`payment_events`, `subscriptions`, `entitlements` and `api_rate_limits` are back
+at 0 rows. Results: `apply_entitlement` + `has_plus_access` agree on all ten
+status/timing combinations (active future/past, past_due inside/outside grace,
+cancelled preserving the paid period, expired, refunded overriding a future end,
+free reset, null start coalescing, unknown user); duplicate
+`(provider, event_id)` insert rejected with `23505` and one row retained;
+`check_rate_limit` allows exactly the configured number of calls. RLS negatives:
+a signed-in user sees only their own `payments`/`entitlements`, and is denied
+`UPDATE entitlements` (self-granting Plus), `INSERT payments` and any read of
+`payment_events` with `42501`.
+
+**Still unverified (owner):** a real test-mode checkout, webhook delivery from
+Razorpay's servers, mandate authentication and a dashboard refund — all require
+test-mode keys and a registered webhook secret, i.e. `docs/BLOCKERS.md` §1.

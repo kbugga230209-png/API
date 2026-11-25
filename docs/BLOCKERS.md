@@ -3,7 +3,12 @@
 Everything else is built. These four items cannot be done from the agent sandbox,
 and the software is written to fail loudly and honestly until they are resolved.
 
-## 1. Razorpay keys (blocks real payments)
+## 1. Razorpay keys (blocks real payments, not the rehearsal)
+
+Payments are implemented end to end and were rehearsed in test mode without
+credentials: 36/36 Edge Function scenarios plus a database-level check of
+entitlement expiry, idempotency and RLS (`docs/PAYMENTS.md`). What remains
+blocked is a real checkout and real webhook delivery.
 
 Payments are implemented end to end — order creation, signature verification,
 payment re-read from the Razorpay API, idempotent grants, webhook handling, grace
