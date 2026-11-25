@@ -1,0 +1,26 @@
+{
+  "name": "bharatbite",
+  "private": true,
+  "version": "0.1.0",
+  "description": "BharatBite — India-first AI food recognition and nutrition tracking",
+  "workspaces": [
+    "packages/core",
+    "packages/foods",
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:core": "npm run build -w @bharatbite/core",
+    "typecheck": "npm run typecheck -w @bharatbite/core && npm run typecheck -w @bharatbite/foods && npm run typecheck -w @bharatbite/web",
+    "lint": "npm run lint -w @bharatbite/web",
+    "test": "npm run test -w @bharatbite/core && npm run test -w @bharatbite/foods",
+    "build:web": "npm run build -w @bharatbite/web",
+    "seed:generate": "node packages/foods/scripts/generate-seed.mjs",
+    "dev:web": "npm run dev -w @bharatbite/web"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3"
+  }
+}

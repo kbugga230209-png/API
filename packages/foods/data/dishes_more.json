@@ -1,0 +1,2459 @@
+{
+  "$schema": "dish-v1",
+  "note": "Breakfasts, street food, non-vegetarian curries, sweets and drinks. Same recipe-calculation contract as dishes.json.",
+  "items": [
+    {
+      "slug": "idli",
+      "name": "Idli",
+      "local": "இட்லி",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Idly",
+          "en"
+        ],
+        [
+          "ಇಡ್ಲಿ",
+          "kn"
+        ],
+        [
+          "ఇడ్లీ",
+          "te"
+        ],
+        [
+          "इडली",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          60
+        ],
+        [
+          "urad_dal",
+          25
+        ],
+        [
+          "water",
+          95
+        ],
+        [
+          "salt",
+          2
+        ]
+      ],
+      "cookedYield": 210,
+      "servings": 4,
+      "serving": [
+        "2 idli",
+        84,
+        "2 idli"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "gluten_free",
+        "steamed",
+        "fermented",
+        "south_indian",
+        "low_fat"
+      ]
+    },
+    {
+      "slug": "plain-dosa",
+      "name": "Plain Dosa",
+      "local": "தோசை",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Dose",
+          "en"
+        ],
+        [
+          "Sada dosa",
+          "en"
+        ],
+        [
+          "ಡೋಸೆ",
+          "kn"
+        ],
+        [
+          "दोसा",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          60
+        ],
+        [
+          "urad_dal",
+          20
+        ],
+        [
+          "sunflower_oil",
+          5
+        ],
+        [
+          "water",
+          90
+        ],
+        [
+          "salt",
+          2
+        ]
+      ],
+      "cookedYield": 155,
+      "servings": 2,
+      "serving": [
+        "1 dosa",
+        74,
+        "1 dosa"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "gluten_free",
+        "fermented",
+        "south_indian"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "masala-dosa",
+      "name": "Masala Dosa",
+      "local": "மசாலா தோசை",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Masala dose",
+          "en"
+        ],
+        [
+          "ಮಸಾಲೆ ದೋಸೆ",
+          "kn"
+        ],
+        [
+          "मसाला दोसा",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          55
+        ],
+        [
+          "urad_dal",
+          18
+        ],
+        [
+          "potato",
+          90
+        ],
+        [
+          "onion",
+          25
+        ],
+        [
+          "sunflower_oil",
+          10
+        ],
+        [
+          "curry_leaves",
+          2
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          90
+        ]
+      ],
+      "cookedYield": 300,
+      "servings": 1,
+      "serving": [
+        "1 dosa with masala",
+        260,
+        "1 dosa"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "fermented",
+        "south_indian"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "uttapam",
+      "name": "Uttapam",
+      "local": "ஊத்தாப்பம்",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Uthappam",
+          "en"
+        ],
+        [
+          "Onion uttapam",
+          "en"
+        ],
+        [
+          "ಉತ್ತಪ್ಪ",
+          "kn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          55
+        ],
+        [
+          "urad_dal",
+          18
+        ],
+        [
+          "onion",
+          30
+        ],
+        [
+          "sunflower_oil",
+          6
+        ],
+        [
+          "water",
+          70
+        ],
+        [
+          "salt",
+          2
+        ]
+      ],
+      "cookedYield": 200,
+      "servings": 2,
+      "serving": [
+        "1 uttapam",
+        89,
+        "1 uttapam"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "fermented",
+        "south_indian"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "medu-vada",
+      "name": "Medu Vada",
+      "local": "மெதுவடை",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Vada",
+          "en"
+        ],
+        [
+          "Uzhunnu vada",
+          "en"
+        ],
+        [
+          "ವಡೆ",
+          "kn"
+        ],
+        [
+          "वडा",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "urad_dal",
+          50
+        ],
+        [
+          "sunflower_oil",
+          15
+        ],
+        [
+          "curry_leaves",
+          2
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          55
+        ]
+      ],
+      "cookedYield": 140,
+      "servings": 3,
+      "serving": [
+        "1 vada",
+        48,
+        "1 vada"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "fried",
+        "south_indian"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "poha-dish",
+      "name": "Poha",
+      "local": "पोहा",
+      "lang": "hi",
+      "cuisine": "maharashtrian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Pohe",
+          "en"
+        ],
+        [
+          "Aval",
+          "en"
+        ],
+        [
+          "પૌંઆ",
+          "gu"
+        ],
+        [
+          "ಅವಲಕ್ಕಿ",
+          "kn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "poha",
+          60
+        ],
+        [
+          "onion",
+          30
+        ],
+        [
+          "potato",
+          30
+        ],
+        [
+          "sunflower_oil",
+          8
+        ],
+        [
+          "peanut",
+          8
+        ],
+        [
+          "curry_leaves",
+          2
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          60
+        ]
+      ],
+      "cookedYield": 225,
+      "servings": 1,
+      "serving": [
+        "1 plate",
+        225,
+        "1 plate"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "gluten_free",
+        "maharashtrian",
+        "light"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "upma",
+      "name": "Upma",
+      "local": "उपमा",
+      "lang": "hi",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Uppuma",
+          "en"
+        ],
+        [
+          "Rava upma",
+          "en"
+        ],
+        [
+          "உப்புமா",
+          "ta"
+        ]
+      ],
+      "ingredients": [
+        [
+          "suji",
+          60
+        ],
+        [
+          "onion",
+          25
+        ],
+        [
+          "sunflower_oil",
+          8
+        ],
+        [
+          "green_peas",
+          20
+        ],
+        [
+          "mustard_seed",
+          2
+        ],
+        [
+          "curry_leaves",
+          2
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          150
+        ]
+      ],
+      "cookedYield": 250,
+      "servings": 1,
+      "serving": [
+        "1 bowl",
+        265,
+        "1 bowl"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "south_indian"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "shira",
+      "name": "Shira (Sheera)",
+      "local": "શીરો",
+      "lang": "gu",
+      "cuisine": "gujarati",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Sheera",
+          "en"
+        ],
+        [
+          "Rava kesari",
+          "en"
+        ],
+        [
+          "शीरा",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "suji",
+          60
+        ],
+        [
+          "ghee",
+          15
+        ],
+        [
+          "sugar",
+          25
+        ],
+        [
+          "water",
+          90
+        ],
+        [
+          "cashew",
+          5
+        ],
+        [
+          "cardamom",
+          1
+        ]
+      ],
+      "cookedYield": 200,
+      "servings": 2,
+      "serving": [
+        "1 katori",
+        102,
+        "1 katori"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "prasad",
+        "gujarati"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "besan-chilla",
+      "name": "Besan Chilla",
+      "local": "बेसन चीला",
+      "lang": "hi",
+      "cuisine": "north_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Besan cheela",
+          "en"
+        ],
+        [
+          "Chilla",
+          "en"
+        ],
+        [
+          "બેસન ચીલા",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "besan",
+          60
+        ],
+        [
+          "onion",
+          30
+        ],
+        [
+          "sunflower_oil",
+          6
+        ],
+        [
+          "tomato",
+          25
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          70
+        ]
+      ],
+      "cookedYield": 165,
+      "servings": 1,
+      "serving": [
+        "2 chilla",
+        168,
+        "2 chilla"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "vegan",
+        "gluten_free",
+        "high_protein"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "masala-omelette",
+      "name": "Masala Omelette",
+      "local": "मसाला ऑमलेट",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "egg",
+      "aliases": [
+        [
+          "Omelette",
+          "en"
+        ],
+        [
+          "Egg bhurji omelette",
+          "en"
+        ],
+        [
+          "ઑમલેટ",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "egg_whole",
+          100
+        ],
+        [
+          "onion",
+          20
+        ],
+        [
+          "tomato",
+          20
+        ],
+        [
+          "sunflower_oil",
+          5
+        ],
+        [
+          "green_chilli",
+          2
+        ],
+        [
+          "salt",
+          2
+        ]
+      ],
+      "cookedYield": 150,
+      "servings": 1,
+      "serving": [
+        "1 omelette (2 eggs)",
+        150,
+        "1 omelette"
+      ],
+      "tags": [
+        "egg",
+        "vegetarian",
+        "high_protein",
+        "keto_friendly"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "egg-bhurji",
+      "name": "Egg Bhurji",
+      "local": "अंडा भुर्जी",
+      "lang": "hi",
+      "cuisine": "north_indian",
+      "category": "egg",
+      "aliases": [
+        [
+          "Anda bhurji",
+          "en"
+        ],
+        [
+          "Scrambled eggs Indian",
+          "en"
+        ],
+        [
+          "ઈંડા ભુરજી",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "egg_whole",
+          100
+        ],
+        [
+          "onion",
+          25
+        ],
+        [
+          "tomato",
+          25
+        ],
+        [
+          "sunflower_oil",
+          6
+        ],
+        [
+          "salt",
+          2
+        ]
+      ],
+      "cookedYield": 150,
+      "servings": 1,
+      "serving": [
+        "1 bowl",
+        150,
+        "1 bowl"
+      ],
+      "tags": [
+        "egg",
+        "vegetarian",
+        "high_protein"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "samosa",
+      "name": "Samosa",
+      "local": "समोसा",
+      "lang": "hi",
+      "cuisine": "street_food",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Singara",
+          "en"
+        ],
+        [
+          "Samosas",
+          "en"
+        ],
+        [
+          "સમોસા",
+          "gu"
+        ],
+        [
+          "সমুচা",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          55
+        ],
+        [
+          "potato",
+          80
+        ],
+        [
+          "green_peas",
+          20
+        ],
+        [
+          "sunflower_oil",
+          18
+        ],
+        [
+          "garam_masala",
+          2
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          25
+        ]
+      ],
+      "cookedYield": 180,
+      "servings": 2,
+      "serving": [
+        "1 samosa",
+        90,
+        "1 samosa"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan",
+        "fried"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "vada-pav",
+      "name": "Vada Pav",
+      "local": "वडा पाव",
+      "lang": "mr",
+      "cuisine": "maharashtrian",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Wada pav",
+          "en"
+        ],
+        [
+          "Bombay burger",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          60
+        ],
+        [
+          "potato",
+          60
+        ],
+        [
+          "sunflower_oil",
+          15
+        ],
+        [
+          "besan",
+          10
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          30
+        ]
+      ],
+      "cookedYield": 190,
+      "servings": 1,
+      "serving": [
+        "1 vada pav",
+        195,
+        "1 piece"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "maharashtrian",
+        "fried"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "pav-bhaji",
+      "name": "Pav Bhaji",
+      "local": "पाव भाजी",
+      "lang": "mr",
+      "cuisine": "maharashtrian",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Pao bhaji",
+          "en"
+        ],
+        [
+          "Bhaji pav",
+          "en"
+        ],
+        [
+          "પાવ ભાજી",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          100
+        ],
+        [
+          "potato",
+          120
+        ],
+        [
+          "green_peas",
+          30
+        ],
+        [
+          "tomato",
+          60
+        ],
+        [
+          "onion",
+          40
+        ],
+        [
+          "butter",
+          18
+        ],
+        [
+          "sunflower_oil",
+          10
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          130
+        ]
+      ],
+      "cookedYield": 520,
+      "servings": 2,
+      "serving": [
+        "1 plate (2 pav)",
+        260,
+        "1 plate"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "maharashtrian",
+        "high_fat"
+      ],
+      "fatSource": "butter",
+      "variantStyles": [
+        "homemade",
+        "street",
+        "restaurant"
+      ]
+    },
+    {
+      "slug": "pani-puri",
+      "name": "Pani Puri",
+      "local": "પાણી પુરી",
+      "lang": "gu",
+      "cuisine": "street_food",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Golgappa",
+          "en"
+        ],
+        [
+          "Puchka",
+          "en"
+        ],
+        [
+          "Pani poori",
+          "en"
+        ],
+        [
+          "पानी पूरी",
+          "hi"
+        ],
+        [
+          "ఫుచ్కా",
+          "te"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          50
+        ],
+        [
+          "potato",
+          60
+        ],
+        [
+          "sunflower_oil",
+          15
+        ],
+        [
+          "tamarind",
+          10
+        ],
+        [
+          "mint",
+          10
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          40
+        ]
+      ],
+      "cookedYield": 195,
+      "servings": 1,
+      "serving": [
+        "6 puris",
+        195,
+        "6 pieces"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan",
+        "fried"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "bhel-puri",
+      "name": "Bhel Puri",
+      "local": "ભેળ પુરી",
+      "lang": "gu",
+      "cuisine": "street_food",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Bhel",
+          "en"
+        ],
+        [
+          "Bhel poori",
+          "en"
+        ],
+        [
+          "Jhal muri",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "poha",
+          40
+        ],
+        [
+          "maida",
+          20
+        ],
+        [
+          "sunflower_oil",
+          8
+        ],
+        [
+          "onion",
+          30
+        ],
+        [
+          "tomato",
+          30
+        ],
+        [
+          "tamarind",
+          8
+        ],
+        [
+          "mint",
+          5
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          20
+        ]
+      ],
+      "cookedYield": 200,
+      "servings": 1,
+      "serving": [
+        "1 plate",
+        205,
+        "1 plate"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "chole-bhature",
+      "name": "Chole Bhature",
+      "local": "छोले भटूरे",
+      "lang": "hi",
+      "cuisine": "punjabi",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Chole bhatura",
+          "en"
+        ],
+        [
+          "Chana bhatura",
+          "en"
+        ],
+        [
+          "ਛੋਲੇ ਭਟੂਰੇ",
+          "pa"
+        ]
+      ],
+      "ingredients": [
+        [
+          "kabuli_chana",
+          80
+        ],
+        [
+          "maida",
+          80
+        ],
+        [
+          "curd",
+          12
+        ],
+        [
+          "sunflower_oil",
+          22
+        ],
+        [
+          "onion",
+          40
+        ],
+        [
+          "tomato",
+          40
+        ],
+        [
+          "garam_masala",
+          2
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          260
+        ]
+      ],
+      "cookedYield": 470,
+      "servings": 2,
+      "serving": [
+        "1 plate (1 bhatura + chole)",
+        250,
+        "1 plate"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "high_fat"
+      ],
+      "fatSource": "sunflower_oil",
+      "variantStyles": [
+        "homemade",
+        "restaurant"
+      ]
+    },
+    {
+      "slug": "aloo-tikki",
+      "name": "Aloo Tikki",
+      "local": "आलू टिक्की",
+      "lang": "hi",
+      "cuisine": "street_food",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Potato tikki",
+          "en"
+        ],
+        [
+          "Aloo tikki chaat",
+          "en"
+        ],
+        [
+          "બટાકા ટીક્કી",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "potato",
+          200
+        ],
+        [
+          "besan",
+          15
+        ],
+        [
+          "sunflower_oil",
+          12
+        ],
+        [
+          "garam_masala",
+          1
+        ],
+        [
+          "salt",
+          2
+        ]
+      ],
+      "cookedYield": 200,
+      "servings": 2,
+      "serving": [
+        "1 tikki",
+        102,
+        "1 tikki"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan",
+        "fried"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "pakora",
+      "name": "Pakora (Bhajiya)",
+      "local": "ભજીયા",
+      "lang": "gu",
+      "cuisine": "street_food",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Bhajji",
+          "en"
+        ],
+        [
+          "Onion pakora",
+          "en"
+        ],
+        [
+          "पकौड़ा",
+          "hi"
+        ],
+        [
+          "পাকোরা",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "besan",
+          60
+        ],
+        [
+          "onion",
+          80
+        ],
+        [
+          "sunflower_oil",
+          20
+        ],
+        [
+          "red_chilli",
+          1
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          45
+        ]
+      ],
+      "cookedYield": 195,
+      "servings": 2,
+      "serving": [
+        "1 serving (4 pieces)",
+        100,
+        "4 pieces"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan",
+        "fried",
+        "monsoon_food"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "veg-momos",
+      "name": "Veg Momos",
+      "local": "मोमोज़",
+      "lang": "hi",
+      "cuisine": "northeastern",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Momo",
+          "en"
+        ],
+        [
+          "Steamed dumplings",
+          "en"
+        ],
+        [
+          "মোমো",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          80
+        ],
+        [
+          "cabbage",
+          80
+        ],
+        [
+          "carrot",
+          40
+        ],
+        [
+          "onion",
+          20
+        ],
+        [
+          "sunflower_oil",
+          5
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          45
+        ]
+      ],
+      "cookedYield": 250,
+      "servings": 1,
+      "serving": [
+        "6 momos",
+        250,
+        "6 pieces"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan",
+        "steamed",
+        "northeastern"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "dabeli",
+      "name": "Dabeli",
+      "local": "દાબેલી",
+      "lang": "gu",
+      "cuisine": "gujarati",
+      "category": "snack_street_food",
+      "aliases": [
+        [
+          "Kutchi dabeli",
+          "en"
+        ],
+        [
+          "Dabeli",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          70
+        ],
+        [
+          "potato",
+          100
+        ],
+        [
+          "sunflower_oil",
+          12
+        ],
+        [
+          "tamarind",
+          8
+        ],
+        [
+          "peanut",
+          8
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "water",
+          35
+        ]
+      ],
+      "cookedYield": 225,
+      "servings": 1,
+      "serving": [
+        "1 dabeli",
+        225,
+        "1 piece"
+      ],
+      "tags": [
+        "snack_street_food",
+        "vegetarian",
+        "vegan",
+        "gujarati"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "chicken-curry",
+      "name": "Chicken Curry",
+      "local": "चिकन करी",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Murgh curry",
+          "en"
+        ],
+        [
+          "Chicken masala",
+          "en"
+        ],
+        [
+          "ચિકન કરી",
+          "gu"
+        ],
+        [
+          "মুরগির ঝোল",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "chicken_skinless",
+          250
+        ],
+        [
+          "onion",
+          80
+        ],
+        [
+          "tomato",
+          80
+        ],
+        [
+          "sunflower_oil",
+          15
+        ],
+        [
+          "curd",
+          30
+        ],
+        [
+          "ginger",
+          6
+        ],
+        [
+          "garlic",
+          8
+        ],
+        [
+          "garam_masala",
+          3
+        ],
+        [
+          "salt",
+          4
+        ],
+        [
+          "water",
+          200
+        ]
+      ],
+      "cookedYield": 570,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        200,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "gravy",
+        "gluten_free"
+      ],
+      "fatSource": "sunflower_oil",
+      "variantStyles": [
+        "homemade",
+        "restaurant"
+      ]
+    },
+    {
+      "slug": "chicken-tandoori",
+      "name": "Chicken Tandoori",
+      "local": "चिकन तंदूरी",
+      "lang": "hi",
+      "cuisine": "punjabi",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Tandoori chicken",
+          "en"
+        ],
+        [
+          "Chicken tikka",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "chicken_skinless",
+          250
+        ],
+        [
+          "curd",
+          50
+        ],
+        [
+          "sunflower_oil",
+          8
+        ],
+        [
+          "red_chilli",
+          3
+        ],
+        [
+          "garam_masala",
+          3
+        ],
+        [
+          "salt",
+          4
+        ]
+      ],
+      "cookedYield": 300,
+      "servings": 2,
+      "serving": [
+        "1 serving (3 pieces)",
+        152,
+        "3 pieces"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "dry",
+        "grilled",
+        "gluten_free"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "butter-chicken",
+      "name": "Butter Chicken",
+      "local": "बटर चिकन",
+      "lang": "hi",
+      "cuisine": "punjabi",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Murgh makhani",
+          "en"
+        ],
+        [
+          "Butter murgh",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "chicken_skinless",
+          200
+        ],
+        [
+          "tomato",
+          100
+        ],
+        [
+          "butter",
+          25
+        ],
+        [
+          "milk_full",
+          50
+        ],
+        [
+          "onion",
+          40
+        ],
+        [
+          "sunflower_oil",
+          10
+        ],
+        [
+          "garam_masala",
+          3
+        ],
+        [
+          "salt",
+          4
+        ],
+        [
+          "water",
+          100
+        ]
+      ],
+      "cookedYield": 470,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        160,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "high_fat",
+        "gravy",
+        "restaurant"
+      ],
+      "fatSource": "butter",
+      "variantStyles": [
+        "homemade",
+        "restaurant"
+      ]
+    },
+    {
+      "slug": "fish-curry",
+      "name": "Fish Curry",
+      "local": "मछली करी",
+      "lang": "hi",
+      "cuisine": "south_indian",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Machli curry",
+          "en"
+        ],
+        [
+          "Meen kuzhambu",
+          "en"
+        ],
+        [
+          "மீன் குழம்பு",
+          "ta"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rohu",
+          200
+        ],
+        [
+          "coconut_fresh",
+          40
+        ],
+        [
+          "onion",
+          50
+        ],
+        [
+          "tomato",
+          50
+        ],
+        [
+          "sunflower_oil",
+          10
+        ],
+        [
+          "tamarind",
+          8
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          150
+        ]
+      ],
+      "cookedYield": 430,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        150,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "gravy",
+        "gluten_free",
+        "omega3"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "egg-curry",
+      "name": "Egg Curry",
+      "local": "अंडा करी",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Anda curry",
+          "en"
+        ],
+        [
+          "Muttai kurma",
+          "en"
+        ],
+        [
+          "ডিমের ঝোল",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "egg_whole",
+          150
+        ],
+        [
+          "onion",
+          60
+        ],
+        [
+          "tomato",
+          70
+        ],
+        [
+          "sunflower_oil",
+          12
+        ],
+        [
+          "garam_masala",
+          2
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          150
+        ]
+      ],
+      "cookedYield": 410,
+      "servings": 3,
+      "serving": [
+        "1 katori (1 egg)",
+        140,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "gravy",
+        "gluten_free"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "mutton-rogan-josh",
+      "name": "Mutton Rogan Josh",
+      "local": "मटन रोगन जोश",
+      "lang": "hi",
+      "cuisine": "kashmiri",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Rogan josh",
+          "en"
+        ],
+        [
+          "Mutton curry",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "mutton_lean",
+          200
+        ],
+        [
+          "onion",
+          60
+        ],
+        [
+          "curd",
+          40
+        ],
+        [
+          "sunflower_oil",
+          18
+        ],
+        [
+          "ginger",
+          5
+        ],
+        [
+          "garlic",
+          6
+        ],
+        [
+          "red_chilli",
+          4
+        ],
+        [
+          "salt",
+          4
+        ],
+        [
+          "water",
+          200
+        ]
+      ],
+      "cookedYield": 460,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        160,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "gravy",
+        "gluten_free",
+        "kashmiri"
+      ],
+      "fatSource": "sunflower_oil",
+      "variantStyles": [
+        "homemade",
+        "restaurant"
+      ]
+    },
+    {
+      "slug": "prawn-masala",
+      "name": "Prawn Masala",
+      "local": "कोलंबी मसाला",
+      "lang": "mr",
+      "cuisine": "maharashtrian",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Jhinga masala",
+          "en"
+        ],
+        [
+          "Prawn curry",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "prawn",
+          150
+        ],
+        [
+          "onion",
+          60
+        ],
+        [
+          "tomato",
+          60
+        ],
+        [
+          "coconut_fresh",
+          20
+        ],
+        [
+          "sunflower_oil",
+          12
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          80
+        ]
+      ],
+      "cookedYield": 330,
+      "servings": 2,
+      "serving": [
+        "1 katori",
+        170,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "high_protein",
+        "gluten_free"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "gulab-jamun",
+      "name": "Gulab Jamun",
+      "local": "गुलाब जामुन",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Gulab jamoon",
+          "en"
+        ],
+        [
+          "ગુલાબ જાંબુ",
+          "gu"
+        ],
+        [
+          "গোলাপ জামুন",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "khoa",
+          60
+        ],
+        [
+          "sugar",
+          40
+        ],
+        [
+          "maida",
+          8
+        ],
+        [
+          "ghee",
+          10
+        ],
+        [
+          "water",
+          60
+        ]
+      ],
+      "cookedYield": 225,
+      "servings": 3,
+      "serving": [
+        "1 piece",
+        45,
+        "1 piece"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "festive",
+        "high_sugar"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "besan-ladoo",
+      "name": "Besan Ladoo",
+      "local": "बेसन लड्डू",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Ladoo",
+          "en"
+        ],
+        [
+          "Laddu",
+          "en"
+        ],
+        [
+          "બેસન લાડુ",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "besan",
+          100
+        ],
+        [
+          "ghee",
+          30
+        ],
+        [
+          "sugar",
+          60
+        ],
+        [
+          "cardamom",
+          1
+        ]
+      ],
+      "cookedYield": 245,
+      "servings": 6,
+      "serving": [
+        "1 ladoo",
+        41,
+        "1 ladoo"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "festive",
+        "high_sugar"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "gajar-halwa",
+      "name": "Gajar Halwa",
+      "local": "गाजर का हलवा",
+      "lang": "hi",
+      "cuisine": "north_indian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Carrot halwa",
+          "en"
+        ],
+        [
+          "Gajar ka halwa",
+          "en"
+        ],
+        [
+          "ગાજર હલવો",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "carrot",
+          250
+        ],
+        [
+          "milk_full",
+          100
+        ],
+        [
+          "ghee",
+          15
+        ],
+        [
+          "sugar",
+          40
+        ],
+        [
+          "cashew",
+          8
+        ]
+      ],
+      "cookedYield": 390,
+      "servings": 4,
+      "serving": [
+        "1 katori",
+        98,
+        "1 katori"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "winter",
+        "festive"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "jalebi",
+      "name": "Jalebi",
+      "local": "જલેબી",
+      "lang": "gu",
+      "cuisine": "pan_indian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Jilebi",
+          "en"
+        ],
+        [
+          "जलेबी",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          60
+        ],
+        [
+          "sugar",
+          50
+        ],
+        [
+          "ghee",
+          15
+        ],
+        [
+          "water",
+          40
+        ]
+      ],
+      "cookedYield": 185,
+      "servings": 2,
+      "serving": [
+        "1 serving (3 pieces)",
+        92,
+        "3 pieces"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "fried",
+        "festive"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "kheer",
+      "name": "Kheer",
+      "local": "खीर",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Payasam",
+          "en"
+        ],
+        [
+          "Rice kheer",
+          "en"
+        ],
+        [
+          "ખીર",
+          "gu"
+        ],
+        [
+          "പായസം",
+          "ml"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          30
+        ],
+        [
+          "milk_full",
+          300
+        ],
+        [
+          "sugar",
+          30
+        ],
+        [
+          "cashew",
+          5
+        ],
+        [
+          "cardamom",
+          1
+        ]
+      ],
+      "cookedYield": 490,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        163,
+        "1 katori"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "festive",
+        "gluten_free"
+      ],
+      "fatSource": "milk_full"
+    },
+    {
+      "slug": "shrikhand",
+      "name": "Shrikhand",
+      "local": "श्रीखंड",
+      "lang": "mr",
+      "cuisine": "maharashtrian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Srikhand",
+          "en"
+        ],
+        [
+          "Hung curd dessert",
+          "en"
+        ],
+        [
+          "શ્રીખંડ",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "curd",
+          250
+        ],
+        [
+          "sugar",
+          40
+        ],
+        [
+          "cardamom",
+          1
+        ],
+        [
+          "almond",
+          5
+        ]
+      ],
+      "cookedYield": 225,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        75,
+        "1 katori"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "gluten_free",
+        "probiotic"
+      ],
+      "fatSource": "curd"
+    },
+    {
+      "slug": "masala-chai",
+      "name": "Masala Chai",
+      "local": "मसाला चाय",
+      "lang": "hi",
+      "cuisine": "pan_indian",
+      "category": "beverage",
+      "aliases": [
+        [
+          "Chai",
+          "en"
+        ],
+        [
+          "Tea with milk",
+          "en"
+        ],
+        [
+          "ચા",
+          "gu"
+        ],
+        [
+          "চা",
+          "bn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "milk_full",
+          100
+        ],
+        [
+          "water",
+          100
+        ],
+        [
+          "sugar",
+          6
+        ],
+        [
+          "ginger",
+          2
+        ],
+        [
+          "cardamom",
+          1
+        ]
+      ],
+      "cookedYield": 190,
+      "servings": 2,
+      "serving": [
+        "1 cup",
+        95,
+        "1 cup"
+      ],
+      "tags": [
+        "beverage",
+        "vegetarian",
+        "gluten_free",
+        "staple"
+      ],
+      "fatSource": "milk_full"
+    },
+    {
+      "slug": "filter-coffee",
+      "name": "Filter Coffee",
+      "local": "பில்டர் காபி",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "beverage",
+      "aliases": [
+        [
+          "Kaapi",
+          "en"
+        ],
+        [
+          "South Indian coffee",
+          "en"
+        ],
+        [
+          "ಕಾಫಿ",
+          "kn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "milk_full",
+          120
+        ],
+        [
+          "water",
+          80
+        ],
+        [
+          "sugar",
+          6
+        ]
+      ],
+      "cookedYield": 195,
+      "servings": 2,
+      "serving": [
+        "1 tumbler",
+        98,
+        "1 tumbler"
+      ],
+      "tags": [
+        "beverage",
+        "vegetarian",
+        "gluten_free",
+        "south_indian"
+      ],
+      "fatSource": "milk_full"
+    },
+    {
+      "slug": "sweet-lassi",
+      "name": "Sweet Lassi",
+      "local": "लस्सी",
+      "lang": "hi",
+      "cuisine": "punjabi",
+      "category": "beverage",
+      "aliases": [
+        [
+          "Lassi",
+          "en"
+        ],
+        [
+          "Mango lassi",
+          "en"
+        ],
+        [
+          "લસી",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "curd",
+          200
+        ],
+        [
+          "sugar",
+          20
+        ],
+        [
+          "water",
+          50
+        ]
+      ],
+      "cookedYield": 265,
+      "servings": 1,
+      "serving": [
+        "1 glass",
+        265,
+        "1 glass"
+      ],
+      "tags": [
+        "beverage",
+        "vegetarian",
+        "gluten_free",
+        "probiotic",
+        "punjabi"
+      ],
+      "fatSource": "curd"
+    },
+    {
+      "slug": "chaas",
+      "name": "Chaas (Buttermilk)",
+      "local": "છાશ",
+      "lang": "gu",
+      "cuisine": "pan_indian",
+      "category": "beverage",
+      "aliases": [
+        [
+          "Buttermilk",
+          "en"
+        ],
+        [
+          "Mor",
+          "en"
+        ],
+        [
+          "छाछ",
+          "hi"
+        ],
+        [
+          "மோர்",
+          "ta"
+        ]
+      ],
+      "ingredients": [
+        [
+          "curd",
+          100
+        ],
+        [
+          "water",
+          150
+        ],
+        [
+          "salt",
+          1
+        ],
+        [
+          "cumin",
+          1
+        ],
+        [
+          "curry_leaves",
+          1
+        ]
+      ],
+      "cookedYield": 250,
+      "servings": 1,
+      "serving": [
+        "1 glass",
+        250,
+        "1 glass"
+      ],
+      "tags": [
+        "beverage",
+        "vegetarian",
+        "gluten_free",
+        "low_calorie",
+        "probiotic",
+        "cooling"
+      ],
+      "fatSource": "curd"
+    }
+  ]
+}

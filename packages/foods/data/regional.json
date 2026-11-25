@@ -1,0 +1,929 @@
+{
+  "$schema": "dish-v1",
+  "note": "Regional and festival preparations from the cuisines BharatBite must recognise natively.",
+  "items": [
+    {
+      "slug": "dal-baati-churma",
+      "name": "Dal Baati Churma",
+      "local": "दाल बाटी चूरमा",
+      "lang": "hi",
+      "cuisine": "rajasthani",
+      "category": "mixed_meal",
+      "aliases": [
+        [
+          "Baati churma",
+          "en"
+        ],
+        [
+          "Dal baati",
+          "en"
+        ],
+        [
+          "दाल बाटी",
+          "mr"
+        ]
+      ],
+      "ingredients": [
+        [
+          "wheat_flour_atta",
+          120
+        ],
+        [
+          "ghee",
+          40
+        ],
+        [
+          "jaggery",
+          25
+        ],
+        [
+          "toor_dal",
+          30
+        ],
+        [
+          "moong_dal",
+          20
+        ],
+        [
+          "onion",
+          20
+        ],
+        [
+          "salt",
+          4
+        ],
+        [
+          "water",
+          200
+        ]
+      ],
+      "cookedYield": 500,
+      "servings": 2,
+      "serving": [
+        "1 plate (2 baati + dal + churma)",
+        250,
+        "1 plate"
+      ],
+      "tags": [
+        "mixed_meal",
+        "vegetarian",
+        "rajasthani",
+        "festive",
+        "high_fat"
+      ],
+      "fatSource": "ghee",
+      "variantStyles": [
+        "homemade",
+        "restaurant"
+      ]
+    },
+    {
+      "slug": "litti-chokha",
+      "name": "Litti Chokha",
+      "local": "लिट्टी चोखा",
+      "lang": "hi",
+      "cuisine": "bihari",
+      "category": "mixed_meal",
+      "aliases": [
+        [
+          "Litti",
+          "en"
+        ],
+        [
+          "Litti chokha",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "wheat_flour_atta",
+          80
+        ],
+        [
+          "besan",
+          40
+        ],
+        [
+          "ghee",
+          10
+        ],
+        [
+          "brinjal",
+          100
+        ],
+        [
+          "onion",
+          40
+        ],
+        [
+          "tomato",
+          40
+        ],
+        [
+          "mustard_oil",
+          6
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          40
+        ]
+      ],
+      "cookedYield": 390,
+      "servings": 2,
+      "serving": [
+        "1 plate (2 litti + chokha)",
+        195,
+        "1 plate"
+      ],
+      "tags": [
+        "mixed_meal",
+        "vegetarian",
+        "bihari",
+        "smoky"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "ven-pongal",
+      "name": "Ven Pongal",
+      "local": "வெண் பொங்கல்",
+      "lang": "ta",
+      "cuisine": "south_indian",
+      "category": "breakfast",
+      "aliases": [
+        [
+          "Khara pongal",
+          "en"
+        ],
+        [
+          "Pongal",
+          "en"
+        ],
+        [
+          "ಪೊಂಗಲ್",
+          "kn"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          60
+        ],
+        [
+          "moong_dal",
+          30
+        ],
+        [
+          "ghee",
+          10
+        ],
+        [
+          "black_pepper",
+          2
+        ],
+        [
+          "cumin",
+          2
+        ],
+        [
+          "cashew",
+          5
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          350
+        ]
+      ],
+      "cookedYield": 470,
+      "servings": 2,
+      "serving": [
+        "1 bowl",
+        235,
+        "1 bowl"
+      ],
+      "tags": [
+        "breakfast",
+        "vegetarian",
+        "gluten_free",
+        "south_indian",
+        "comfort_food",
+        "festival"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "puran-poli",
+      "name": "Puran Poli",
+      "local": "पुरण पोळी",
+      "lang": "mr",
+      "cuisine": "maharashtrian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Puran poli",
+          "en"
+        ],
+        [
+          "Holige",
+          "en"
+        ],
+        [
+          "Obbattu",
+          "en"
+        ],
+        [
+          "પુરણ પોળી",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "wheat_flour_atta",
+          50
+        ],
+        [
+          "chana_dal",
+          40
+        ],
+        [
+          "jaggery",
+          30
+        ],
+        [
+          "ghee",
+          12
+        ],
+        [
+          "cardamom",
+          1
+        ],
+        [
+          "water",
+          40
+        ]
+      ],
+      "cookedYield": 195,
+      "servings": 2,
+      "serving": [
+        "1 poli",
+        98,
+        "1 poli"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "festival",
+        "maharashtrian",
+        "high_sugar"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "ukadiche-modak",
+      "name": "Ukadiche Modak",
+      "local": "उकडीचे मोदक",
+      "lang": "mr",
+      "cuisine": "maharashtrian",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Modak",
+          "en"
+        ],
+        [
+          "Kozhukattai",
+          "en"
+        ],
+        [
+          "મોદક",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          50
+        ],
+        [
+          "coconut_fresh",
+          40
+        ],
+        [
+          "jaggery",
+          30
+        ],
+        [
+          "ghee",
+          5
+        ],
+        [
+          "cardamom",
+          1
+        ],
+        [
+          "water",
+          60
+        ]
+      ],
+      "cookedYield": 185,
+      "servings": 3,
+      "serving": [
+        "1 modak",
+        62,
+        "1 modak"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "gluten_free",
+        "steamed",
+        "festival",
+        "ganesh_chaturthi"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "undhiyu",
+      "name": "Undhiyu",
+      "local": "ઊંધિયું",
+      "lang": "gu",
+      "cuisine": "gujarati",
+      "category": "vegetable_sabzi",
+      "aliases": [
+        [
+          "Undhiyu",
+          "en"
+        ],
+        [
+          "Umbadiyu",
+          "en"
+        ],
+        [
+          "ઊંધિયુ",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "potato",
+          80
+        ],
+        [
+          "raw_banana",
+          80
+        ],
+        [
+          "brinjal",
+          60
+        ],
+        [
+          "karela",
+          40
+        ],
+        [
+          "green_peas",
+          30
+        ],
+        [
+          "coconut_fresh",
+          15
+        ],
+        [
+          "mustard_oil",
+          12
+        ],
+        [
+          "coriander_seed",
+          4
+        ],
+        [
+          "salt",
+          3
+        ]
+      ],
+      "cookedYield": 420,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        140,
+        "1 katori"
+      ],
+      "tags": [
+        "vegetable_sabzi",
+        "vegetarian",
+        "vegan",
+        "gujarati",
+        "winter",
+        "festival"
+      ],
+      "fatSource": "mustard_oil"
+    },
+    {
+      "slug": "dhansak",
+      "name": "Dhansak",
+      "local": "ધાનસાક",
+      "lang": "gu",
+      "cuisine": "not_regional",
+      "category": "dal_legume",
+      "aliases": [
+        [
+          "Parsi dhansak",
+          "en"
+        ],
+        [
+          "Dhanshak",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "toor_dal",
+          30
+        ],
+        [
+          "masoor_dal",
+          20
+        ],
+        [
+          "moong_dal",
+          20
+        ],
+        [
+          "mutton_lean",
+          100
+        ],
+        [
+          "onion",
+          40
+        ],
+        [
+          "tomato",
+          40
+        ],
+        [
+          "ghee",
+          10
+        ],
+        [
+          "coriander_seed",
+          4
+        ],
+        [
+          "salt",
+          4
+        ],
+        [
+          "water",
+          250
+        ]
+      ],
+      "cookedYield": 480,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        160,
+        "1 katori"
+      ],
+      "tags": [
+        "dal_legume",
+        "non_veg",
+        "parsi",
+        "high_protein"
+      ],
+      "fatSource": "ghee"
+    },
+    {
+      "slug": "kosha-mangsho",
+      "name": "Kosha Mangsho",
+      "local": "কষা মাংস",
+      "lang": "bn",
+      "cuisine": "bengali",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Bengali mutton curry",
+          "en"
+        ],
+        [
+          "Mutton kosha",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "mutton_lean",
+          200
+        ],
+        [
+          "onion",
+          60
+        ],
+        [
+          "curd",
+          30
+        ],
+        [
+          "mustard_oil",
+          20
+        ],
+        [
+          "garam_masala",
+          3
+        ],
+        [
+          "red_chilli",
+          3
+        ],
+        [
+          "salt",
+          4
+        ],
+        [
+          "water",
+          120
+        ]
+      ],
+      "cookedYield": 400,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        133,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "bengali",
+        "high_protein",
+        "festive"
+      ],
+      "fatSource": "mustard_oil"
+    },
+    {
+      "slug": "machher-jhol",
+      "name": "Machher Jhol",
+      "local": "মাছের ঝোল",
+      "lang": "bn",
+      "cuisine": "bengali",
+      "category": "non_veg_curry",
+      "aliases": [
+        [
+          "Bengali fish curry",
+          "en"
+        ],
+        [
+          "Maacher jhol",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rohu",
+          150
+        ],
+        [
+          "mustard_oil",
+          8
+        ],
+        [
+          "tomato",
+          40
+        ],
+        [
+          "onion",
+          30
+        ],
+        [
+          "turmeric",
+          2
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          160
+        ]
+      ],
+      "cookedYield": 370,
+      "servings": 2,
+      "serving": [
+        "1 katori",
+        185,
+        "1 katori"
+      ],
+      "tags": [
+        "non_veg_curry",
+        "bengali",
+        "gluten_free",
+        "light",
+        "omega3"
+      ],
+      "fatSource": "mustard_oil"
+    },
+    {
+      "slug": "thukpa",
+      "name": "Thukpa",
+      "local": "थुक्पा",
+      "lang": "hi",
+      "cuisine": "northeastern",
+      "category": "soup",
+      "aliases": [
+        [
+          "Noodle soup",
+          "en"
+        ],
+        [
+          "Chicken thukpa",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "maida",
+          60
+        ],
+        [
+          "chicken_skinless",
+          80
+        ],
+        [
+          "carrot",
+          30
+        ],
+        [
+          "cabbage",
+          30
+        ],
+        [
+          "onion",
+          20
+        ],
+        [
+          "sunflower_oil",
+          5
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          320
+        ]
+      ],
+      "cookedYield": 530,
+      "servings": 2,
+      "serving": [
+        "1 bowl",
+        265,
+        "1 bowl"
+      ],
+      "tags": [
+        "soup",
+        "non_veg",
+        "northeastern",
+        "comfort_food"
+      ],
+      "fatSource": "sunflower_oil"
+    },
+    {
+      "slug": "pakhala",
+      "name": "Pakhala",
+      "local": "ପଖାଳ",
+      "lang": "or",
+      "cuisine": "odia",
+      "category": "rice_dish",
+      "aliases": [
+        [
+          "Pakhal",
+          "en"
+        ],
+        [
+          "Fermented rice water",
+          "en"
+        ],
+        [
+          "Pakhala bhata",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "rice_raw",
+          60
+        ],
+        [
+          "curd",
+          60
+        ],
+        [
+          "water",
+          300
+        ],
+        [
+          "salt",
+          2
+        ],
+        [
+          "mustard_seed",
+          1
+        ],
+        [
+          "curry_leaves",
+          1
+        ]
+      ],
+      "cookedYield": 420,
+      "servings": 1,
+      "serving": [
+        "1 bowl",
+        420,
+        "1 bowl"
+      ],
+      "tags": [
+        "rice_dish",
+        "vegetarian",
+        "odia",
+        "summer",
+        "probiotic",
+        "fermented"
+      ],
+      "fatSource": "curd"
+    },
+    {
+      "slug": "mishti-doi",
+      "name": "Mishti Doi",
+      "local": "মিষ্টি দই",
+      "lang": "bn",
+      "cuisine": "bengali",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Sweet yoghurt",
+          "en"
+        ],
+        [
+          "Misti doi",
+          "en"
+        ],
+        [
+          "મીઠી દહીં",
+          "gu"
+        ]
+      ],
+      "ingredients": [
+        [
+          "milk_full",
+          300
+        ],
+        [
+          "curd",
+          30
+        ],
+        [
+          "jaggery",
+          40
+        ]
+      ],
+      "cookedYield": 340,
+      "servings": 3,
+      "serving": [
+        "1 katori",
+        113,
+        "1 katori"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "gluten_free",
+        "bengali",
+        "probiotic"
+      ],
+      "fatSource": "milk_full"
+    },
+    {
+      "slug": "sandesh",
+      "name": "Sandesh",
+      "local": "সন্দেশ",
+      "lang": "bn",
+      "cuisine": "bengali",
+      "category": "sweet_dessert",
+      "aliases": [
+        [
+          "Sondesh",
+          "en"
+        ],
+        [
+          "Chhena sandesh",
+          "en"
+        ]
+      ],
+      "ingredients": [
+        [
+          "khoa",
+          100
+        ],
+        [
+          "sugar",
+          30
+        ],
+        [
+          "cardamom",
+          1
+        ]
+      ],
+      "cookedYield": 128,
+      "servings": 4,
+      "serving": [
+        "1 piece",
+        32,
+        "1 piece"
+      ],
+      "tags": [
+        "sweet_dessert",
+        "vegetarian",
+        "bengali",
+        "festive",
+        "high_sugar"
+      ],
+      "fatSource": "khoa"
+    },
+    {
+      "slug": "sarson-da-saag",
+      "name": "Sarson da Saag",
+      "local": "ਸਰਸੋਂ ਦਾ ਸਾਗ",
+      "lang": "pa",
+      "cuisine": "punjabi",
+      "category": "vegetable_sabzi",
+      "aliases": [
+        [
+          "Mustard greens",
+          "en"
+        ],
+        [
+          "Saag",
+          "en"
+        ],
+        [
+          "सरसों का साग",
+          "hi"
+        ]
+      ],
+      "ingredients": [
+        [
+          "palak",
+          200
+        ],
+        [
+          "methi_leaves",
+          80
+        ],
+        [
+          "onion",
+          30
+        ],
+        [
+          "ghee",
+          10
+        ],
+        [
+          "maize_flour",
+          10
+        ],
+        [
+          "salt",
+          3
+        ],
+        [
+          "water",
+          100
+        ]
+      ],
+      "cookedYield": 360,
+      "servings": 2,
+      "serving": [
+        "1 katori",
+        180,
+        "1 katori"
+      ],
+      "tags": [
+        "vegetable_sabzi",
+        "vegetarian",
+        "punjabi",
+        "winter",
+        "iron_rich"
+      ],
+      "fatSource": "ghee",
+      "notes": "Computed with spinach as the IFCT proxy for mustard greens; audit against IFCT mustard-leaf row before launch."
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "direct-v1",
+  "note": "Foods whose composition is measured/declared directly rather than calculated from a recipe (packaged goods, composite sweets, processed staples). Items flagged `audit: true` use label or reference values that still need a documented source page captured in the repository.",
+  "items": [
+    {
+      "slug": "egg-boiled", "name": "Egg, boiled", "local": "उबला अंडा", "lang": "hi", "cuisine": "pan_indian", "category": "egg",
+      "aliases": [["Boiled egg", "en"], ["Anda", "en"], ["બાફેલું ઈંડું", "gu"], ["முட்டை", "ta"]],
+      "nutrition": { "kcal": 143, "protein_g": 13.3, "carbs_g": 0.7, "fat_g": 9.5, "sat_fat_g": 2.8, "fibre_g": 0, "sugar_g": 0.7, "sodium_mg": 142 },
+      "serving": ["1 large egg", 50, "1 egg"], "source": "IFCT 2017 — Egg, whole, raw/boiled (M001)", "methodology": "ifct_value", "ref": "IFCT M001", "tags": ["egg", "high_protein", "keto_friendly"]
+    },
+    {
+      "slug": "bread-white-slice", "name": "Bread, white", "local": "सफेद ब्रेड", "lang": "hi", "cuisine": "pan_indian", "category": "roti_bread",
+      "aliases": [["White bread", "en"], ["Pav bread", "en"], ["બ્રેડ", "gu"]],
+      "nutrition": { "kcal": 265, "protein_g": 8.0, "carbs_g": 50.0, "fat_g": 3.2, "sat_fat_g": 0.7, "fibre_g": 2.7, "sugar_g": 5.0, "sodium_mg": 490 },
+      "serving": ["1 slice", 28, "1 slice"], "source": "IFCT 2017 — Bread, white (A025)", "methodology": "ifct_value", "ref": "IFCT A025", "tags": ["roti_bread", "vegetarian", "packaged"]
+    },
+    {
+      "slug": "bread-brown-slice", "name": "Bread, brown", "local": "ब्राउन ब्रेड", "lang": "hi", "cuisine": "pan_indian", "category": "roti_bread",
+      "aliases": [["Brown bread", "en"], ["Whole wheat bread", "en"]],
+      "nutrition": { "kcal": 250, "protein_g": 9.0, "carbs_g": 46.0, "fat_g": 3.5, "sat_fat_g": 0.8, "fibre_g": 5.0, "sugar_g": 4.0, "sodium_mg": 450 },
+      "serving": ["1 slice", 28, "1 slice"], "source": "Indian packaged bread label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["roti_bread", "vegetarian", "packaged"]
+    },
+    {
+      "slug": "potato-chips", "name": "Potato Chips", "local": "आलू चिप्स", "lang": "hi", "cuisine": "pan_indian", "category": "snack_street_food",
+      "aliases": [["Chips", "en"], ["Wafers", "en"], ["ચિપ્સ", "gu"]],
+      "nutrition": { "kcal": 536, "protein_g": 7.0, "carbs_g": 53.0, "fat_g": 34.0, "sat_fat_g": 15.0, "fibre_g": 4.0, "sugar_g": 2.0, "sodium_mg": 525 },
+      "serving": ["1 small pack", 30, "1 pack (30 g)"], "source": "Indian packaged crisps label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["snack_street_food", "vegetarian", "packaged", "high_fat"]
+    },
+    {
+      "slug": "glucose-biscuit", "name": "Glucose Biscuit", "local": "ग्लूकोज़ बिस्किट", "lang": "hi", "cuisine": "pan_indian", "category": "snack_street_food",
+      "aliases": [["Biscuit", "en"], ["Parle-G type", "en"], ["બિસ્કિટ", "gu"]],
+      "nutrition": { "kcal": 444, "protein_g": 7.0, "carbs_g": 76.0, "fat_g": 13.0, "sat_fat_g": 6.0, "fibre_g": 2.5, "sugar_g": 24.0, "sodium_mg": 400 },
+      "serving": ["4 biscuits", 25, "4 biscuits"], "source": "Indian glucose biscuit label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["snack_street_food", "vegetarian", "packaged"]
+    },
+    {
+      "slug": "digestive-biscuit", "name": "Digestive Biscuit", "local": "डाइजेस्टिव बिस्किट", "lang": "hi", "cuisine": "pan_indian", "category": "snack_street_food",
+      "aliases": [["Marie biscuit", "en"], ["Wheat biscuit", "en"]],
+      "nutrition": { "kcal": 470, "protein_g": 7.5, "carbs_g": 66.0, "fat_g": 20.0, "sat_fat_g": 9.0, "fibre_g": 5.5, "sugar_g": 17.0, "sodium_mg": 450 },
+      "serving": ["2 biscuits", 25, "2 biscuits"], "source": "Indian digestive biscuit label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["snack_street_food", "vegetarian", "packaged"]
+    },
+    {
+      "slug": "namkeen-mixture", "name": "Namkeen Mixture", "local": "नमकीन", "lang": "hi", "cuisine": "pan_indian", "category": "snack_street_food",
+      "aliases": [["Bhujia mixture", "en"], ["Farsan", "en"], ["નમકીન", "gu"]],
+      "nutrition": { "kcal": 520, "protein_g": 12.0, "carbs_g": 50.0, "fat_g": 31.0, "sat_fat_g": 9.0, "fibre_g": 6.0, "sugar_g": 3.0, "sodium_mg": 900 },
+      "serving": ["1 handful", 30, "1 small bowl"], "source": "Indian namkeen label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["snack_street_food", "vegetarian", "packaged", "high_sodium"]
+    },
+    {
+      "slug": "instant-noodles-cooked", "name": "Instant Noodles (Cooked)", "local": "इंस्टेंट नूडल्स", "lang": "hi", "cuisine": "pan_indian", "category": "mixed_meal",
+      "aliases": [["Maggi style noodles", "en"], ["Masala noodles", "en"]],
+      "nutrition": { "kcal": 152, "protein_g": 3.0, "carbs_g": 21.0, "fat_g": 6.5, "sat_fat_g": 3.0, "fibre_g": 1.0, "sugar_g": 1.5, "sodium_mg": 400 },
+      "serving": ["1 packet cooked", 180, "1 packet"], "source": "Instant noodles label + water as prepared (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["mixed_meal", "vegetarian", "packaged", "high_sodium"]
+    },
+    {
+      "slug": "papad-roasted", "name": "Papad, Roasted", "local": "पापड़", "lang": "hi", "cuisine": "pan_indian", "category": "condiment_chutney",
+      "aliases": [["Pappadam", "en"], ["Appalam", "en"], ["પાપડ", "gu"]],
+      "nutrition": { "kcal": 371, "protein_g": 22.0, "carbs_g": 45.0, "fat_g": 11.0, "sat_fat_g": 2.0, "fibre_g": 7.0, "sugar_g": 2.0, "sodium_mg": 1500 },
+      "serving": ["1 papad", 12, "1 papad"], "source": "IFCT 2017 — Papad, roasted (C028)", "methodology": "ifct_value", "ref": "IFCT C028", "tags": ["condiment_chutney", "vegetarian", "high_protein", "high_sodium"]
+    },
+    {
+      "slug": "papad-fried", "name": "Papad, Fried", "local": "तला पापड़", "lang": "hi", "cuisine": "pan_indian", "category": "condiment_chutney",
+      "aliases": [["Fried pappadam", "en"], ["Fryums", "en"]],
+      "nutrition": { "kcal": 450, "protein_g": 18.0, "carbs_g": 40.0, "fat_g": 25.0, "sat_fat_g": 5.0, "fibre_g": 5.0, "sugar_g": 2.0, "sodium_mg": 1400 },
+      "serving": ["1 papad", 15, "1 papad"], "source": "Calculated: roasted papad + absorbed frying oil (standardized)", "methodology": "standardized_recipe_calculation", "tags": ["condiment_chutney", "vegetarian", "fried", "high_sodium"]
+    },
+    {
+      "slug": "roasted-chana", "name": "Roasted Bengal Gram", "local": "भुना चना", "lang": "hi", "cuisine": "pan_indian", "category": "snack_street_food",
+      "aliases": [["Roasted chana", "en"], ["Chana chur", "en"], ["શેકેલા ચણા", "gu"]],
+      "nutrition": { "kcal": 364, "protein_g": 19.7, "carbs_g": 57.3, "fat_g": 6.8, "sat_fat_g": 0.9, "fibre_g": 10.0, "sugar_g": 2.0, "sodium_mg": 30 },
+      "serving": ["1 handful", 30, "1 small bowl"], "source": "IFCT 2017 — Bengal gram, roasted (B014)", "methodology": "ifct_value", "ref": "IFCT B014", "tags": ["snack_street_food", "vegetarian", "vegan", "high_protein", "high_fibre"]
+    },
+    {
+      "slug": "puffed-rice", "name": "Puffed Rice (Murmura)", "local": "मुरमुरे", "lang": "hi", "cuisine": "pan_indian", "category": "snack_street_food",
+      "aliases": [["Murmura", "en"], ["Pori", "en"], ["મમરા", "gu"], ["মুড়ি", "bn"]],
+      "nutrition": { "kcal": 325, "protein_g": 7.5, "carbs_g": 73.0, "fat_g": 0.5, "sat_fat_g": 0.1, "fibre_g": 1.5, "sugar_g": 0.4, "sodium_mg": 5 },
+      "serving": ["1 bowl", 20, "1 bowl"], "source": "IFCT 2017 — Puffed rice (A016)", "methodology": "ifct_value", "ref": "IFCT A016", "tags": ["snack_street_food", "vegetarian", "vegan", "low_fat"]
+    },
+    {
+      "slug": "ice-cream-vanilla", "name": "Ice Cream, Vanilla", "local": "वनीला आइसक्रीम", "lang": "hi", "cuisine": "pan_indian", "category": "sweet_dessert",
+      "aliases": [["Vanilla ice cream", "en"], ["Ice cream", "en"]],
+      "nutrition": { "kcal": 207, "protein_g": 3.5, "carbs_g": 24.0, "fat_g": 11.0, "sat_fat_g": 7.0, "fibre_g": 0.5, "sugar_g": 21.0, "sodium_mg": 80 },
+      "serving": ["1 scoop", 60, "1 scoop"], "source": "IFCT 2017 — Ice cream, vanilla (D030)", "methodology": "ifct_value", "ref": "IFCT D030", "tags": ["sweet_dessert", "vegetarian", "packaged"]
+    },
+    {
+      "slug": "milk-chocolate", "name": "Milk Chocolate", "local": "चॉकलेट", "lang": "hi", "cuisine": "pan_indian", "category": "sweet_dessert",
+      "aliases": [["Chocolate bar", "en"], ["Chocolate", "en"]],
+      "nutrition": { "kcal": 535, "protein_g": 7.6, "carbs_g": 59.0, "fat_g": 30.0, "sat_fat_g": 18.0, "fibre_g": 3.4, "sugar_g": 52.0, "sodium_mg": 79 },
+      "serving": ["1 bar", 25, "1 small bar"], "source": "USDA FoodData Central 19146 (milk chocolate)", "methodology": "usda_value", "ref": "USDA 19146", "tags": ["sweet_dessert", "vegetarian", "packaged"]
+    },
+    {
+      "slug": "packaged-fruit-juice", "name": "Packaged Fruit Juice", "local": "फलों का रस", "lang": "hi", "cuisine": "pan_indian", "category": "beverage",
+      "aliases": [["Juice", "en"], ["Mixed fruit juice", "en"]],
+      "nutrition": { "kcal": 50, "protein_g": 0.2, "carbs_g": 12.5, "fat_g": 0.1, "sat_fat_g": 0, "fibre_g": 0.2, "sugar_g": 11.5, "sodium_mg": 10 },
+      "serving": ["1 glass", 200, "1 glass (200 ml)"], "source": "Indian packaged juice label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["beverage", "vegetarian", "vegan", "packaged", "high_sugar"]
+    },
+    {
+      "slug": "cola-soft-drink", "name": "Cola Soft Drink", "local": "कोला", "lang": "hi", "cuisine": "pan_indian", "category": "beverage",
+      "aliases": [["Soft drink", "en"], ["Cold drink", "en"], ["Soda", "en"]],
+      "nutrition": { "kcal": 41, "protein_g": 0, "carbs_g": 10.5, "fat_g": 0, "sat_fat_g": 0, "fibre_g": 0, "sugar_g": 10.5, "sodium_mg": 4 },
+      "serving": ["1 glass", 250, "1 glass (250 ml)"], "source": "Indian cola label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["beverage", "vegetarian", "vegan", "packaged", "high_sugar"]
+    },
+    {
+      "slug": "rasgulla", "name": "Rasgulla", "local": "રસગુલ્લા", "lang": "gu", "cuisine": "bengali", "category": "sweet_dessert",
+      "aliases": [["Rasgulla", "en"], ["Rosogolla", "en"], ["रसगुल्ला", "hi"], ["রসগোল্লা", "bn"]],
+      "nutrition": { "kcal": 186, "protein_g": 4.0, "carbs_g": 36.0, "fat_g": 3.0, "sat_fat_g": 1.9, "fibre_g": 0, "sugar_g": 33.0, "sodium_mg": 40 },
+      "serving": ["2 pieces", 80, "2 pieces"], "source": "IFCT 2017 — Rasgulla (D028)", "methodology": "ifct_value", "ref": "IFCT D028", "tags": ["sweet_dessert", "vegetarian", "bengali", "festive"]
+    },
+    {
+      "slug": "soan-papdi", "name": "Soan Papdi", "local": "सोन पापड़ी", "lang": "hi", "cuisine": "pan_indian", "category": "sweet_dessert",
+      "aliases": [["Son papdi", "en"], ["Patisa", "en"]],
+      "nutrition": { "kcal": 480, "protein_g": 5.0, "carbs_g": 60.0, "fat_g": 24.0, "sat_fat_g": 12.0, "fibre_g": 1.0, "sugar_g": 45.0, "sodium_mg": 60 },
+      "serving": ["1 piece", 25, "1 piece"], "source": "Indian mithai label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["sweet_dessert", "vegetarian", "festive", "high_sugar"]
+    },
+    {
+      "slug": "kaju-katli", "name": "Kaju Katli", "local": "કાજુ કતરી", "lang": "gu", "cuisine": "pan_indian", "category": "sweet_dessert",
+      "aliases": [["Kaju katli", "en"], ["Cashew fudge", "en"], ["काजू कतली", "hi"]],
+      "nutrition": { "kcal": 490, "protein_g": 8.0, "carbs_g": 58.0, "fat_g": 25.0, "sat_fat_g": 5.0, "fibre_g": 2.0, "sugar_g": 42.0, "sodium_mg": 30 },
+      "serving": ["1 piece", 15, "1 piece"], "source": "Calculated from cashew + sugar composition (audit pending)", "methodology": "standardized_recipe_calculation", "audit": true, "tags": ["sweet_dessert", "vegetarian", "festive", "high_sugar"]
+    },
+    {
+      "slug": "motichoor-ladoo", "name": "Motichoor Ladoo", "local": "मोतीचूर लड्डू", "lang": "hi", "cuisine": "pan_indian", "category": "sweet_dessert",
+      "aliases": [["Boondi ladoo", "en"], ["Laddu", "en"], ["મોતીચૂર લાડુ", "gu"]],
+      "nutrition": { "kcal": 450, "protein_g": 4.0, "carbs_g": 62.0, "fat_g": 21.0, "sat_fat_g": 9.0, "fibre_g": 1.5, "sugar_g": 48.0, "sodium_mg": 45 },
+      "serving": ["1 ladoo", 35, "1 ladoo"], "source": "Indian mithai label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["sweet_dessert", "vegetarian", "festive", "high_sugar"]
+    },
+    {
+      "slug": "banana-chips", "name": "Banana Chips", "local": "केले के चिप्स", "lang": "hi", "cuisine": "south_indian", "category": "snack_street_food",
+      "aliases": [["Kerala banana chips", "en"], ["Ethakka upperi", "en"]],
+      "nutrition": { "kcal": 519, "protein_g": 3.0, "carbs_g": 58.0, "fat_g": 30.0, "sat_fat_g": 26.0, "fibre_g": 4.0, "sugar_g": 8.0, "sodium_mg": 200 },
+      "serving": ["1 handful", 25, "1 small bowl"], "source": "Calculated: raw banana fried in coconut oil (audit pending)", "methodology": "standardized_recipe_calculation", "audit": true, "tags": ["snack_street_food", "vegetarian", "vegan", "fried"]
+    },
+    {
+      "slug": "tomato-ketchup", "name": "Tomato Ketchup", "local": "टोमैटो सॉस", "lang": "hi", "cuisine": "pan_indian", "category": "condiment_chutney",
+      "aliases": [["Ketchup", "en"], ["Tomato sauce", "en"]],
+      "nutrition": { "kcal": 110, "protein_g": 1.2, "carbs_g": 26.0, "fat_g": 0.2, "sat_fat_g": 0, "fibre_g": 0.6, "sugar_g": 22.0, "sodium_mg": 900 },
+      "serving": ["1 tbsp", 15, "1 tablespoon"], "source": "Indian ketchup label median (audit pending)", "methodology": "label_declaration", "audit": true, "tags": ["condiment_chutney", "vegetarian", "vegan", "packaged"]
+    }
+  ]
+}
