@@ -67,7 +67,7 @@ ml/
     cli.py                    python3 -m bharatbite_ml.cli <command>
   dataset/                    sourcing plan + manifest schema (no images)
   benchmark/                  results schema + gate documentation (no results)
-  tests/                      98 unittest cases
+  tests/                      103 unittest cases
 ```
 
 ## Commands
