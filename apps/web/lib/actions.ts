@@ -10,9 +10,9 @@ import {
   type MealType,
   type PlannerPreferences,
 } from '@bharatbite/core';
-import { plannerPool } from '@bharatbite/foods';
 import { createServerSupabase } from './supabase/server';
 import { getEntitlement, getFoodDetail, getPreferences, getWeightHistory, weekStartOf } from './data';
+import { getPlannerPool } from './catalog';
 
 const MEALS: MealType[] = ['breakfast', 'mid_morning', 'lunch', 'evening_snack', 'dinner', 'midnight'];
 
@@ -240,10 +240,8 @@ export async function generatePlanAction() {
     mealSlots: ['breakfast', 'lunch', 'evening_snack', 'dinner'],
   };
 
-  const pool = plannerPool(
-    // Reuse the compiled catalog so planning never depends on a DB round-trip.
-    (await import('./catalog')).getBundledFoods(),
-  );
+  // The pool is compiled in, so planning never depends on a database round-trip.
+  const pool = getPlannerPool();
   const plan = generateWeeklyPlan(pool, targets, plannerPrefs, Date.now() % 100000);
 
   if (plan.days.length === 0) {

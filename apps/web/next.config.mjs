@@ -3,10 +3,6 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: ['@bharatbite/core', '@bharatbite/foods'],
-  // The catalog is compiled in; keep the server bundle honest about it.
-  outputFileTracingIncludes: {
-    '/**': ['../../packages/foods/generated/**'],
-  },
   async headers() {
     return [
       {
