@@ -1,0 +1,41 @@
+{
+  "id": "/?source=pwa",
+  "name": "BharatBite — Indian food, understood",
+  "short_name": "BharatBite",
+  "description": "Indian food recognition and nutrition tracking. Free scanning, verified nutrition, regional dishes and a weekly diet planner.",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#fdfbf7",
+  "theme_color": "#b5451b",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["health", "food", "lifestyle", "medical"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Log a meal",
+      "short_name": "Log food",
+      "url": "/app/diary",
+      "description": "Search the food database and add to today's diary"
+    },
+    {
+      "name": "This week's plan",
+      "short_name": "Planner",
+      "url": "/app/planner",
+      "description": "Open the 7-day diet plan and grocery list"
+    },
+    {
+      "name": "Food database",
+      "short_name": "Foods",
+      "url": "/foods",
+      "description": "Browse 226 Indian foods with sources"
+    }
+  ]
+}

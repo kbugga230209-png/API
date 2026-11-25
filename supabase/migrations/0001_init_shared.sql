@@ -91,31 +91,6 @@ begin
 end;
 $$;
 
--- Central Plus check. Mirrors packages/core/src/entitlements.ts::isPlusActive.
--- SECURITY DEFINER so RLS policies on other tables can call it without needing
--- the caller to have select rights on `entitlements`.
-create or replace function public.has_plus_access(p_user uuid default auth.uid())
-returns boolean
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select coalesce((
-    select case
-      when e.plan_code = 'free' then false
-      when e.status in ('active','cancelled') then e.current_period_end is not null and e.current_period_end > now()
-      when e.status = 'past_due' then coalesce(e.grace_until, e.current_period_end) > now()
-      else false
-    end
-    from public.entitlements e
-    where e.user_id = p_user
-  ), false);
-$$;
-
-revoke all on function public.has_plus_access(uuid) from public;
-grant execute on function public.has_plus_access(uuid) to authenticated, anon;
-
 -- Simple fixed-window rate limiter used by Edge Functions.
 create table if not exists public.api_rate_limits (
   bucket text primary key,

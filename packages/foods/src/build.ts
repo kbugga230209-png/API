@@ -13,6 +13,7 @@ import type {
   FoodItem,
   FoodVariant,
   LanguageCode,
+  MealType,
   NutritionPer100g,
   ServingSize,
   VerificationStatus,
@@ -432,11 +433,12 @@ export interface PlannerCandidate {
   servingGrams: number;
   costPerServingInr: number;
   prepMinutes: number;
-  mealSlots: string[];
+  mealSlots: MealType[];
   dietTags: string[];
 }
 
-const SLOT_MAP: Record<string, string[]> = {
+/** Categories eligible per meal slot. Slots absent here are never planned. */
+const SLOT_MAP: Partial<Record<MealType, string[]>> = {
   breakfast: ['breakfast', 'egg', 'roti_bread'],
   lunch: ['rice_dish', 'dal_legume', 'vegetable_sabzi', 'mixed_meal', 'roti_bread'],
   dinner: ['roti_bread', 'dal_legume', 'vegetable_sabzi', 'soup', 'paneer_dairy', 'non_veg_curry'],
@@ -451,7 +453,7 @@ export function plannerPool(foods: readonly FoodItem[]): PlannerCandidate[] {
     const variant = food.variants.find((v) => v.slug === food.defaultVariant) ?? food.variants[0];
     if (!variant) continue;
 
-    const slots = Object.entries(SLOT_MAP)
+    const slots = (Object.entries(SLOT_MAP) as [MealType, string[]][])
       .filter(([, categories]) => categories.includes(food.category))
       .map(([slot]) => slot);
     if (slots.length === 0) continue;
