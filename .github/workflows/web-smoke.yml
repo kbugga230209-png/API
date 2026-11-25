@@ -1,0 +1,77 @@
+name: web smoke test
+
+# Checks the deployed site, not the source: the build can be green while the
+# origin is behind deployment protection, the Supabase URL is wrong, or the
+# service worker is not served. Runs against production.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'arena/**'
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/web-smoke.yml'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BASE: https://bharatbite.vercel.app
+    steps:
+      - name: Marketing page
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/home.html -w '%{http_code}' "$BASE/")
+          echo "GET / -> $code"
+          test "$code" = "200" || { echo "::error::/ returned $code"; head -c 500 /tmp/home.html; exit 1; }
+          grep -qi "BharatBite" /tmp/home.html
+          grep -qi "226" /tmp/home.html
+
+      - name: Search hits the catalog (Supabase RPC or bundled fallback)
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/search.html -w '%{http_code}' "$BASE/foods?q=thepla")
+          echo "GET /foods?q=thepla -> $code"
+          test "$code" = "200" || exit 1
+          grep -qi "Thepla" /tmp/search.html || { echo "::error::search returned no thepla row"; exit 1; }
+
+      - name: Gujarati script search
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/gu.html -w '%{http_code}' "$BASE/foods?q=%E0%AA%A5%E0%AB%87%E0%AA%AA%E0%AA%B2%E0%AA%BE")
+          echo "GET થેપલા -> $code"
+          test "$code" = "200" || exit 1
+          grep -qi "Thepla" /tmp/gu.html || { echo "::error::alias search failed"; exit 1; }
+
+      - name: Food detail page
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/food.html -w '%{http_code}' "$BASE/foods/thepla")
+          echo "GET /foods/thepla -> $code"
+          test "$code" = "200" || exit 1
+          grep -qi "kcal" /tmp/food.html
+
+      - name: Auth guard redirects /app to /login
+        run: |
+          set -euo pipefail
+          headers=$(curl -sS -o /dev/null -D - "$BASE/app")
+          echo "$headers" | head -5
+          echo "$headers" | grep -qi "location: .*login" || { echo "::error::/app did not redirect to /login"; exit 1; }
+
+      - name: PWA assets
+        run: |
+          set -euo pipefail
+          for path in manifest.webmanifest sw.js icons/icon-192.png; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "$BASE/$path")
+            echo "GET /$path -> $code"
+            test "$code" = "200" || exit 1
+          done
+          curl -sS "$BASE/manifest.webmanifest" | grep -q '"start_url": "/app"'
+
+      - name: Payments fail closed, not open
+        run: |
+          set -euo pipefail
+          body=$(curl -sS -X POST "$BASE/api/export" -o /dev/null -w '%{http_code}')
+          echo "POST /api/export -> $body (expected 405/404/401, never 200)"
+          test "$body" != "200" || exit 1
