@@ -10,7 +10,7 @@ Status legend: `[x]` done & verified · `[~]` in progress · `[ ]` not started �
 | Working branch | `arena/1a49ed4f-api` (branched from `main` @ `dc09958`) |
 | Supabase org | `kbugga230209-png's Org` (`ndefgopxrbcpnwdvjmyp`) |
 | Supabase project | **created** `bharatbite` — ref `xetdzgsbzjctenhelaki`, region `ap-south-1`, status `ACTIVE_HEALTHY` |
-| Vercel team | `kbugga230209-png's projects` (`team_sEVb6krtaA6CiC4JWYneC2ES`), hobby plan, 0 projects before this work |
+| Vercel project | **created + deployed** `bharatbite` (`prj_1cbHeWAKZsQ2XYmFtKlGGTYQAa1c`), root dir `apps/web`, framework nextjs, production `https://bharatbite.vercel.app` (READY, promoted) |
 | Razorpay | **no connector available** — code written against documented REST API, test-mode only. Owner must supply keys. |
 | Android toolchain | **absent** (no JDK / Android SDK in sandbox) — APK build requires owner machine or CI runner |
 
@@ -26,7 +26,7 @@ Status legend: `[x]` done & verified · `[~]` in progress · `[ ]` not started �
 8. `[ ]` Mobile app (Expo RN): onboarding, AI install screen with progress/SHA-256/atomic install, on-device inference adapter (ONNX/TFLite), offline SQLite + sync outbox, Zustand stores, design tokens, light/dark, Plus theming.
 9. `[ ]` ML: training pipeline (EfficientNet-Lite0 INT8 / MobileNetV3-Small INT8 benchmark), dataset/licensing audit, manifest signing + verification, evaluation harness.
 10. `[ ]` Tests: TypeScript typecheck, lint, unit (nutrition engine, entitlement machine, manifest verify), SQL/RLS tests executed against the live project, webhook replay tests, Vercel build checks.
-11. `[ ]` Vercel preview → production deploy.
+11. `[x]` Vercel production deploy — build ran on Node 26, `npm run build:app` compiled core → foods → web, deployment READY and promoted to `https://bharatbite.vercel.app`.
 12. `[!]` Signed APK + GitHub Release: blocked (no toolchain, no signing key material).
 13. `[!]` Live Razorpay: blocked (no keys / no merchant approval evidence).
 14. `[!]` Publish a `model_versions` row so `model-manifest` stops returning 404 — needs a real artifact + Ed25519 signature, which needs the training run in step 9.
