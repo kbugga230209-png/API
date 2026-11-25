@@ -59,6 +59,12 @@ if [[ "$DRY_RUN" == "0" && "$ASSUME_YES" == "0" ]]; then
   [[ "$answer" == "y" || "$answer" == "Y" ]] || { echo "Aborted."; exit 0; }
 fi
 
+# Commit author. Fresh clones have no identity, so fall back to the authenticated
+# GitHub account (never overwrites an identity the repo or the user already set).
+GH_USER="$(gh api user --jq .login 2>/dev/null || echo "$OWNER")"
+IDENT_NAME="${GIT_AUTHOR_NAME:-$(git config --global user.name 2>/dev/null || echo "$OWNER")}"
+IDENT_EMAIL="${GIT_AUTHOR_EMAIL:-$(git config --global user.email 2>/dev/null || echo "$GH_USER@users.noreply.github.com")}"
+
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
@@ -85,6 +91,10 @@ for key in "${KEYS[@]}"; do
     echo "Already up to date."
     continue
   fi
+
+  # Ensure this clone can commit even with no global identity configured.
+  git -C "$dst" config user.name "$IDENT_NAME"
+  git -C "$dst" config user.email "$IDENT_EMAIL"
 
   echo "Changes:"
   git -C "$dst" diff --cached --stat | sed 's/^/  /'
