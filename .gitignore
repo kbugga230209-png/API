@@ -1,0 +1,23 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if tooling is ever added)
+node_modules/
+npm-debug.log*
+
+# Python (OG banner generator)
+__pycache__/
+*.pyc
+.venv/
+
+# Local scratch
+tmp/
+*.local.*

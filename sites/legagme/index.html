@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGAGME — The Legacy Board</title>
+<meta name="description" content="Log every win. A persistent legacy board for the Heavenly crew — PvP, builds, chaos and exploration, saved in your browser.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="LEGAGME — The Legacy Board">
+<meta property="og:description" content="Log every win. The Heavenly crew's achievements, tracked.">
+<meta property="og:image" content="og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Cpath d='M20 14h24v8h-6v22h-4v6h-4v-6h-4V22h-6z' fill='%23d4af37'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --panel:#14121c;
+  --panel-2:#1a1726;
+  --ink:#f2efe6;
+  --muted:#9a97a8;
+  --gold:#d4af37;
+  --gold-soft:rgba(212,175,55,.14);
+  --green:#6bff92;
+  --red:#ff5b5b;
+  --line:#000;
+  --px:"Press Start 2P","Lucida Console","Courier New",monospace;
+  --mono:"Lucida Console","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(900px 500px at 50% -10%, rgba(212,175,55,.08), transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  font-family:var(--mono);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:40px 18px 70px}
+header{text-align:center;margin-bottom:30px}
+h1{
+  font-family:var(--px);font-size:clamp(20px,5vw,34px);letter-spacing:.1em;
+  color:var(--gold);text-shadow:0 0 26px rgba(212,175,55,.4);margin-bottom:14px;
+}
+.tag{color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.panel{
+  background:var(--panel);
+  border:3px solid var(--line);
+  box-shadow:0 0 0 3px #2a2438 inset,6px 6px 0 #000;
+  padding:18px;
+}
+/* Score strip */
+.score-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.score-cell{text-align:center;padding:16px 10px}
+.score-cell .k{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.score-cell .v{font-family:var(--px);font-size:20px;color:var(--gold);margin-top:10px}
+.score-cell .v.green{color:var(--green)}
+/* Filters + actions */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.chip{
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--panel);color:var(--muted);border:2px solid #000;
+  box-shadow:0 0 0 2px #2a2438 inset,3px 3px 0 #000;
+  padding:8px 14px;cursor:pointer;transition:color .15s;
+}
+.chip:hover,.chip:focus-visible{color:var(--gold);outline:none}
+.chip[aria-pressed="true"]{color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset,3px 3px 0 #000}
+.spacer{flex:1}
+/* Board */
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{position:relative;padding:16px;transition:transform .15s}
+.card:hover{transform:translateY(-2px)}
+.card.done{box-shadow:0 0 0 3px var(--gold) inset,6px 6px 0 #000,0 0 24px rgba(212,175,55,.25)}
+.card .cat{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+.card h3{font-size:14px;margin:8px 0 2px;line-height:1.5}
+.card .who{font-size:11px;color:var(--gold);letter-spacing:.08em}
+.bar{height:14px;border:2px solid #000;background:#0c0a12;margin:12px 0 6px;box-shadow:0 0 0 2px #2a2438 inset}
+.fill{height:100%;background:linear-gradient(90deg,#8b6914,var(--gold));transition:width .4s cubic-bezier(.22,1,.36,1)}
+.card.done .fill{background:linear-gradient(90deg,#2d9b5e,var(--green))}
+.count{font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+.count b{color:var(--ink)}
+.row{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.px-btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  background:#176b3b;color:#f4f1db;border:2px solid #000;
+  box-shadow:0 0 0 2px #2d9b5e inset,3px 3px 0 #000;
+  padding:7px 12px;cursor:pointer;
+}
+.px-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 2px #2d9b5e inset,1px 1px 0 #000}
+.px-btn.gold{background:#6b5314;box-shadow:0 0 0 2px #a8842a inset,3px 3px 0 #000}
+.px-btn.red{background:#6b1717;box-shadow:0 0 0 2px #a83a2a inset,3px 3px 0 #000}
+.px-btn.ghost{background:var(--panel-2);box-shadow:0 0 0 2px #3a3450 inset,3px 3px 0 #000;color:var(--muted)}
+.px-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.done-tag{
+  position:absolute;top:-10px;right:10px;font-family:var(--px);font-size:8px;
+  background:var(--gold);color:#0a0a0f;padding:5px 8px;border:2px solid #000;
+}
+/* Add form */
+.add-panel{margin-top:26px}
+.add-panel h2{font-family:var(--px);font-size:12px;color:var(--gold);margin-bottom:14px;letter-spacing:.1em}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.form-grid label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+input,select{
+  width:100%;font-family:var(--mono);font-size:13px;color:var(--ink);
+  background:#0c0a12;border:2px solid #000;box-shadow:0 0 0 2px #2a2438 inset;
+  padding:9px 10px;outline:none;
+}
+input:focus,select:focus{box-shadow:0 0 0 2px var(--gold) inset}
+select option{background:#14121c}
+.form-actions{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.hint{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
+footer{text-align:center;margin-top:36px;color:var(--muted);font-size:11px;letter-spacing:.12em}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px dotted #3a3450;margin:0 5px}
+footer a:hover{color:var(--gold)}
+.toast{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--panel);border:2px solid #000;box-shadow:0 0 0 2px var(--gold) inset,4px 4px 0 #000;
+  color:var(--gold);font-size:12px;padding:10px 18px;transition:transform .3s;z-index:50;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .fill,.card,.toast{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>LEGAGME</h1>
+    <p class="tag">The Legacy Board — log every win</p>
+  </header>
+
+  <div class="score-strip" role="status" aria-live="polite">
+    <div class="panel score-cell"><div class="k">Legacy score</div><div class="v" id="score">0</div></div>
+    <div class="panel score-cell"><div class="k">Achievements</div><div class="v" id="count">0</div></div>
+    <div class="panel score-cell"><div class="k">Completed</div><div class="v green" id="done">0</div></div>
+    <div class="panel score-cell"><div class="k">Total logged</div><div class="v" id="logged">0</div></div>
+  </div>
+
+  <div class="toolbar" role="group" aria-label="Filter by category">
+    <button class="chip" data-filter="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="PvP" aria-pressed="false">PvP</button>
+    <button class="chip" data-filter="Builds" aria-pressed="false">Builds</button>
+    <button class="chip" data-filter="Chaos" aria-pressed="false">Chaos</button>
+    <button class="chip" data-filter="Exploration" aria-pressed="false">Exploration</button>
+    <span class="spacer"></span>
+    <button class="px-btn ghost" id="export">Export</button>
+    <button class="px-btn ghost" id="import-btn">Import</button>
+    <button class="px-btn red" id="reset">Reset</button>
+    <input type="file" id="import-file" accept="application/json" hidden>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <div class="panel add-panel">
+    <h2>+ New achievement</h2>
+    <form id="add-form">
+      <div class="form-grid">
+        <div><label for="f-title">Title</label><input id="f-title" required maxlength="60" placeholder="e.g. 1000 arena wins"></div>
+        <div><label for="f-who">Player</label><input id="f-who" required maxlength="24" placeholder="e.g. LigmaFire"></div>
+        <div><label for="f-cat">Category</label>
+          <select id="f-cat"><option>PvP</option><option>Builds</option><option>Chaos</option><option>Exploration</option></select>
+        </div>
+        <div><label for="f-cur">Current</label><input id="f-cur" type="number" min="0" max="999999" value="0" required></div>
+        <div><label for="f-target">Target</label><input id="f-target" type="number" min="1" max="999999" value="100" required></div>
+      </div>
+      <div class="form-actions">
+        <button class="px-btn gold" type="submit">Carve it in</button>
+      </div>
+      <p class="hint">Everything saves to this browser (localStorage). Export to back up or move devices. Seed stats come from the Realm leaderboard.</p>
+    </form>
+  </div>
+
+  <footer>
+    <a data-xlink="hub" href="#">Universe</a>·<a data-xlink="thatminecraft" href="#">The Realm</a>·<a data-xlink="heavenly" href="#">Heavenly</a>·<a data-xlink="maxxing" href="#">Analyzer</a>·<a data-xlink="aioutfit" href="#">Outfits</a>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="legagme.v1";
+  var SEED=[
+    {id:"s1",title:"Arena win streak",who:"KushXWhore",cat:"PvP",cur:412,target:500},
+    {id:"s2",title:"Blueprints carved",who:"LifeIsALie_48",cat:"Builds",cur:187,target:250},
+    {id:"s3",title:"TNT detonated",who:"NOTXKUSHAL",cat:"Chaos",cur:512,target:1000},
+    {id:"s4",title:"Biomes mapped",who:"NotySmasui",cat:"Exploration",cur:64,target:64},
+    {id:"s5",title:"Rod splats landed",who:"Pearl fr",cat:"Chaos",cur:87,target:100}
+  ];
+  var state=load(), filter="all";
+
+  function load(){
+    try{
+      var raw=localStorage.getItem(KEY);
+      if(raw){var d=JSON.parse(raw);if(Array.isArray(d))return d;}
+    }catch(e){}
+    return JSON.parse(JSON.stringify(SEED));
+  }
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){toast("Storage unavailable — changes won't persist");}}
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+  function toast(msg){
+    var t=$("toast");t.textContent=msg;t.classList.add("show");
+    clearTimeout(toast._h);toast._h=setTimeout(function(){t.classList.remove("show");},2200);
+  }
+
+  function render(){
+    var board=$("board");board.innerHTML="";
+    var list=state.filter(function(a){return filter==="all"||a.cat===filter;});
+    if(!list.length){
+      board.innerHTML='<div class="panel" style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:12px">Nothing here yet — carve the first achievement below.</div>';
+    }
+    list.forEach(function(a){
+      var pct=Math.min(100,Math.round(a.cur/a.target*100));
+      var done=a.cur>=a.target;
+      var card=document.createElement("div");
+      card.className="panel card"+(done?" done":"");
+      card.innerHTML=
+        (done?'<span class="done-tag">DONE</span>':"")+
+        '<div class="cat">'+esc(a.cat)+'</div>'+
+        '<h3>'+esc(a.title)+'</h3>'+
+        '<div class="who">'+esc(a.who)+'</div>'+
+        '<div class="bar"><div class="fill" style="width:'+pct+'%"></div></div>'+
+        '<div class="count"><span><b>'+a.cur.toLocaleString("en-IN")+'</b> / '+a.target.toLocaleString("en-IN")+'</span><span>'+pct+'%</span></div>'+
+        '<div class="row">'+
+          '<button class="px-btn" data-act="inc1" data-id="'+a.id+'" aria-label="Add one to '+esc(a.title)+'">+1</button>'+
+          '<button class="px-btn" data-act="inc10" data-id="'+a.id+'" aria-label="Add ten to '+esc(a.title)+'">+10</button>'+
+          '<button class="px-btn ghost" data-act="dec" data-id="'+a.id+'" aria-label="Subtract one from '+esc(a.title)+'">−1</button>'+
+          '<button class="px-btn red" data-act="del" data-id="'+a.id+'" aria-label="Delete '+esc(a.title)+'">Del</button>'+
+        '</div>';
+      board.appendChild(card);
+    });
+    // Score strip
+    var total=state.length,doneN=state.filter(function(a){return a.cur>=a.target;}).length;
+    var logged=state.reduce(function(s,a){return s+a.cur;},0);
+    var avg=total?state.reduce(function(s,a){return s+Math.min(1,a.cur/a.target);},0)/total:0;
+    $("score").textContent=Math.round(avg*1000+doneN*100);
+    $("count").textContent=total;
+    $("done").textContent=doneN;
+    $("logged").textContent=logged.toLocaleString("en-IN");
+  }
+
+  $("board").addEventListener("click",function(e){
+    var btn=e.target.closest("button[data-act]");if(!btn)return;
+    var id=btn.getAttribute("data-id"),act=btn.getAttribute("data-act");
+    var a=state.find(function(x){return x.id===id;});if(!a)return;
+    if(act==="inc1")a.cur++;
+    if(act==="inc10")a.cur+=10;
+    if(act==="dec")a.cur=Math.max(0,a.cur-1);
+    if(act==="del"){
+      if(!confirm('Delete "'+a.title+'"?'))return;
+      state=state.filter(function(x){return x.id!==id;});
+      toast("Achievement removed");save();render();return;
+    }
+    if(a.cur>=a.target&&act!=="dec")toast("Legacy carved: "+a.title+" ✓");
+    save();render();
+  });
+
+  document.querySelectorAll(".chip").forEach(function(chip){
+    chip.addEventListener("click",function(){
+      filter=chip.getAttribute("data-filter");
+      document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===chip?"true":"false");});
+      render();
+    });
+  });
+
+  $("add-form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var cur=parseInt($("f-cur").value,10)||0,target=parseInt($("f-target").value,10)||1;
+    if(target<1){toast("Target must be at least 1");return;}
+    state.push({
+      id:"a"+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36),
+      title:$("f-title").value.trim(),who:$("f-who").value.trim(),
+      cat:$("f-cat").value,cur:Math.max(0,cur),target:target
+    });
+    save();render();e.target.reset();$("f-cur").value=0;$("f-target").value=100;
+    toast("Carved into the board");
+  });
+
+  $("export").addEventListener("click",function(){
+    var blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="legagme-legacy.json";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+    toast("Legacy exported");
+  });
+  $("import-btn").addEventListener("click",function(){$("import-file").click();});
+  $("import-file").addEventListener("change",function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var d=JSON.parse(r.result);
+        if(!Array.isArray(d))throw new Error("bad shape");
+        d.forEach(function(a){
+          if(typeof a.title!=="string"||typeof a.who!=="string")throw new Error("bad item");
+          a.cur=Math.max(0,parseInt(a.cur,10)||0);a.target=Math.max(1,parseInt(a.target,10)||1);
+          a.cat=["PvP","Builds","Chaos","Exploration"].indexOf(a.cat)>-1?a.cat:"PvP";
+          a.id=String(a.id||"i"+Math.random().toString(36).slice(2));
+        });
+        state=d;save();render();toast("Legacy imported");
+      }catch(err){toast("Import failed — not a valid board file");}
+    };
+    r.readAsText(f);e.target.value="";
+  });
+  $("reset").addEventListener("click",function(){
+    if(!confirm("Reset the board to the Realm seed stats? Your changes will be lost."))return;
+    state=JSON.parse(JSON.stringify(SEED));save();render();toast("Board reset to seed");
+  });
+
+  // Cross-links
+  var REPOS={heavenly:"Heaven","heavenly-site":"Heavenly-site",thatminecraft:"Heavenly-",maxxing:"maxxing",aioutfit:"AiOutfit",legagme:"LegaGMe"};
+  var inHub=location.pathname.indexOf("/sites/")>-1;
+  document.querySelectorAll("[data-xlink]").forEach(function(a){
+    var k=a.getAttribute("data-xlink");
+    a.href=k==="hub"?(inHub?"../../":"https://kbugga230209-png.github.io/API/"):(inHub?"../"+k+"/":"https://kbugga230209-png.github.io/"+REPOS[k]+"/");
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

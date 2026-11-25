@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THATMINECRAFT — The Realm Lobby</title>
+<meta name="description" content="A voxel overworld lobby: isometric terrain, day-night cycle, crew profiles and the realm leaderboard. Now rendering at 1 blit per frame.">
+<meta name="theme-color" content="#03060f">
+<meta property="og:title" content="THATMINECRAFT — The Realm Lobby">
+<meta property="og:description" content="Step through the portal. The overworld hub hums with torches and fireflies.">
+<meta property="og:image" content="og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2303060f'/%3E%3Cpath d='M32 10l18 10v20L32 50 14 40V20z' fill='%234fae2d'/%3E%3Cpath d='M32 10l18 10-18 10-18-10z' fill='%236fd44a'/%3E%3Cpath d='M32 30v20L14 40V20z' fill='%232f6817'/%3E%3C/svg%3E">
+<style>
+:root{
+  --sky-top:#6ec4ff;--sky-bottom:#d1f2ff;
+  --panel-bg:#2e2614;--panel-bright:#5f4a23;
+  --text:#f7f1d8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#03060f;color:var(--text);font-family:"Lucida Console","Courier New",monospace;text-transform:uppercase;letter-spacing:1px}
+body{min-height:240vh;overflow-x:hidden}
+body.locked{overflow:hidden}
+a{color:inherit}
+main.realm{position:relative;min-height:240vh;padding-top:6vh}
+.sky{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(var(--sky-top),var(--sky-bottom));z-index:0}
+.sun,.moon{position:absolute;width:78px;height:78px;border:6px solid #fdf4a1;background:#ffef85;box-shadow:0 0 14px #ffe26b;image-rendering:pixelated;transition:opacity .6s}
+.moon{background:#cfd6ff;border-color:#a9b4ff;box-shadow:0 0 12px #9fb7ff}
+.cloud{position:absolute;width:28px;height:28px;background:#f5f5f5;box-shadow:28px 0 #f5f5f5,56px 0 #f5f5f5,14px 28px #f5f5f5,42px 28px #f5f5f5,28px 28px #f5f5f5;animation:cloudFloat 140s linear infinite;image-rendering:pixelated}
+.cloud.small{transform:scale(.7)}
+@keyframes cloudFloat{0%{transform:translateX(-20vw)}100%{transform:translateX(120vw)}}
+canvas#voxelCanvas{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:1;image-rendering:pixelated}
+.fog{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:2;pointer-events:none;background:#dcebff}
+#particles{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:3;pointer-events:none}
+.particle{position:absolute;width:4px;height:4px;background:#ffffff55;animation:floatPixel 16s linear infinite;image-rendering:pixelated}
+.particle.dust{background:#fdf7d933}
+.particle.firefly{background:#f7ff7a;box-shadow:0 0 10px #f7ff7a;opacity:0}
+body.night .particle.firefly{opacity:.9}
+@keyframes floatPixel{0%{transform:translateY(0);opacity:0}20%{opacity:.8}100%{transform:translateY(-160px);opacity:0}}
+.player-field{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:4;pointer-events:none}
+.player{position:absolute;background:none;border:none;padding:0;cursor:pointer;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:6px;transition:filter .2s;font:inherit;color:inherit;text-transform:uppercase;letter-spacing:inherit;image-rendering:pixelated}
+.player .nameTag{background:#0a110d;border:3px solid #000;padding:4px 8px;font-size:.65rem;box-shadow:0 0 0 3px #1b2a1f inset}
+.player .avatar{position:relative;width:64px;height:108px;animation:idleBob 3s ease-in-out infinite}
+.player .avatar span{position:absolute;border:3px solid #000;box-shadow:inset -3px -3px #0004}
+.player .head{width:36px;height:36px;top:0;left:14px;background:var(--head-color,#d8b48b)}
+.player .head::after{content:"";position:absolute;width:6px;height:6px;top:14px;left:8px;background:#000;box-shadow:14px 0 #000}
+.player .torso{width:36px;height:40px;top:38px;left:14px;background:var(--torso-color,#2d7de0)}
+.player .arm{width:14px;height:40px;top:38px;background:var(--arm-color,#2450a4)}
+.player .arm-left{left:0}.player .arm-right{right:0}
+.player .leg{width:16px;height:34px;top:82px;background:var(--leg-color,#101d3f)}
+.player .leg-left{left:16px}.player .leg-right{right:16px}
+.player:hover .nameTag,.player:focus-visible .nameTag{border-color:#6aff79;color:#6aff79}
+.player:hover .avatar,.player:focus-visible .avatar{filter:drop-shadow(0 0 8px #6aff79)}
+.player:focus-visible{outline:none}
+.player.pulse .avatar{animation:idleBob 1s ease-in-out infinite,uiPulse .6s steps(2) infinite}
+.player.selected .nameTag{color:#a0ff9a}
+@keyframes idleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes uiPulse{0%{filter:drop-shadow(0 0 4px #7cff9d)}100%{filter:drop-shadow(0 0 10px #7cff9d)}}
+.interface{position:relative;z-index:6;margin-left:clamp(1rem,5vw,4rem);margin-top:14vh;width:min(420px,90vw);display:flex;flex-direction:column;gap:1rem}
+.panel{background:var(--panel-bg);border:4px solid #000;box-shadow:0 0 0 4px var(--panel-bright) inset,6px 6px 0 #000;padding:1rem;color:var(--text)}
+.panel h2,.panel h3{margin:0 0 .5rem 0;font-size:1rem}
+.inventory-grid{display:grid;grid-template-columns:repeat(3,minmax(64px,1fr));gap:.5rem}
+.slot{position:relative;border:3px solid #000;background:#111;width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;font:inherit;color:inherit;text-transform:uppercase;letter-spacing:inherit;appearance:none;transition:border-color .2s,transform .2s}
+.slot:hover,.slot:focus-visible{border-color:#54d66f;transform:translateY(-2px);outline:none}
+.slot[aria-pressed="true"]{border-color:#6bff92}
+.slot::after{content:attr(data-tooltip);position:absolute;bottom:100%;left:50%;transform:translate(-50%,-8px);background:#050505;border:3px solid #000;padding:4px 6px;font-size:.6rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:7}
+.slot:hover::after,.slot:focus-visible::after{opacity:1}
+.item{width:42px;height:42px;position:relative}
+.item::before{content:"";position:absolute;width:6px;height:6px;left:18px;top:18px;background:#fff}
+.item-sword::before{left:18px;top:2px;background:#9ef7ff;box-shadow:6px -6px #9ef7ff,6px 0 #9ef7ff,0 6px #9ef7ff,6px 6px #9ef7ff,12px 6px #5dc3ff,12px 12px #d0d0d0,12px 18px #d0d0d0,12px 24px #b6844a,12px 30px #b6844a,12px 36px #7a4b23}
+.item-compass::before{left:10px;top:10px;background:#cfd3d8;box-shadow:6px 0 #cfd3d8,12px 0 #cfd3d8,18px 0 #cfd3d8,0 6px #cfd3d8,18px 6px #cfd3d8,0 12px #cfd3d8,18px 12px #cfd3d8,6px 18px #cfd3d8,12px 18px #cfd3d8,9px 9px #d22b2b,12px 12px #1c1c1c,9px 15px #1c1c1c}
+.item-table::before{left:6px;top:6px;background:#7a4a1f;box-shadow:12px 0 #7a4a1f,24px 0 #7a4a1f,6px 6px #3b200e,18px 6px #3b200e,30px 6px #3b200e,6px 12px #7a4a1f,18px 12px #7a4a1f,30px 12px #7a4a1f,6px 18px #3b200e,18px 18px #3b200e,30px 18px #3b200e}
+.item-tnt::before{left:6px;top:6px;background:#c21f1f;box-shadow:12px 0 #c21f1f,24px 0 #c21f1f,36px 0 #c21f1f,6px 6px #ffffff,18px 6px #ffffff,30px 6px #ffffff,6px 12px #000,18px 12px #000,30px 12px #000,6px 18px #c21f1f,18px 18px #c21f1f,30px 18px #c21f1f}
+.item-book::before{left:10px;top:8px;background:#431c67;box-shadow:6px 0 #431c67,12px 0 #431c67,18px 0 #431c67,24px 0 #431c67,30px 0 #431c67,10px 6px #daa520,16px 6px #daa520,22px 6px #daa520,10px 12px #431c67,16px 12px #431c67,22px 12px #431c67,10px 18px #daa520,16px 18px #daa520,22px 18px #daa520}
+.item-map::before{left:6px;top:6px;background:#d9d3b4;box-shadow:12px 0 #d9d3b4,24px 0 #d9d3b4,36px 0 #d9d3b4,6px 6px #8bcf57,18px 6px #8bcf57,30px 6px #8bcf57,6px 12px #d9d3b4,18px 12px #8bcf57,30px 12px #d9d3b4,12px 18px #8bcf57,24px 18px #c47f3a}
+.section-panel ul,.quest-panel ul{margin:.5rem 0 0 0;padding-left:1rem;list-style:square}
+.section-panel li,.quest-panel li{margin-bottom:.25rem;text-transform:none;color:#d5eacf}
+.leaderboard-panel{background:#1b1f12}
+.leaderboard-panel ul{list-style:none;margin:0;padding:0}
+.score-row{display:grid;grid-template-columns:1fr auto auto;gap:.5rem;padding:.25rem 0;border-bottom:2px solid #090c06;font-size:.8rem}
+.score-row:last-child{border-bottom:none}
+.score-row span:last-child{color:#9bff81}
+.leaderboard-panel.pulse{animation:uiPulse .6s steps(2) infinite}
+#profilePanel{position:fixed;right:clamp(1rem,4vw,3rem);top:12vh;width:min(320px,90vw);z-index:9}
+#profilePanel[hidden]{display:none}
+.profile-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.profile-row{display:flex;justify-content:space-between;border-bottom:2px solid #000;padding:.25rem 0;font-size:.8rem}
+.profile-body p{margin-top:.75rem;line-height:1.4;text-transform:none}
+.pixel-btn{background:#176b3b;border:4px solid #000;color:#f4f1db;padding:.5rem 1rem;cursor:pointer;text-transform:uppercase;letter-spacing:1px;font:inherit;box-shadow:0 0 0 3px #2d9b5e inset,4px 4px 0 #000}
+.pixel-btn.small{padding:.25rem .5rem}
+.pixel-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 3px #2d9b5e inset,1px 1px 0 #000}
+.pixel-btn:focus-visible{outline:2px solid #6bff92;outline-offset:2px}
+.quest-wrapper{position:relative;z-index:6;margin:120vh auto 4rem auto;width:min(480px,92vw)}
+.quest-panel{background:#222009}
+.quest-panel p{text-transform:none;line-height:1.5}
+.scroll-hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:#0a0f05;border:3px solid #000;padding:.3rem .75rem;z-index:6;opacity:.7;font-size:.75rem}
+body.locked .scroll-hint{opacity:0}
+.torch{position:fixed;width:18px;height:46px;background:#5c3415;border:3px solid #000;left:var(--tx);top:var(--ty);z-index:5;display:flex;align-items:flex-start;justify-content:center;padding-top:4px}
+.torch .flame{width:12px;height:18px;background:#ffb347;border:3px solid #000;animation:flame .6s steps(2) infinite;opacity:.4}
+body.night .torch .flame{opacity:1}
+@keyframes flame{0%{transform:scaleY(.9)}100%{transform:scaleY(1.1)}}
+.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#050b1f;color:#eaf4ff;z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;transition:opacity .5s}
+.overlay.fade{opacity:0;pointer-events:none}
+#entryOverlay{opacity:0;pointer-events:none}
+#entryOverlay.visible{opacity:1;pointer-events:auto}
+#entryOverlay .entry-card{background:#0d142a;border:4px solid #000;box-shadow:0 0 0 4px #2e3a5f inset,6px 6px 0 #000;padding:2rem;text-align:center}
+.pixel-bar{width:240px;border:4px solid #000;background:#101010;padding:6px}
+.pixel-bar-fill{width:0%;height:18px;background:#45c155;box-shadow:0 0 0 3px #000 inset;transition:width .15s}
+.tip{font-size:.8rem;color:#94ffe0}
+body.night .sky{filter:brightness(.6)}
+body.night .cloud{opacity:.35}
+#sectionText{text-transform:none;line-height:1.4}
+.realm-nav{position:relative;z-index:6;text-align:center;padding:0 1rem 3rem;font-size:.7rem}
+.realm-nav a{color:#94ffe0;text-decoration:none;border-bottom:1px dotted #2e3a5f;margin:0 6px}
+.realm-nav a:hover{color:#6bff92}
+@media (max-width:760px){
+  .interface{margin-left:1rem;width:calc(100vw - 2rem);margin-top:10vh}
+  #profilePanel{top:auto;bottom:1rem;left:1rem;right:1rem;width:auto}
+  .quest-wrapper{margin-top:110vh}
+  .torch{display:none}
+  .score-row{font-size:.7rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .cloud,.particle,.player .avatar,.torch .flame{animation:none}
+  .particle.firefly{opacity:.5}
+  .overlay{transition:none}
+}
+</style>
+</head>
+<body class="locked">
+<div id="loadingScreen" class="overlay" role="status">
+  <h1>THATMINECRAFT</h1>
+  <p>Loading Terrain...</p>
+  <div class="pixel-bar"><div class="pixel-bar-fill" id="progressFill"></div></div>
+  <p class="tip">Carving voxel mountains ▒▒▒</p>
+</div>
+<div id="entryOverlay" class="overlay">
+  <div class="entry-card">
+    <h2>THATMINECRAFT LOBBY</h2>
+    <p>step through the portal lobby + ui</p>
+    <button class="pixel-btn" id="enterBtn">Enter The Realm</button>
+  </div>
+</div>
+
+<div class="sky" aria-hidden="true">
+  <div class="sun"></div>
+  <div class="moon"></div>
+  <div class="cloud" style="top:12%;left:-10%;animation-delay:0s"></div>
+  <div class="cloud small" style="top:30%;left:-20%;animation-delay:10s"></div>
+  <div class="cloud" style="top:55%;left:-15%;animation-delay:40s"></div>
+  <div class="cloud small" style="top:70%;left:-5%;animation-delay:80s"></div>
+</div>
+<canvas id="voxelCanvas" aria-hidden="true"></canvas>
+<div class="fog" aria-hidden="true"></div>
+<div id="particles" aria-hidden="true"></div>
+<div class="player-field" id="playerField" role="group" aria-label="Players standing in the lobby"></div>
+<div class="torch" style="--tx:12%;--ty:68%" aria-hidden="true"><span class="flame"></span></div>
+<div class="torch" style="--tx:82%;--ty:62%" aria-hidden="true"><span class="flame"></span></div>
+
+<main class="realm">
+  <section class="hud">
+    <div class="interface">
+      <div class="panel inventory-panel">
+        <h3>Inventory Navigator</h3>
+        <div class="inventory-grid" role="group" aria-label="Browse realm sections">
+          <button class="slot" data-section="pvp" data-tooltip="Diamond Sword → PvP" aria-pressed="false" aria-label="PvP Stronghold"><div class="item item-sword"></div></button>
+          <button class="slot" data-section="exploration" data-tooltip="Compass → Exploration" aria-pressed="false" aria-label="Exploration Atlas"><div class="item item-compass"></div></button>
+          <button class="slot" data-section="builders" data-tooltip="Crafting Table → Builders" aria-pressed="false" aria-label="Builder Workshop"><div class="item item-table"></div></button>
+          <button class="slot" data-section="chaos" data-tooltip="TNT → Chaos" aria-pressed="false" aria-label="Chaos Syndicate"><div class="item item-tnt"></div></button>
+          <button class="slot" data-section="profiles" data-tooltip="Book → Profiles" aria-pressed="false" aria-label="Player Profiles"><div class="item item-book"></div></button>
+          <button class="slot" data-section="leaderboard" data-tooltip="Map → Leaderboard" aria-pressed="false" aria-label="Server Map and Leaderboard"><div class="item item-map"></div></button>
+        </div>
+      </div>
+      <div class="panel section-panel" id="sectionPanel" aria-live="polite">
+        <h3 id="sectionTitle">Realm Directory</h3>
+        <p id="sectionText">Click an inventory slot to browse this lobby.</p>
+        <ul id="sectionList"></ul>
+      </div>
+      <div class="panel leaderboard-panel" id="leaderboardPanel">
+        <h3>Realm Leaderboard</h3>
+        <ul id="scoreList"></ul>
+      </div>
+    </div>
+  </section>
+  <section class="quest-wrapper">
+    <div class="panel quest-panel">
+      <h3>Lobby Broadcast</h3>
+      <p>The overworld hub hums with particles, torches, and idle footstep loops. Scroll to glide through the biome, then use the inventory to inspect crews.</p>
+      <ul>
+        <li>Daylight brightens the voxel valleys, night summons torches + fireflies.</li>
+        <li>Profiles open by selecting any avatar standing on the grass.</li>
+        <li>Leaderboard updates are carved into spruce planks.</li>
+      </ul>
+    </div>
+  </section>
+  <nav class="realm-nav" aria-label="Elsewhere in the universe">
+    <a data-xlink="hub" href="#">Universe</a>·<a data-xlink="heavenly" href="#">Heavenly</a>·<a data-xlink="heavenly-site" href="#">Dossier</a>·<a data-xlink="legagme" href="#">Legacy Board</a>·<a data-xlink="maxxing" href="#">Analyzer</a>
+  </nav>
+</main>
+
+<div id="profilePanel" class="panel profile-panel" role="dialog" aria-label="Player profile" hidden>
+  <div class="profile-header">
+    <span id="profileUsername">Player</span>
+    <button class="pixel-btn small" id="closeProfile" aria-label="Close profile">X</button>
+  </div>
+  <div class="profile-body">
+    <div class="profile-row"><span>Name</span><span id="profileName"></span></div>
+    <div class="profile-row"><span>Role</span><span id="profileRole"></span></div>
+    <div class="profile-row"><span>Fav Weapon</span><span id="profileWeapon"></span></div>
+    <div class="profile-row"><span>Fav Biome</span><span id="profileBiome"></span></div>
+    <p id="profileDescription"></p>
+  </div>
+</div>
+<div class="scroll-hint" aria-hidden="true">⬇ Scroll to roam the overworld ⬇</div>
+
+<script>
+(function(){
+"use strict";
+/* THATMINECRAFT — rebuilt renderer.
+ * Original: ~12,000 canvas path fills EVERY frame.
+ * Rebuild: world pre-rendered to an offscreen canvas once per quantized light level;
+ * each frame is a single drawImage blit + cheap camera lerp. ~100x less per-frame work.
+ */
+var canvas=document.getElementById("voxelCanvas");
+var ctx=canvas.getContext("2d");
+var body=document.body;
+var sun=document.querySelector(".sun"),moon=document.querySelector(".moon"),fog=document.querySelector(".fog");
+var particleLayer=document.getElementById("particles");
+var loadingScreen=document.getElementById("loadingScreen"),entryOverlay=document.getElementById("entryOverlay");
+var enterBtn=document.getElementById("enterBtn"),progressFill=document.getElementById("progressFill");
+var playerField=document.getElementById("playerField"),profilePanel=document.getElementById("profilePanel");
+var closeProfile=document.getElementById("closeProfile");
+var sectionTitle=document.getElementById("sectionTitle"),sectionText=document.getElementById("sectionText"),sectionList=document.getElementById("sectionList");
+var leaderboardPanel=document.getElementById("leaderboardPanel"),scoreList=document.getElementById("scoreList");
+var slots=document.querySelectorAll(".slot");
+var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+var viewport={width:innerWidth,height:innerHeight};
+var worldScale=1,dims={tileW:88,tileH:44,blockH:32};
+var camera={x:0,y:0,targetX:0,targetY:0,hoverX:0,hoverY:0};
+var scrollProgress=0,lastTime=0;
+var lobbyPlayers=[],lastFocus=null;
+var off=document.createElement("canvas"),offCtx=off.getContext("2d");
+var offOrigin={x:0,y:0},lastLightStep=-1,lastBlitX=1e9,lastBlitY=1e9;
+var DAY_MS=120000; // was 20000 — a 20-second day was strobing; now a calm 2-minute day
+
+/* ---------- World generation (same seed → same terrain as the original) ---------- */
+function mulberry32(a){return function(){var t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
+function generateWorld(size){
+  var heights=[],treeMap=new Set(),rand=mulberry32(9337);
+  for(var x=0;x<size;x++){heights[x]=[];
+    for(var z=0;z<size;z++){
+      var dist=Math.hypot(x-size*.4,z-size*.35),dist2=Math.hypot(x-size*.75,z-size*.2);
+      var base=4+Math.sin((x+2)*.45)*1.6+Math.cos((z+5)*.35)*1.4+Math.sin((x+z)*.2)*1.8;
+      base+=Math.max(0,(size*.35-dist)*.12);
+      base+=Math.max(0,(size*.22-dist2)*.25);
+      if(x<3||z<3||x>size-4||z>size-4)base=Math.min(base,3.2);
+      base=Math.max(2,Math.min(13,Math.round(base)));
+      heights[x][z]=base;
+      if(base>5&&rand()>.8)treeMap.add(x+","+z);
+    }
+  }
+  return{size:size,heights:heights,waterLevel:4,treeMap:treeMap};
+}
+var world=generateWorld(24);
+var palette={
+  grass:{top:[79,174,45],left:[47,104,23],right:[60,132,33]},
+  dirt:{top:[91,51,23],left:[56,31,12],right:[70,39,15]},
+  stone:{top:[148,148,148],left:[96,96,96],right:[118,118,118]},
+  water:{top:[62,142,226,.8],left:[37,82,150,.85],right:[46,101,176,.85]},
+  wood:{top:[172,109,52],left:[86,51,22],right:[120,74,32]},
+  leaves:{top:[70,140,40],left:[44,88,24],right:[55,110,30]},
+  snow:{top:[230,242,255],left:[170,190,210],right:[200,210,230]}
+};
+function formatColor(rgb,light){
+  var alpha=rgb[3]!==undefined?rgb[3]:1;
+  var f=Math.min(1.25,Math.max(.2,light));
+  return "rgba("+Math.min(255,Math.floor(rgb[0]*f))+","+Math.min(255,Math.floor(rgb[1]*f))+","+Math.min(255,Math.floor(rgb[2]*f))+","+alpha+")";
+}
+function drawFace(g,points,color){
+  g.beginPath();g.moveTo(points[0][0],points[0][1]);
+  for(var i=1;i<points.length;i++)g.lineTo(points[i][0],points[i][1]);
+  g.closePath();g.fillStyle=color;g.fill();g.strokeStyle="#000000aa";g.stroke();
+}
+function drawCube(g,x,y,z,type,light,ox,oy){
+  var p=palette[type]||palette.stone;
+  var baseX=(x-z)*dims.tileW*.5+ox;
+  var baseY=(x+z)*dims.tileH*.5+oy-y*dims.blockH;
+  var topY=baseY-dims.blockH,halfW=dims.tileW*.5,halfH=dims.tileH*.5;
+  drawFace(g,[[baseX-halfW,topY+halfH],[baseX,topY+dims.tileH],[baseX,topY+dims.tileH+dims.blockH],[baseX-halfW,topY+halfH+dims.blockH]],formatColor(p.left,light*.85));
+  drawFace(g,[[baseX+halfW,topY+halfH],[baseX,topY+dims.tileH],[baseX,topY+dims.tileH+dims.blockH],[baseX+halfW,topY+halfH+dims.blockH]],formatColor(p.right,light*.95));
+  drawFace(g,[[baseX,topY],[baseX+halfW,topY+halfH],[baseX,topY+dims.tileH],[baseX-halfW,topY+halfH]],formatColor(p.top,light*1.05));
+}
+
+/* ---------- Offscreen pre-render (once per light step, not per frame) ---------- */
+function setupDims(){
+  worldScale=Math.max(.5,Math.min(1,viewport.width/1100));
+  dims.tileW=Math.round(88*worldScale);dims.tileH=Math.round(44*worldScale);dims.blockH=Math.round(32*worldScale);
+  var pad=48,maxY=18;
+  offOrigin.x=world.size*dims.tileW*.5+pad;
+  offOrigin.y=maxY*dims.blockH+pad;
+  off.width=Math.ceil(world.size*dims.tileW+pad*2);
+  off.height=Math.ceil((world.size*2-2)*dims.tileH*.5+offOrigin.y+dims.tileH+dims.blockH+pad);
+  lastLightStep=-1; // force re-render
+}
+function renderWorld(light){
+  var g=offCtx,size=world.size,ox=offOrigin.x,oy=offOrigin.y;
+  g.clearRect(0,0,off.width,off.height);
+  for(var layer=0;layer<size*2;layer++){
+    for(var x=0;x<size;x++){
+      var z=layer-x;if(z<0||z>=size)continue;
+      var colH=world.heights[x][z],maxH=Math.max(colH,world.waterLevel);
+      for(var y=0;y<maxH;y++){
+        var type;
+        if(y>=colH){if(y<world.waterLevel)type="water";else continue;}
+        else if(colH-y>4)type="stone";
+        else if(colH-y>1)type="dirt";
+        else type=colH>9?"snow":"grass";
+        // Occlusion cull: fully buried cubes contribute nothing — skip them.
+        if(y+1<colH&&x+1<size&&z+1<size&&world.heights[x+1][z]>y&&world.heights[x][z+1]>y)continue;
+        drawCube(g,x,y,z,type,light,ox,oy);
+      }
+      if(world.treeMap.has(x+","+z)&&colH>=world.waterLevel){
+        drawCube(g,x,colH,z,"wood",light+.05,ox,oy);
+        drawCube(g,x,colH+1,z,"wood",light+.05,ox,oy);
+        drawCube(g,x,colH+2,z,"leaves",light+.12,ox,oy);
+        drawCube(g,x,colH+3,z,"leaves",light+.12,ox,oy);
+      }
+    }
+  }
+}
+
+/* ---------- Canvas sizing ---------- */
+function resizeCanvas(){
+  viewport.width=innerWidth;viewport.height=innerHeight;
+  var ratio=Math.min(2,window.devicePixelRatio||1);
+  canvas.width=viewport.width*ratio;canvas.height=viewport.height*ratio;
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.imageSmoothingEnabled=false;
+  setupDims();
+}
+resizeCanvas();
+var resizeTimer=null;
+addEventListener("resize",function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(function(){resizeCanvas();lastBlitX=1e9;},150);});
+
+/* ---------- Input ---------- */
+addEventListener("scroll",function(){
+  var max=Math.max(1,body.scrollHeight-viewport.height);
+  scrollProgress=Math.min(1,Math.max(0,scrollY/max));
+  updateCameraTargets();
+},{passive:true});
+addEventListener("pointermove",function(e){
+  if(reduce)return;
+  camera.hoverX=(e.clientX/viewport.width-.5)*140*worldScale;
+  camera.hoverY=(e.clientY/viewport.height-.5)*60*worldScale;
+  updateCameraTargets();
+},{passive:true});
+function updateCameraTargets(){
+  camera.targetX=(scrollProgress-.5)*700*worldScale+camera.hoverX;
+  camera.targetY=-scrollProgress*220*worldScale+camera.hoverY;
+}
+
+/* ---------- Players (same crew, same stats) ---------- */
+var playersData=[
+  {username:"KushXWhore",displayName:"Kush",role:"PvP Specialist",weapon:"Diamond Sword",biome:"Basalt Deltas",description:"Lightning-fast arena sentinel chaining crits & pearl traps.",colors:{head:"#d8b48b",torso:"#2d7de0",arm:"#1f4b8f",leg:"#101e45"},spawn:{x:6,z:9}},
+  {username:"Pearl fr",displayName:"Parv",role:"Troll",weapon:"Fishing Rod",biome:"Mushroom Fields",description:"Chaos fisher who yanks everyone off platforms for laughs.",colors:{head:"#e0b68f",torso:"#c72f2f",arm:"#8c1b1b",leg:"#1f0505"},spawn:{x:11,z:12}},
+  {username:"Gigafire22",displayName:"Rishabh",role:"Peaceful",weapon:"Totem Shield",biome:"Flower Forest",description:"Keeps the paths lit and the bees calm with gentle builds.",colors:{head:"#e8c09b",torso:"#3d9257",arm:"#307042",leg:"#1d4028"},spawn:{x:14,z:6}},
+  {username:"NotySmasui",displayName:"Samarth",role:"Explorer",weapon:"Compass",biome:"Jagged Peaks",description:"Cartographer of every chunk, marking secrets on maps.",colors:{head:"#dab38d",torso:"#b88b3c",arm:"#8d6924",leg:"#2e2414"},spawn:{x:17,z:10}},
+  {username:"LifeIsALie_48",displayName:"Het",role:"Builder",weapon:"Netherite Pickaxe",biome:"Cherry Grove",description:"Architect stacking copper + cherry palettes for mansions.",colors:{head:"#e3c2a0",torso:"#7a53b1",arm:"#59357f",leg:"#1b0f26"},spawn:{x:8,z:4}},
+  {username:".NotDarkSpirit",displayName:"Shade",role:"Troll",weapon:"Potion Of Invisibility",biome:"Deep Dark",description:"Ghostly prankster leaving redstone whispers everywhere.",colors:{head:"#c8b196",torso:"#242237",arm:"#1a1828",leg:"#0c0b13"},spawn:{x:12,z:15}},
+  {username:"NOTXKUSHAL",displayName:"Kushal",role:"Chaos",weapon:"Minecart TNT",biome:"Crimson Forest",description:"Detonates rails, laughs, repeats. The chaos quota keeper.",colors:{head:"#d4aa81",torso:"#ff5b2e",arm:"#b43a1a",leg:"#27110b"},spawn:{x:4,z:13}}
+];
+function createPlayer(data){
+  var btn=document.createElement("button");
+  btn.className="player";btn.type="button";
+  btn.setAttribute("aria-label","Open profile of "+data.username+", "+data.role);
+  btn.style.setProperty("--head-color",data.colors.head);
+  btn.style.setProperty("--torso-color",data.colors.torso);
+  btn.style.setProperty("--arm-color",data.colors.arm);
+  btn.style.setProperty("--leg-color",data.colors.leg);
+  btn.innerHTML='<div class="nameTag">'+data.username+'</div><div class="avatar"><span class="head"></span><span class="torso"></span><span class="arm arm-left"></span><span class="arm arm-right"></span><span class="leg leg-left"></span><span class="leg leg-right"></span></div>';
+  btn.addEventListener("click",function(){openProfile(data,btn);});
+  playerField.appendChild(btn);
+  return{data:data,el:btn,spawn:data.spawn};
+}
+playersData.forEach(function(p){lobbyPlayers.push(createPlayer(p));});
+function updatePlayerPositions(ox,oy){
+  lobbyPlayers.forEach(function(entry){
+    var x=entry.spawn.x,z=entry.spawn.z;
+    var h=world.heights[Math.min(world.size-1,Math.max(0,x))][Math.min(world.size-1,Math.max(0,z))];
+    var isoX=(x-z)*dims.tileW*.5+ox;
+    var isoY=(x+z)*dims.tileH*.5+oy-h*dims.blockH-20*worldScale;
+    entry.el.style.left=(isoX-32*worldScale)+"px";
+    entry.el.style.top=(isoY-80*worldScale)+"px";
+    entry.el.style.transform="scale("+worldScale+")";
+    entry.el.style.transformOrigin="bottom center";
+  });
+}
+function openProfile(player,element){
+  lobbyPlayers.forEach(function(p){p.el.classList.remove("selected");});
+  if(element){element.classList.add("selected");lastFocus=element;}
+  document.getElementById("profileUsername").textContent=player.username;
+  document.getElementById("profileName").textContent=player.displayName;
+  document.getElementById("profileRole").textContent=player.role;
+  document.getElementById("profileWeapon").textContent=player.weapon;
+  document.getElementById("profileBiome").textContent=player.biome;
+  document.getElementById("profileDescription").textContent=player.description;
+  profilePanel.hidden=false;
+  closeProfile.focus();
+}
+function hideProfile(){
+  profilePanel.hidden=true;
+  lobbyPlayers.forEach(function(p){p.el.classList.remove("selected");});
+  if(lastFocus){lastFocus.focus();lastFocus=null;}
+}
+closeProfile.addEventListener("click",hideProfile);
+addEventListener("keydown",function(e){if(e.key==="Escape"&&!profilePanel.hidden)hideProfile();});
+
+/* ---------- Leaderboard ---------- */
+var scoreboardData=[
+  {category:"Best PvP",player:"KushXWhore",stat:"412 Wins"},
+  {category:"Best Builder",player:"LifeIsALie_48",stat:"187 Blueprints"},
+  {category:"Most Chaos",player:"NOTXKUSHAL",stat:"512 TNT"},
+  {category:"Best Explorer",player:"NotySmasui",stat:"64 Biomes"},
+  {category:"Most Deaths",player:"Pearl fr",stat:"87 Splats"}
+];
+scoreboardData.forEach(function(row){
+  var li=document.createElement("li");li.className="score-row";
+  li.innerHTML="<span>"+row.category+"</span><span>"+row.player+"</span><span>"+row.stat+"</span>";
+  scoreList.appendChild(li);
+});
+
+/* ---------- Sections ---------- */
+function highlightPlayers(fn){
+  lobbyPlayers.forEach(function(entry){
+    entry.el.classList.remove("pulse");
+    if(fn(entry.data)){
+      entry.el.classList.add("pulse");
+      setTimeout(function(){entry.el.classList.remove("pulse");},1600);
+    }
+  });
+}
+var sections={
+  pvp:{title:"PvP Stronghold",text:"Diamond Sword warps you into the obsidian arena queue. Armor stands rattle whenever a duel begins.",list:["KushXWhore keeps the crit streak at 412.","Pearl fr yoinks foes with rods for sport."],action:function(){highlightPlayers(function(p){return p.role.indexOf("PvP")>-1||p.username==="Pearl fr";});}},
+  exploration:{title:"Exploration Atlas",text:"Compass slot pings the cartography wing. Scroll to glide across the fog while explorers map fresh biomes.",list:["NotySmasui logged 64 unique biomes.","Gigafire22 keeps the waystones peaceful."],action:function(){highlightPlayers(function(p){return["Explorer","Peaceful"].indexOf(p.role)>-1;});}},
+  builders:{title:"Builder Workshop",text:"Crafting Table opens the build bench UI. Copper, cherry, and prismarine pallets are stacked in rows.",list:["LifeIsALie_48 leads megabase projects.","Gigafire22 assists with cozy lantern paths."],action:function(){highlightPlayers(function(p){return p.role.indexOf("Builder")>-1;});}},
+  chaos:{title:"Chaos Syndicate",text:"TNT slot arms the prank log. Expect anvils, slime launchers, and suspicious dispensers.",list:["NOTXKUSHAL handles TNT logistics.","Pearl fr + .NotDarkSpirit script mischief."],action:function(){highlightPlayers(function(p){return["Chaos","Troll"].some(function(t){return p.role.indexOf(t)>-1;});});}},
+  profiles:{title:"Player Profiles",text:"Spellbook slot opens player dossiers. Click any glowing avatar in the grass lobby to inspect their loadout.",list:["Hover avatars for glow outlines.","Click to open the pixel profile window."],action:function(){highlightPlayers(function(){return true;});}},
+  leaderboard:{title:"Server Map",text:"Cartography map syncs the scoreboard planks. Follow the glowing frame to the stats board.",list:["Best PvP → KushXWhore","Builder Crown → LifeIsALie_48","Chaos Crown → NOTXKUSHAL"],action:function(){leaderboardPanel.classList.add("pulse");leaderboardPanel.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});setTimeout(function(){leaderboardPanel.classList.remove("pulse");},1600);}}
+};
+function setActiveSection(key){
+  var data=sections[key];if(!data)return;
+  sectionTitle.textContent=data.title;sectionText.textContent=data.text;sectionList.innerHTML="";
+  data.list.forEach(function(line){var li=document.createElement("li");li.textContent=line;sectionList.appendChild(li);});
+  data.action();
+}
+slots.forEach(function(slot){
+  slot.addEventListener("click",function(){
+    slots.forEach(function(s){s.setAttribute("aria-pressed","false");});
+    slot.setAttribute("aria-pressed","true");
+    setActiveSection(slot.dataset.section);
+  });
+});
+setActiveSection("profiles");
+document.querySelector('.slot[data-section="profiles"]').setAttribute("aria-pressed","true");
+
+/* ---------- Particles ---------- */
+(function(){
+  var i,p;
+  for(i=0;i<40;i++){
+    p=document.createElement("span");p.className="particle dust";
+    p.style.left=Math.random()*100+"%";p.style.top=Math.random()*100+"%";
+    p.style.animationDuration=(12+Math.random()*10)+"s";p.style.animationDelay=(Math.random()*12)+"s";
+    particleLayer.appendChild(p);
+  }
+  for(i=0;i<16;i++){
+    p=document.createElement("span");p.className="particle firefly";
+    p.style.left=Math.random()*100+"%";p.style.top=Math.random()*100+"%";
+    p.style.animationDuration=(8+Math.random()*10)+"s";p.style.animationDelay=(Math.random()*20)+"s";
+    particleLayer.appendChild(p);
+  }
+})();
+
+/* ---------- Sky (DOM writes throttled to ~10 fps) ---------- */
+var lastSky=0,lastNight=null;
+function updateSky(daylight,angle,now){
+  if(now-lastSky<100)return;
+  lastSky=now;
+  document.documentElement.style.setProperty("--sky-top","rgb("+Math.floor(30+140*daylight)+","+Math.floor(60+130*daylight)+","+Math.floor(120+90*daylight)+")");
+  document.documentElement.style.setProperty("--sky-bottom","rgb("+Math.floor(60+150*daylight)+","+Math.floor(110+120*daylight)+","+Math.floor(150+80*daylight)+")");
+  sun.style.left=(50+Math.cos(angle)*45)+"%";sun.style.top=(50-Math.sin(angle)*35)+"%";
+  moon.style.left=(50+Math.cos(angle+Math.PI)*45)+"%";moon.style.top=(50-Math.sin(angle+Math.PI)*35)+"%";
+  sun.style.opacity=Math.max(0,Math.sin(angle));
+  moon.style.opacity=daylight<.45?1:.1;
+  fog.style.opacity=(.05+(1-daylight)*.25).toFixed(3);
+  var night=daylight<.4;
+  if(night!==lastNight){body.classList.toggle("night",night);lastNight=night;}
+}
+
+/* ---------- Main loop: ONE blit per frame ---------- */
+function frame(timestamp){
+  if(!lastTime)lastTime=timestamp;
+  var dt=Math.min(64,timestamp-lastTime);lastTime=timestamp;
+  var phase=(timestamp%DAY_MS)/DAY_MS;
+  var angle=phase*Math.PI*2;
+  var daylight=.35+Math.max(0,Math.sin(angle))*.65;
+  var step=Math.round(daylight*32);
+  if(step!==lastLightStep){renderWorld(step/32);lastLightStep=step;}
+  var k=reduce?1:1-Math.exp(-dt*.004);
+  camera.x+=(camera.targetX-camera.x)*k;
+  camera.y+=(camera.targetY-camera.y)*k;
+  var ox=viewport.width/2+camera.x,oy=viewport.height*.92+camera.y;
+  var dx=ox-offOrigin.x,dy=oy-offOrigin.y;
+  if(Math.abs(dx-lastBlitX)>.1||Math.abs(dy-lastBlitY)>.1||step!==frame._step){
+    ctx.clearRect(0,0,viewport.width,viewport.height);
+    ctx.drawImage(off,dx,dy);
+    if(Math.abs(dx-lastBlitX)>.5||Math.abs(dy-lastBlitY)>.5)updatePlayerPositions(ox,oy);
+    lastBlitX=dx;lastBlitY=dy;frame._step=step;
+  }
+  updateSky(daylight,angle,timestamp);
+  if(!reduce)requestAnimationFrame(frame);
+}
+
+/* ---------- Boot ---------- */
+function boot(){
+  renderWorld(.85);lastLightStep=Math.round(.85*32);
+  var ox=viewport.width/2,oy=viewport.height*.92;
+  ctx.clearRect(0,0,viewport.width,viewport.height);
+  ctx.drawImage(off,ox-offOrigin.x,oy-offOrigin.y);
+  updatePlayerPositions(ox,oy);
+  updateSky(.85,Math.PI*.4,1000);
+  if(reduce){
+    // Static daylight scene; still re-blit on scroll so navigation works.
+    addEventListener("scroll",function(){
+      var ox2=viewport.width/2+camera.targetX,oy2=viewport.height*.92+camera.targetY;
+      ctx.clearRect(0,0,viewport.width,viewport.height);
+      ctx.drawImage(off,ox2-offOrigin.x,oy2-offOrigin.y);
+      updatePlayerPositions(ox2,oy2);
+    },{passive:true});
+  }else{
+    requestAnimationFrame(frame);
+  }
+}
+// Honest, fast loading: the world builds in milliseconds — show a short stylized bar, then the portal.
+var prog=0;
+var loadTimer=setInterval(function(){
+  prog=Math.min(100,prog+34);
+  progressFill.style.width=prog+"%";
+  if(prog>=100){
+    clearInterval(loadTimer);
+    boot();
+    loadingScreen.classList.add("fade");
+    setTimeout(function(){loadingScreen.remove();},550);
+    entryOverlay.classList.add("visible");
+    enterBtn.focus();
+  }
+},140);
+enterBtn.addEventListener("click",function(){
+  entryOverlay.classList.add("fade");
+  body.classList.remove("locked");
+  setTimeout(function(){entryOverlay.remove();},550);
+});
+
+/* ---------- Cross-links ---------- */
+var REPOS={heavenly:"Heaven","heavenly-site":"Heavenly-site",thatminecraft:"Heavenly-",maxxing:"maxxing",aioutfit:"AiOutfit",legagme:"LegaGMe"};
+var inHub=location.pathname.indexOf("/sites/")>-1;
+document.querySelectorAll("[data-xlink]").forEach(function(a){
+  var k=a.getAttribute("data-xlink");
+  a.href=k==="hub"?(inHub?"../../":"https://kbugga230209-png.github.io/API/"):(inHub?"../"+k+"/":"https://kbugga230209-png.github.io/"+REPOS[k]+"/");
+});
+})();
+</script>
+</body>
+</html>

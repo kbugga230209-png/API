@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Outfit Finder — fit, palette &amp; budget, tuned to you</title>
+<meta name="description" content="A client-side outfit engine: your height, weight, style, budget, occasion and season become a complete look with Indian-market prices.">
+<meta name="theme-color" content="#0f0f0f">
+<meta property="og:title" content="AI Outfit Finder">
+<meta property="og:description" content="Find the perfect outfit — tuned to your fit, budget and the occasion.">
+<meta property="og:image" content="og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f0f0f'/%3E%3Cpath d='M22 14l10 6 10-6 8 10-8 6v20H22V30l-8-6z' fill='%23ff4d6d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="glow glow-a" aria-hidden="true"></div>
+<div class="glow glow-b" aria-hidden="true"></div>
+
+<main class="container">
+  <header class="head">
+    <p class="eyebrow">Client-side outfit engine · no signup · prices in ₹</p>
+    <h1>AI Outfit Finder</h1>
+    <p class="subtitle">Your fit, your budget, your occasion — one complete look.</p>
+  </header>
+
+  <form class="card" id="outfit-form" novalidate>
+    <div class="grid">
+      <div class="field">
+        <label for="height">Height (cm) <span class="opt">optional</span></label>
+        <input type="number" id="height" inputmode="numeric" min="100" max="250" placeholder="e.g. 175" autocomplete="off">
+        <p class="err" id="height-err" hidden>Enter 100–250 cm.</p>
+      </div>
+      <div class="field">
+        <label for="weight">Weight (kg) <span class="opt">optional</span></label>
+        <input type="number" id="weight" inputmode="numeric" min="30" max="200" placeholder="e.g. 68" autocomplete="off">
+        <p class="err" id="weight-err" hidden>Enter 30–200 kg.</p>
+      </div>
+      <div class="field">
+        <label for="style">Style</label>
+        <select id="style">
+          <option>Streetwear</option>
+          <option>Minimal</option>
+          <option>Formal</option>
+          <option>Gym</option>
+          <option>Old Money</option>
+          <option>Party</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="budget">Budget</label>
+        <select id="budget">
+          <option value="budget">Budget · under ₹5,000</option>
+          <option value="midrange" selected>Midrange · ₹5,000–15,000</option>
+          <option value="premium">Premium · ₹12,000+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="occasion">Occasion</label>
+        <select id="occasion">
+          <option>Everyday</option>
+          <option>College</option>
+          <option>Date</option>
+          <option>Interview</option>
+          <option>Festival</option>
+          <option>Gym</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="season">Season</label>
+        <select id="season">
+          <option value="auto" selected>Auto (from today's date)</option>
+          <option value="summer">Summer</option>
+          <option value="monsoon">Monsoon</option>
+          <option value="winter">Winter</option>
+        </select>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="submit" class="btn-primary" id="go">Find my outfit</button>
+      <button type="button" class="btn-ghost" id="shuffle" hidden>Shuffle variants ↻</button>
+    </div>
+  </form>
+
+  <section class="result" id="result" aria-live="polite" hidden>
+    <div class="result-head">
+      <h2 id="result-title">Your look</h2>
+      <p class="result-sub" id="result-sub"></p>
+    </div>
+    <div class="notice" id="notice" hidden></div>
+    <ul class="items" id="items"></ul>
+    <div class="total-row">
+      <span class="total-label">Estimated total</span>
+      <span class="total" id="total"></span>
+      <span class="badge" id="budget-badge"></span>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <h3>Fit notes</h3>
+        <ul class="notes" id="fit-notes"></ul>
+      </div>
+      <div class="panel">
+        <h3>Palette</h3>
+        <div class="palette" id="palette"></div>
+        <h3 class="mt">Styling tips</h3>
+        <ul class="notes" id="tips"></ul>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn-ghost" id="copy">Copy this outfit</button>
+      <a class="btn-ghost link" data-xlink="hub" href="#">Back to the Universe</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>100% in-browser rule engine · no photos, no accounts, no tracking.</p>
+    <p><a data-xlink="maxxing" href="#">Analyzer</a> · <a data-xlink="thatminecraft" href="#">The Realm</a> · <a data-xlink="legagme" href="#">Legacy Board</a></p>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
