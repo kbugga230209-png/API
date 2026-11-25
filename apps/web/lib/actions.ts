@@ -191,7 +191,6 @@ export async function savePreferencesAction(formData: FormData) {
       carb_target_g: targets.carbs_g,
       fat_target_g: targets.fat_g,
       fibre_target_g: targets.fibre_g,
-      onboarding_completed: true,
     })
     .eq('user_id', user.id);
   if (error) fail('/app/settings', error.message);
@@ -360,7 +359,6 @@ export async function wipeHealthDataAction() {
       target_weight_kg: null,
       allergies: [],
       restrictions: [],
-      onboarding_completed: false,
     })
     .eq('user_id', user.id);
   await supabase.from('profiles').update({ onboarding_completed: false }).eq('id', user.id);
