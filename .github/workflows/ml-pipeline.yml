@@ -25,7 +25,7 @@ concurrency:
 
 jobs:
   unit:
-    name: unit tests (stdlib only)
+    name: unit tests (stdlib + Pillow for the image audit)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -33,8 +33,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install Pillow (dHash near-duplicate detection)
+        run: python3 -m pip install --quiet 'pillow>=10'
       - name: Unit tests
         run: PYTHONPATH=ml python3 -m unittest discover -s ml/tests -t ml -v
+      - name: Dataset source licence policy
+        run: cd ml && python3 -m bharatbite_ml.cli sources-audit
+      - name: Runtime compatibility refuses to guess
+        run: |
+          cd ml
+          if python3 -m bharatbite_ml.cli compat > /tmp/compat.json; then
+            echo "compat must fail without measured runs"; exit 1
+          fi
+          grep -q '"insufficient-data"' /tmp/compat.json
       - name: Label/catalog contract
         run: cd ml && python3 -m bharatbite_ml.cli validate-labels
       - name: Pipeline selftest
