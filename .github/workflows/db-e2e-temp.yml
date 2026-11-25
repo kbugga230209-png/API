@@ -6,44 +6,11 @@ on:
     branches:
       - 'arena/**'
 
-permissions:
-  contents: write
-
 jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      SUPABASE_URL: https://xetdzgsbzjctenhelaki.supabase.co
-      ANON: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhldGR6Z3NiempjdGVuaGVsYWtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU1OTM2MTUsImV4cCI6MjExMTE2OTYxNX0.lVeGrodiueGDKLlv5HZU-QbQvyAqvQNKYzzkizP60oU
     steps:
       - uses: actions/checkout@v4
-
-      - name: Run checks
-        id: checks
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          bash .github/e2e.sh 2>&1 | tee /tmp/report.txt
-
-      - name: Publish report
-        if: always()
-        run: |
-          {
-            echo "# db e2e report"
-            echo
-            echo "outcome: ${{ steps.checks.outcome }}"
-            echo
-            echo '```'
-            cat /tmp/report.txt 2>/dev/null || echo 'no report'
-            echo '```'
-          } > e2e-report.md
-          git config user.name "arena-agent"
-          git config user.email "agent@arena.ai"
-          git add e2e-report.md
-          git commit -q -m "chore: db e2e report [skip ci]" || echo "nothing to commit"
-          git push || echo "push failed"
-
-      - name: Fail if checks failed
-        if: steps.checks.outcome != 'success'
-        run: exit 1
+      - name: Run database e2e
+        run: python3 .github/e2e.py
