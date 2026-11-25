@@ -9,7 +9,7 @@
     "apps/web"
   ],
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "scripts": {
     "build:core": "npm run build -w @bharatbite/core",
