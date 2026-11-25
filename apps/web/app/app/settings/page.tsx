@@ -49,6 +49,9 @@ export default async function SettingsPage({
 
       <span className="eyebrow">You</span>
       <h1 style={{ fontSize: 'clamp(24px, 3vw, 32px)', margin: '6px 0 10px' }}>Goals and settings</h1>
+      <p className="small muted">
+        On-device recognition is separate from these goals: <a href="/app/model">recognition model status</a>.
+      </p>
       <p className="muted small" style={{ maxWidth: '62ch' }}>
         These numbers drive your daily targets and the diet planner. They stay on your account — no
         third party sees them.

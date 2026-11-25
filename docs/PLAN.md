@@ -190,3 +190,32 @@ Chrome shows the URL bar instead of pretending the app is verified.
 `docs/ANDROID.md` holds the keystore requirements (RSA 4096, 25+ years,
 keytool commands, Play App Signing, asset-links wiring, release checklist) and
 states plainly what reproducibility does and does not mean here.
+
+## 9. Model installation (workstream 4)
+
+`packages/core/src/model-install.ts` orchestrates the install with every
+dependency injected (fetch, store, signature verifier, SHA-256, runtime), so the
+flow is testable in Node: **17 new tests, 55 total core tests, 0 failures**.
+
+The order is the point: fetch manifest → validate shape → check app-version
+compatibility → verify the Ed25519 signature over the canonical payload → ask for
+consent → download → confirm the byte count → verify SHA-256 of the received
+bytes → only then write to storage → run a runtime health check → `ready`.
+Nothing is written before the checksum matches, so an interrupted or tampered
+download can never become the installed model; a model that fails the health
+check is deleted again rather than left installed. Retries stop at
+`MAX_INSTALL_ATTEMPTS`, and a 404 from `model-manifest` is reported as "not
+published" rather than an error.
+
+`apps/web/lib/model-install-client.ts` supplies the browser adapters (Cache
+Storage, WebCrypto SHA-256, WebCrypto Ed25519, fetch) and `/app/model` runs the
+real pipeline with an honest readout: publisher key, endpoint, phase, progress,
+and the exact stop reason. Today it stops at `manifest_unavailable` (no model is
+published) or, with a published model, at `health_check_failed` — this build has
+no TFLite interpreter, and the page says so instead of claiming offline
+recognition exists. Ed25519 verification fails closed where the browser lacks it
+rather than downgrading to no verification.
+
+Still missing for end-to-end offline recognition: a TFLite interpreter in the
+client (WASM or a native bridge in the Android shell) and a published model.
+Both are listed as blockers rather than simulated.
