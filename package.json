@@ -19,7 +19,9 @@
     "build:web": "npm run build -w @bharatbite/web",
     "seed:generate": "node packages/foods/scripts/generate-catalog.mjs",
     "dev:web": "npm run dev -w @bharatbite/web",
-    "build:app": "npm run build:core && npm run build -w @bharatbite/foods && npm run build -w @bharatbite/web"
+    "build:app": "npm run build:core && npm run build -w @bharatbite/foods && npm run build -w @bharatbite/web",
+    "test:payments": "node supabase/tests/rehearsal/run.mjs",
+    "test:ml": "PYTHONPATH=ml python3 -m unittest discover -s ml/tests -t ml"
   },
   "devDependencies": {
     "typescript": "5.7.3"

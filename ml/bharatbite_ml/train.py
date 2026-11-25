@@ -88,7 +88,8 @@ def build_datasets(tf, root: Path, manifest: dict, classes: list[str], batch_siz
             rng = np.random.default_rng(seed + len(split))
             images = rng.random((count, 224, 224, 3), dtype="float32")
             labels = rng.integers(0, len(classes), size=count)
-            ds = tf.data.Dataset.from_tensor_slices((images, labels))
+            one_hot = tf.one_hot(labels, len(classes))
+            ds = tf.data.Dataset.from_tensor_slices((images, one_hot))
             return ds.batch(batch_size)
 
         return make("train"), make("val"), {"train": 64, "val": 64, "test": 0}

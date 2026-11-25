@@ -23,6 +23,7 @@ ml/artifacts/*.onnx
 ml/artifacts/*.tflite
 ml/keys/
 ml/smoke-out/
+supabase/tests/rehearsal/.build/
 ml/runs/
 *.keystore
 *.jks

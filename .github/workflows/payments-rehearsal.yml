@@ -1,0 +1,46 @@
+name: payments rehearsal
+
+on:
+  push:
+    paths:
+      - 'supabase/functions/**'
+      - 'packages/core/src/entitlements.ts'
+      - 'supabase/tests/rehearsal/**'
+      - '.github/workflows/payments-rehearsal.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/**'
+      - 'supabase/tests/rehearsal/**'
+      - '.github/workflows/payments-rehearsal.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: payments-rehearsal-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rehearsal:
+    name: test-mode rehearsal (no network, no keys)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build core (for the shared entitlement rule)
+        run: npm run build:core
+      - name: Rehearse payment flows against the shipped function sources
+        run: npm run test:payments
+      - name: Assert no live credentials are reachable from the rehearsal
+        run: |
+          if grep -rn "api.razorpay.com" supabase/tests/rehearsal/*.mjs | grep -v "fake-\|harness\|run.mjs"; then
+            echo "::error::a rehearsal file references the live Razorpay host outside the fake"
+            exit 1
+          fi
+          echo "rehearsal uses only the in-process fake; no Razorpay host is called"
