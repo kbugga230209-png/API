@@ -7,14 +7,17 @@ The six rebuilds are finished and live in this repo under `sites/`. This file is
 | | |
 |---|---|
 | Rebuilds committed here | ✅ `sites/<key>/`, verified by `--dry-run` against all six repos |
-| GitHub write access from this session | ❌ **blocked** — read-only app token (`403 Resource not accessible by integration`) |
+| GitHub App permission (`Contents`) | ✅ **Read and write** — confirmed in installation settings |
+| Token issued to this session | ❌ **read-only** — `403 Resource not accessible by integration` on every write |
 | Sync script | ✅ verified; sets commit identity, survives per-repo failures |
 
-Run `bash scripts/publish-check.sh` any time to see the current answer for all six repos.
+So the grant is correct and repo access is correct; the token this sandbox receives is scoped down to read-only before it reaches the agent. That is not fixable from installation settings — Route 2 or 3 is the way.
+
+Run `bash scripts/publish-check.sh` any time to re-test all six repos.
 
 ## Route 1 — grant write access, then let the agent sync
 
-The GitHub connection here is a GitHub App installation (**id `158123716`**) that covers all 7 repos but holds read-only contents.
+Already done and confirmed: the installation shows **Read and write access to actions, code, issues, pull requests, and workflows**, and it covers all 7 repos. Re-testing still returns 403, so the token, not the permission, is the limit. Keep this section only as a record of what was ruled out:
 
 1. Open <https://github.com/settings/installations/158123716>
 2. Under **Permissions**, set **Contents → Read and write**, save.
@@ -24,15 +27,14 @@ If GitHub shows **Contents** as read-only and won't let you change it, that perm
 
 ## Route 2 — run one command yourself (guaranteed)
 
-Anywhere `git push` already works for your account:
+One paste, in any terminal where `git push` already works for your account. Verified against a fresh clone of this branch:
 
 ```bash
-git clone https://github.com/kbugga230209-png/API.git
-cd API
-git checkout arena/7a52f1c4-api
-bash scripts/sync-to-repos.sh --dry-run   # preview all six diffs, push nothing
-bash scripts/sync-to-repos.sh             # commit + push all six
+git clone -b arena/7a52f1c4-api https://github.com/kbugga230209-png/API.git heavenly \
+  && cd heavenly && bash scripts/sync-to-repos.sh
 ```
+
+Add `--dry-run` before the run to preview all six diffs without pushing anything.
 
 Or a single repo: `bash scripts/sync-to-repos.sh maxxing`
 
