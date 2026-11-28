@@ -43,7 +43,15 @@ final class LocalBundleSchemeHandler: NSObject, WKURLSchemeHandler {
         return stoppedTasks.contains(ObjectIdentifier(task))
     }
 
+    private func clearTask(_ task: WKURLSchemeTask) {
+        lock.lock()
+        stoppedTasks.remove(ObjectIdentifier(task))
+        lock.unlock()
+    }
+
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        defer { clearTask(urlSchemeTask) }
+
         guard let url = urlSchemeTask.request.url else {
             if !isStopped(urlSchemeTask) {
                 urlSchemeTask.didFailWithError(URLError(.badURL))
@@ -67,8 +75,9 @@ final class LocalBundleSchemeHandler: NSObject, WKURLSchemeHandler {
         }
 
         guard
-            let bundleDir = Bundle.main.resourceURL?.appendingPathComponent("WebBundle"),
-            case let fileURL = bundleDir.appendingPathComponent(trimmed),
+            let bundleDir = Bundle.main.resourceURL?.appendingPathComponent("WebBundle").standardizedFileURL,
+            case let fileURL = bundleDir.appendingPathComponent(trimmed).standardizedFileURL,
+            fileURL.path.hasPrefix(bundleDir.path),
             FileManager.default.fileExists(atPath: fileURL.path),
             let data = try? Data(contentsOf: fileURL)
         else {
@@ -168,6 +177,21 @@ final class HybridHostViewController: UIViewController, UIPencilInteractionDeleg
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.isOpaque = false
         view.addSubview(webView)
+
+        // Mount transparent native PKCanvasView overlay (hidden until explicitly enabled via bridge)
+        pencilKitEngine.canvasView.frame = view.bounds
+        pencilKitEngine.canvasView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(pencilKitEngine.canvasView)
+
+        // Passive Apple Pencil Hover recognizer across the full workspace (M2/M4 iPad Pro & iPad Air)
+        let workspaceHover = UIHoverGestureRecognizer(
+            target: pencilKitEngine,
+            action: #selector(PencilKitBridgeEngine.handlePencilHover(_:))
+        )
+        workspaceHover.cancelsTouchesInView = false
+        workspaceHover.delaysTouchesBegan = false
+        workspaceHover.delaysTouchesEnded = false
+        view.addGestureRecognizer(workspaceHover)
 
         // Register Apple Pencil 2 Double-Tap & Apple Pencil Pro Squeeze hardware interaction
         let pencilInteraction = UIPencilInteraction()

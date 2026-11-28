@@ -19,14 +19,20 @@ final class PencilKitBridgeEngine: NSObject, PKCanvasViewDelegate {
         canvasView.backgroundColor = .clear
         canvasView.isOpaque = false
         canvasView.drawingPolicy = .pencilOnly
+        canvasView.isHidden = true
+        canvasView.isUserInteractionEnabled = false
 
         let hoverRecognizer = UIHoverGestureRecognizer(target: self, action: #selector(handlePencilHover(_:)))
+        hoverRecognizer.cancelsTouchesInView = false
+        hoverRecognizer.delaysTouchesBegan = false
+        hoverRecognizer.delaysTouchesEnded = false
         canvasView.addGestureRecognizer(hoverRecognizer)
     }
 
-    @objc private func handlePencilHover(_ recognizer: UIHoverGestureRecognizer) {
+    @objc func handlePencilHover(_ recognizer: UIHoverGestureRecognizer) {
         guard recognizer.state == .began || recognizer.state == .changed else { return }
-        let loc = recognizer.location(in: canvasView)
+        let targetView = recognizer.view ?? canvasView
+        let loc = recognizer.location(in: targetView)
         var zOffset: CGFloat = 0.25
         var altitude: CGFloat = .pi / 2
         var azimuth: CGFloat = 0
@@ -36,12 +42,16 @@ final class PencilKitBridgeEngine: NSObject, PKCanvasViewDelegate {
         }
         if #available(iOS 16.4, *) {
             altitude = recognizer.altitudeAngle
-            azimuth = recognizer.azimuthAngle(in: canvasView)
+            azimuth = recognizer.azimuthAngle(in: targetView)
         }
         onHoverChanged?(loc.x, loc.y, zOffset, altitude, azimuth)
     }
 
     func configure(from dict: [String: Any]) {
+        let enabled = dict["enabled"] as? Bool ?? false
+        canvasView.isHidden = !enabled
+        canvasView.isUserInteractionEnabled = enabled
+
         activeDocumentId = dict["documentId"] as? String ?? ""
         activePageId = dict["pageId"] as? String ?? ""
         let stylusOnly = dict["stylusOnly"] as? Bool ?? true

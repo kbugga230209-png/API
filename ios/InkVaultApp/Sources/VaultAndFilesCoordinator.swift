@@ -5,6 +5,7 @@ import UniformTypeIdentifiers
 import CryptoKit
 import Security
 import Vision
+import ImageIO
 
 /// Coordinates WKScriptMessageHandler commands, atomic local file-system vault checkpoints,
 /// Files App `UIDocumentPickerViewController` (including folder batch import),
@@ -266,7 +267,20 @@ final class InkVaultBridgeCoordinator: NSObject, ObservableObject, WKScriptMessa
             request.recognitionLevel = .accurate
             request.usesLanguageCorrection = true
 
-            let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+            let cgOrientation: CGImagePropertyOrientation
+            switch uiImage.imageOrientation {
+            case .up: cgOrientation = .up
+            case .down: cgOrientation = .down
+            case .left: cgOrientation = .left
+            case .right: cgOrientation = .right
+            case .upMirrored: cgOrientation = .upMirrored
+            case .downMirrored: cgOrientation = .downMirrored
+            case .leftMirrored: cgOrientation = .leftMirrored
+            case .rightMirrored: cgOrientation = .rightMirrored
+            @unknown default: cgOrientation = .up
+            }
+
+            let handler = VNImageRequestHandler(cgImage: cgImage, orientation: cgOrientation, options: [:])
             do {
                 try handler.perform([request])
             } catch {

@@ -82,10 +82,11 @@ jobs:
             AD_HOC_CODE_SIGNING_ALLOWED=YES \
             | tee ios/build/xcodebuild-archive.log
 
-      - name: Package & inspect INKVAULT.ipa
+      - name: Package & verify unsigned INKVAULT.ipa (Mach-O, Info.plist, Resources & AltStore compatibility)
         run: |
-          chmod +x scripts/package-unsigned-ipa.sh
+          chmod +x scripts/package-unsigned-ipa.sh scripts/verify-ipa-altstore.py
           ./scripts/package-unsigned-ipa.sh "ios/build/InkVault.xcarchive" "ios/build/ipa" "INKVAULT.ipa"
+          python3 scripts/verify-ipa-altstore.py "ios/build/ipa/INKVAULT.ipa" | tee ios/build/altstore-verification.json
           plutil -p ios/build/InkVault.xcarchive/Products/Applications/InkVault.app/Info.plist > ios/build/compiled-info-plist.txt
           shasum -a 256 ios/build/ipa/INKVAULT.ipa | tee ios/build/ipa/INKVAULT.ipa.sha256
 
@@ -96,6 +97,7 @@ jobs:
           path: |
             ios/build/ipa/INKVAULT.ipa
             ios/build/ipa/INKVAULT.ipa.sha256
+            ios/build/altstore-verification.json
             ios/build/xcodebuild-simulator.log
             ios/build/xcodebuild-archive.log
             ios/build/compiled-info-plist.txt
@@ -141,6 +143,7 @@ jobs:
               "ipa_sha256": open("ios/build/ipa/INKVAULT.ipa.sha256").read().strip(),
               "ipa_size_bytes": os.path.getsize("ios/build/ipa/INKVAULT.ipa"),
               "ipa_blob_sha": ipa_blob,
+              "altstore_verification": json.load(open("ios/build/altstore-verification.json")),
               "compiled_plist": open("ios/build/compiled-info-plist.txt").read(),
           }
           with open("ios/build/verification-report.json", "w") as out:
