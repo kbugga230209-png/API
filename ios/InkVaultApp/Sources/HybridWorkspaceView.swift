@@ -221,8 +221,12 @@ final class HybridHostViewController: UIViewController, UIPencilInteractionDeleg
             actionString = "showInkAttributes"
         case .ignore:
             actionString = "ignore"
-        @unknown default:
-            actionString = "switchEraser"
+        default:
+            if #available(iOS 17.5, *), UIPencilInteraction.preferredTapAction == .showContextualPalette {
+                actionString = "showColorPalette"
+            } else {
+                actionString = "switchEraser"
+            }
         }
 
         coordinator.dispatchEventToWeb([
