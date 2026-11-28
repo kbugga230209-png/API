@@ -65,6 +65,7 @@ workflows:
 
       - name: Package INKVAULT.ipa for Windows Sideloading (AltStore / Sideloadly)
         script: |
+          set -euo pipefail
           chmod +x scripts/package-unsigned-ipa.sh scripts/verify-ipa-altstore.py
           ./scripts/package-unsigned-ipa.sh "ios/build/InkVault.xcarchive" "ios/build/ipa" "INKVAULT.ipa"
           python3 scripts/verify-ipa-altstore.py "ios/build/ipa/INKVAULT.ipa" | tee ios/build/altstore-verification.json

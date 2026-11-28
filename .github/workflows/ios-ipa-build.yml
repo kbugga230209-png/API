@@ -10,6 +10,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 permissions:
+  actions: read
   contents: write
   checks: write
 
@@ -84,6 +85,7 @@ jobs:
 
       - name: Package & verify unsigned INKVAULT.ipa (Mach-O, Info.plist, Resources & AltStore compatibility)
         run: |
+          set -euo pipefail
           chmod +x scripts/package-unsigned-ipa.sh scripts/verify-ipa-altstore.py
           ./scripts/package-unsigned-ipa.sh "ios/build/InkVault.xcarchive" "ios/build/ipa" "INKVAULT.ipa"
           python3 scripts/verify-ipa-altstore.py "ios/build/ipa/INKVAULT.ipa" | tee ios/build/altstore-verification.json

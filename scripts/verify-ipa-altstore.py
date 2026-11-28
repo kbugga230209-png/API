@@ -115,7 +115,7 @@ def verify_ipa(ipa_path: str, entitlements_path: str = "ios/InkVaultApp/InkVault
             offset += cmdsize
 
         assert not has_code_sig, "Expected unsigned Mach-O binary (LC_CODE_SIGNATURE must be absent prior to AltStore signing)"
-        assert platform_id == 1, f"Expected PLATFORM_IOS (1) in LC_BUILD_VERSION, got {platform_id}"
+        assert platform_id == 2, f"Expected PLATFORM_IOS (2 in <mach-o/loader.h>) in LC_BUILD_VERSION, got {platform_id}"
         assert minos_str == "16.0.0", f"Expected Mach-O minos 16.0.0, got {minos_str}"
         header_headroom = min_sec_offset - (32 + sizeofcmds)
         assert header_headroom >= 1024, f"Insufficient Mach-O header headroom for AltSign ldid ({header_headroom} bytes)"
