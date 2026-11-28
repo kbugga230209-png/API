@@ -5,6 +5,7 @@ ios/*.xcodeproj
 ios/DerivedData
 ios/build
 build
+release
 coverage
 .vite
 .cache
