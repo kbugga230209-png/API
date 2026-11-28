@@ -1,0 +1,94 @@
+name: Build INKVAULT iPadOS IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "arena/**"
+
+jobs:
+  build-ipados-ipa:
+    name: macOS Xcode 16 Build & IPA Export
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install exact dependencies via lockfile
+        run: npm ci
+
+      - name: Run TypeScript typecheck & Vitest suite
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Build production web assets & iOS WebBundle
+        run: |
+          npm run build:ios
+          ls -la ios/InkVaultApp/WebBundle
+          ls -la ios/InkVaultApp/Resources/Assets.xcassets/AppIcon.appiconset
+
+      - name: Install XcodeGen & generate InkVault.xcodeproj
+        run: |
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          cd ios
+          xcodegen generate
+          xcodebuild -version
+          xcodebuild -list -project InkVault.xcodeproj
+
+      - name: Verify Simulator Debug build (x86_64/arm64 iPadOS Simulator SDK)
+        run: |
+          mkdir -p ios/build
+          set -o pipefail
+          xcodebuild build \
+            -project ios/InkVault.xcodeproj \
+            -scheme InkVault \
+            -configuration Debug \
+            -destination "generic/platform=iOS Simulator" \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee ios/build/xcodebuild-simulator.log
+
+      - name: Archive Release ARM64 iPadOS application
+        run: |
+          mkdir -p ios/build
+          set -o pipefail
+          xcodebuild archive \
+            -project ios/InkVault.xcodeproj \
+            -scheme InkVault \
+            -configuration Release \
+            -destination "generic/platform=iOS" \
+            -archivePath ios/build/InkVault.xcarchive \
+            PRODUCT_BUNDLE_IDENTIFIER=app.inkvault.studio \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            | tee ios/build/xcodebuild-archive.log
+
+      - name: Package & inspect INKVAULT.ipa
+        run: |
+          chmod +x scripts/package-unsigned-ipa.sh
+          ./scripts/package-unsigned-ipa.sh "ios/build/InkVault.xcarchive" "ios/build/ipa" "INKVAULT.ipa"
+          plutil -p ios/build/InkVault.xcarchive/Products/Applications/InkVault.app/Info.plist | tee ios/build/compiled-info-plist.txt
+          shasum -a 256 ios/build/ipa/INKVAULT.ipa | tee ios/build/ipa/INKVAULT.ipa.sha256
+
+      - name: Upload INKVAULT.ipa & Xcode build logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: INKVAULT-iPadOS-IPA-and-Logs
+          path: |
+            ios/build/ipa/INKVAULT.ipa
+            ios/build/ipa/INKVAULT.ipa.sha256
+            ios/build/xcodebuild-simulator.log
+            ios/build/xcodebuild-archive.log
+            ios/build/compiled-info-plist.txt
+          retention-days: 30

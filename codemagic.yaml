@@ -1,0 +1,121 @@
+workflows:
+  inkvault-ipados-sideload-ipa:
+    name: INKVAULT iPadOS — Sideload IPA (Windows AltStore / Sideloadly / Free Personal Team)
+    max_build_duration: 45
+    instance_type: mac_mini_m2
+    environment:
+      xcode: 16.2
+      node: 20
+      vars:
+        XCODE_PROJECT: "ios/InkVault.xcodeproj"
+        XCODE_SCHEME: "InkVault"
+        BUNDLE_ID: "app.inkvault.studio"
+    cache:
+      cache_paths:
+        - $HOME/.npm
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "*"
+          include: true
+          source: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Install npm dependencies from lockfile
+        script: |
+          npm ci
+
+      - name: Run TypeScript typecheck & Vitest suite
+        script: |
+          npm run typecheck
+          npm test
+
+      - name: Build production web bundle & sync iOS assets
+        script: |
+          npm run build:ios
+          test -f ios/InkVaultApp/WebBundle/index.html
+          test -f ios/InkVaultApp/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png
+
+      - name: Generate Xcode project via XcodeGen
+        script: |
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          cd ios
+          xcodegen generate
+          xcodebuild -list -project InkVault.xcodeproj
+
+      - name: Compile & Archive iPadOS ARM64 application
+        script: |
+          mkdir -p ios/build
+          set -o pipefail
+          xcodebuild archive \
+            -project "$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration Release \
+            -destination "generic/platform=iOS" \
+            -archivePath "ios/build/InkVault.xcarchive" \
+            PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            | tee ios/build/xcodebuild-archive.log
+
+      - name: Package INKVAULT.ipa for Windows Sideloading (AltStore / Sideloadly)
+        script: |
+          chmod +x scripts/package-unsigned-ipa.sh
+          ./scripts/package-unsigned-ipa.sh "ios/build/InkVault.xcarchive" "ios/build/ipa" "INKVAULT.ipa"
+    artifacts:
+      - ios/build/ipa/INKVAULT.ipa
+      - ios/build/xcodebuild-archive.log
+
+  inkvault-ipados-signed-ipa:
+    name: INKVAULT iPadOS — Cloud-Signed IPA (Paid Apple Developer Account)
+    max_build_duration: 45
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: codemagic
+    environment:
+      ios_signing:
+        distribution_type: development
+        bundle_identifier: app.inkvault.studio
+      xcode: 16.2
+      node: 20
+      vars:
+        XCODE_PROJECT: "ios/InkVault.xcodeproj"
+        XCODE_SCHEME: "InkVault"
+        BUNDLE_ID: "app.inkvault.studio"
+    scripts:
+      - name: Install npm dependencies, typecheck, test, and build iOS WebBundle
+        script: |
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build:ios
+
+      - name: Generate Xcode project & apply provisioning profiles
+        script: |
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          cd ios
+          xcodegen generate
+          cd ..
+          xcode-project use-profiles --project "$XCODE_PROJECT"
+
+      - name: Archive & Export signed INKVAULT.ipa
+        script: |
+          mkdir -p ios/build/ipa
+          xcode-project build-ipa \
+            --project "$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME" \
+            | tee ios/build/xcodebuild-signed.log
+          FIRST_IPA=$(ls build/ios/ipa/*.ipa | head -n 1)
+          cp "$FIRST_IPA" ios/build/ipa/INKVAULT.ipa
+    artifacts:
+      - ios/build/ipa/INKVAULT.ipa
+      - build/ios/ipa/*.ipa
+      - ios/build/xcodebuild-signed.log
+      - /tmp/xcodebuild_logs/*.log

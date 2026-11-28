@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>$(DEVELOPMENT_LANGUAGE)</string>
+  <key>CFBundleDisplayName</key>
+  <string>INKVAULT</string>
+  <key>CFBundleExecutable</key>
+  <string>$(EXECUTABLE_NAME)</string>
+  <key>CFBundleIdentifier</key>
+  <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>INKVAULT</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>$(MARKETING_VERSION)</string>
+  <key>CFBundleVersion</key>
+  <string>$(CURRENT_PROJECT_VERSION)</string>
+  <key>LSRequiresIPhoneOS</key>
+  <true/>
+  <key>UIApplicationSceneManifest</key>
+  <dict>
+    <key>UIApplicationSupportsMultipleScenes</key>
+    <true/>
+  </dict>
+  <key>UIApplicationSupportsIndirectInputEvents</key>
+  <true/>
+  <key>UILaunchStoryboardName</key>
+  <string>LaunchScreen</string>
+  <key>UIRequiresFullScreen</key>
+  <false/>
+  <key>UIStatusBarHidden</key>
+  <false/>
+  <key>UISupportedInterfaceOrientations</key>
+  <array>
+    <string>UIInterfaceOrientationPortrait</string>
+    <string>UIInterfaceOrientationLandscapeLeft</string>
+    <string>UIInterfaceOrientationLandscapeRight</string>
+  </array>
+  <key>UISupportedInterfaceOrientations~ipad</key>
+  <array>
+    <string>UIInterfaceOrientationPortrait</string>
+    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    <string>UIInterfaceOrientationLandscapeLeft</string>
+    <string>UIInterfaceOrientationLandscapeRight</string>
+  </array>
+  <key>LSSupportsOpeningDocumentsInPlace</key>
+  <false/>
+  <key>UIFileSharingEnabled</key>
+  <true/>
+  <key>ITSAppUsesNonExemptEncryption</key>
+  <false/>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>INKVAULT records optional lecture audio synchronized with your handwriting only when you start an Audio Note.</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>INKVAULT saves exported notebook page images to your Photo Library only when you select Save Image.</string>
+  <key>CFBundleDocumentTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>INKVAULT Notebook Archive</string>
+      <key>LSHandlerRank</key>
+      <string>Owner</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>app.inkvault.notebook</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>INKVAULT Full Backup Archive</string>
+      <key>LSHandlerRank</key>
+      <string>Owner</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>app.inkvault.backup</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>PDF Document</string>
+      <key>LSHandlerRank</key>
+      <string>Alternate</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>com.adobe.pdf</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>Goodnotes Archive</string>
+      <key>LSHandlerRank</key>
+      <string>Alternate</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>public.zip-archive</string>
+      </array>
+    </dict>
+  </array>
+  <key>UTExportedTypeDeclarations</key>
+  <array>
+    <dict>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.zip-archive</string>
+        <string>public.data</string>
+      </array>
+      <key>UTTypeDescription</key>
+      <string>INKVAULT Portable Notebook</string>
+      <key>UTTypeIdentifier</key>
+      <string>app.inkvault.notebook</string>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <array>
+          <string>inkvault</string>
+        </array>
+        <key>public.mime-type</key>
+        <string>application/vnd.inkvault.notebook+zip</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.zip-archive</string>
+        <string>public.data</string>
+      </array>
+      <key>UTTypeDescription</key>
+      <string>INKVAULT Library Backup</string>
+      <key>UTTypeIdentifier</key>
+      <string>app.inkvault.backup</string>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <array>
+          <string>inkvault-backup</string>
+        </array>
+      </dict>
+    </dict>
+  </array>
+</dict>
+</plist>

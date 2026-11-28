@@ -1,0 +1,14 @@
+node_modules
+dist
+ios/InkVaultApp/WebBundle
+ios/*.xcodeproj
+ios/DerivedData
+ios/build
+build
+coverage
+.vite
+.cache
+.DS_Store
+*.log
+image-search
+Unselected files
